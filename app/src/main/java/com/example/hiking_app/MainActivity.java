@@ -7,20 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.Toast;
 
+import com.example.hiking_app.controller.hike_controller.InsertHikeActivity;
+import com.example.hiking_app.controller.hike_controller.ViewHike;
 import com.example.hiking_app.databinding.ActivityMainBinding;
-import com.example.hiking_app.model.Hikes;
-import com.example.hiking_app.model.Observations;
-import com.example.hiking_app.model.Reviews;
-import com.example.hiking_app.model.Users;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 

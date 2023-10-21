@@ -24,6 +24,11 @@ public interface AppDao {
     long insertHike(Hikes hike);
     @Query("SELECT * FROM hikes ORDER BY id DESC ")
     List<Hikes> getListHike();
+    @Query("SELECT * FROM hikes WHERE id = :hikeId")
+    Hikes findHikeById(int hikeId);
+    @Query("DELETE FROM hikes WHERE id = :hikeId")
+    void deleteHikeById(int hikeId);
+
     @Insert
     long insertReview(Reviews review);
     @Insert

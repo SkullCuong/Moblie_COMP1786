@@ -1,18 +1,23 @@
-package com.example.hiking_app;
+package com.example.hiking_app.controller.hike_controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hiking_app.MainActivity;
+import com.example.hiking_app.R;
+import com.example.hiking_app.RegistrationActivity;
 import com.example.hiking_app.model.Hikes;
 
 import java.util.List;
@@ -46,6 +51,9 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
     public class HikesViewHolder extends RecyclerView.ViewHolder {
         ImageView HikeImg;
         TextView name, location, date, length;
+        Button buttonDeleteActivity;
+        Button buttonDetails;
+
 
         public HikesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,18 +62,39 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             location = itemView.findViewById(R.id.hikeLocation);
             date = itemView.findViewById(R.id.hikeDate);
             length = itemView.findViewById(R.id.hikeLength);
+            buttonDeleteActivity = itemView.findViewById(R.id.deleteHike);
+            buttonDetails = itemView.findViewById(R.id.HikeDetails);
 
         }
         public void setFilteredList(List<Hikes> filteredList){
 
         }
         void bindData(final Hikes hike) {
+
             //personImage.setImageBitmap(getUserImage(hike.getImage()));
 //            HikeImg.setImageBitmap(getUserImage());
             name.setText(hike.getName());
             date.setText(hike.getDate());
             location.setText(hike.getLocation());
             length.setText(String.valueOf(hike.getLength()));
+            // Set the ID for the current item
+            final int itemId = hike.getId();
+            buttonDeleteActivity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, DeleteHike.class);
+                    intent.putExtra("hike_id", itemId);
+                    context.startActivity(intent);
+                }
+            });
+            buttonDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, HikeDetails.class);
+                    intent.putExtra("hike_id", itemId);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
     public void setFilteredList(List<Hikes> filteredList) {

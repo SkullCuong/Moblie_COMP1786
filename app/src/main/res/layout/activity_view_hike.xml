@@ -8,7 +8,7 @@
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
     android:animateLayoutChanges="true"
-    tools:context=".ViewHike">
+    tools:context=".controller.hike_controller.ViewHike">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,6 +93,21 @@
                     android:text="Length"
                     android:textSize="18sp"
                     />
+                <Button
+                    android:id="@+id/deleteHike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+
+                    />
+                <Button
+                    android:id="@+id/HikeDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Details"
+
+                    />
+
             </LinearLayout>
 
 

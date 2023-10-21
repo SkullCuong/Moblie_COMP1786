@@ -1,15 +1,15 @@
-package com.example.hiking_app;
+package com.example.hiking_app.controller.hike_controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.example.hiking_app.DbContext;
+import com.example.hiking_app.R;
 import com.example.hiking_app.databinding.ActivityInsertHikeBinding;
-import com.example.hiking_app.databinding.ActivityMainBinding;
 import com.example.hiking_app.model.Hikes;
 
 import java.util.Calendar;
