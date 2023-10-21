@@ -31,4 +31,11 @@ public interface AppDao {
 
 
 
+    @Query("SELECT * FROM users WHERE userName = :username")
+    Users getUserByUsername(String username);
+
+    @Query("SELECT * FROM users WHERE email = :email")
+    Users getUserByEmail(String email);
+
+
 }
