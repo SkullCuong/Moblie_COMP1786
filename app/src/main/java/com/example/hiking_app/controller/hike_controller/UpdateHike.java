@@ -2,6 +2,7 @@ package com.example.hiking_app.controller.hike_controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -77,7 +78,9 @@ public class UpdateHike extends AppCompatActivity {
 
         // Save to db
         DbContext.getInstance(this.getApplicationContext()).appDao().updateHike(foundHike);
-
+        //Start activity
+        Intent intent = new Intent(this, ViewHike.class);
+        startActivity(intent);
         //send message successful
         showMessage("Update successful!");
     }
