@@ -41,6 +41,7 @@ dependencies {
     implementation ("org.mindrot:jbcrypt:0.4")
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("com.makeramen:roundedimageview:2.3.0")
     implementation ("com.intuit.sdp:sdp-android:1.1.0")
     implementation ("com.intuit.ssp:ssp-android:1.1.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
