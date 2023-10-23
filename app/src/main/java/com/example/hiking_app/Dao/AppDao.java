@@ -3,6 +3,7 @@ package com.example.hiking_app.Dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.hiking_app.model.Hikes;
 import com.example.hiking_app.model.Observations;
@@ -28,6 +29,10 @@ public interface AppDao {
     Hikes findHikeById(int hikeId);
     @Query("DELETE FROM hikes WHERE id = :hikeId")
     void deleteHikeById(int hikeId);
+    @Update
+    void updateHike(Hikes hike);
+
+
 
     @Insert
     long insertReview(Reviews review);

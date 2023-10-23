@@ -53,6 +53,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
         TextView name, location, date, length;
         Button buttonDeleteActivity;
         Button buttonDetails;
+        Button buttonUpdate;
 
 
         public HikesViewHolder(@NonNull View itemView) {
@@ -64,6 +65,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             length = itemView.findViewById(R.id.hikeLength);
             buttonDeleteActivity = itemView.findViewById(R.id.deleteHike);
             buttonDetails = itemView.findViewById(R.id.HikeDetails);
+            buttonUpdate = itemView.findViewById(R.id.HikeUpdate);
 
         }
         public void setFilteredList(List<Hikes> filteredList){
@@ -91,6 +93,14 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, HikeDetails.class);
+                    intent.putExtra("hike_id", itemId);
+                    context.startActivity(intent);
+                }
+            });
+            buttonUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, UpdateHike.class);
                     intent.putExtra("hike_id", itemId);
                     context.startActivity(intent);
                 }
