@@ -1,28 +1,110 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".LoginActivity">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbackgroundmobile"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/_24sdp"
+    app:layout_constraintBottom_toBottomOf="parent">
+    <FrameLayout
+        android:id="@+id/layoutImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_170sdp"
+            android:background="@drawable/applicationimage"
+            android:scaleType="centerCrop" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Welcome Back to Hiking App"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_19ssp"
+            android:textStyle="bold" />
+    </FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Sign in to Continue"
+        android:textColor="@color/black"
+
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold" />
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username" />
-
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/input_background"
+        android:hint="Username"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_16sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13ssp"
+        />
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/input_background"
+        android:hint="Password"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
-        android:hint="Password" />
-
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_16sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13ssp" />
     <Button
         android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:text="Sign in"
+        android:textColor="@color/white"
+        android:backgroundTint="@android:color/black"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle = "bold"
+        app:cornerRadius="@dimen/_8sdp" />
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login" />
-
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account?"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle = "bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Sign up Here!"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:textColor="#0000FF"
+            android:textStyle = "bold"/>
+    </LinearLayout>
 </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
