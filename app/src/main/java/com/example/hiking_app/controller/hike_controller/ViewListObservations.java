@@ -9,25 +9,21 @@ import android.os.Bundle;
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
 import com.example.hiking_app.model.Hikes;
+import com.example.hiking_app.model.Observations;
 
 import java.util.List;
 
-public class ViewHike extends AppCompatActivity {
-    private List<Hikes> hikes;
-
+public class ViewListObservations extends AppCompatActivity {
+    private List<Observations> observations;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hikes);
-        hikes = DbContext.getInstance(this).appDao().getListHike();
-        ListHikeAdapter listAdapter = new ListHikeAdapter(hikes,this);
-        RecyclerView recyclerView = findViewById(R.id.listHikes);
+        setContentView(R.layout.activity_view_list_observations);
+        int hikeId = getIntent().getIntExtra("hike_id", -1);;
+        observations = DbContext.getInstance(this).appDao().getObservationsByHikeId(hikeId);
+        ListObservationAdapter listAdapter = new ListObservationAdapter(observations,this);
+        RecyclerView recyclerView = findViewById(R.id.listObservations);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(listAdapter);
-        setListener();
     }
-
-    private void setListener() {
-    }
-
 }

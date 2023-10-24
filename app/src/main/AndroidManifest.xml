@@ -13,6 +13,20 @@
         android:theme="@style/Theme.Hiking_App"
         tools:targetApi="31">
         <activity
+            android:name=".controller.hike_controller.UpdateObservation"
+            android:exported="false" />
+        <activity
+            android:name=".controller.hike_controller.ViewListObservations"
+            android:exported="false" />
+        <activity
+            android:name=".controller.hike_controller.ViewHike$ViewListObservations"
+            android:exported="false" />
+        <activity
+            android:name=".ViewObservation"
+            android:exported="false"
+            android:label="@string/title_activity_view_observation"
+            android:theme="@style/Theme.Hiking_App" />
+        <activity
             android:name=".controller.hike_controller.UpdateHike"
             android:exported="false" />
         <activity

@@ -1,6 +1,7 @@
 package com.example.hiking_app.Dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -36,8 +37,24 @@ public interface AppDao {
 
     @Insert
     long insertReview(Reviews review);
+
+    // Observation Start
     @Insert
     long insertObservations(Observations observations);
+
+    @Query("SELECT * FROM observations WHERE hikeId =:hikeId")
+    List<Observations> getObservationsByHikeId(int hikeId);
+
+    @Query("SELECT * FROM observations WHERE id =:observationId")
+    Observations getObservationById(int observationId);
+
+    @Update
+    void updateObservation(Observations observation);
+
+    @Delete
+    void deleteObservation(Observations observation);
+
+    // Observation End
 
 
 

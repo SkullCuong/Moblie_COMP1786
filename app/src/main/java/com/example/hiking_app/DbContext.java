@@ -1,6 +1,7 @@
 package com.example.hiking_app;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.room.Database;
 import androidx.room.Room;
@@ -25,6 +26,16 @@ public abstract class DbContext extends RoomDatabase {
         };
         return instance;
     }
+
+    public static DbContext getInstance(View.OnClickListener onClickListener) {
+        if(instance == null){
+            instance = Room.databaseBuilder((Context) onClickListener,DbContext.class,Database_name)
+                    .allowMainThreadQueries()
+                    .build();
+        };
+        return instance;
+    }
+
     public abstract AppDao appDao();
 
 }
