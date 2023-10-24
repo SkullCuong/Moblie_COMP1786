@@ -66,6 +66,20 @@ public class HikeDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        binding.AddOservation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(HikeDetails.this,InsertObservation.class);
+                intent.putExtra("hike_id", hikeId);
+                HikeDetails.this.startActivity(intent);
+            }
+        });
+        binding.ViewOservation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(HikeDetails.this,ViewListObservations.class);
+                intent.putExtra("hike_id", hikeId);
+                HikeDetails.this.startActivity(intent);
+            }
+        });
     }
 
 }

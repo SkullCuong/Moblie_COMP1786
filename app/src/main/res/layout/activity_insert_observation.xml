@@ -46,17 +46,18 @@
             android:width="@dimen/_45sdp"
             android:paddingEnd="@dimen/_15sdp"
             />
-        <EditText
-            android:id="@+id/ObPhoto"
-            android:hint="Photo"
+        <Button
+            android:id="@+id/ObPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Picture"></Button>
+
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_background"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:height="@dimen/_20sdp"
-            android:width="@dimen/_45sdp"
-            android:paddingEnd="@dimen/_15sdp"
-            />
+            tools:srcCompat="@tools:sample/avatars" />
+
         <Button
             android:id="@+id/ObAdd"
             android:layout_width="wrap_content"

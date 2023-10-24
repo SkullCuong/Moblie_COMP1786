@@ -67,6 +67,17 @@
             android:layout_height="wrap_content"
             android:text="Show review"
             ></Button>
-
+        <Button
+            android:id="@+id/AddOservation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AddOservation"
+            />
+        <Button
+            android:id="@+id/ViewOservation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Observations"
+            />
     </LinearLayout>
 </ScrollView>
