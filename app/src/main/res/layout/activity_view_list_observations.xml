@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.hike_controller.ViewListObservations">
+    tools:context=".controller.observation_controller.ViewListObservations">
 
     <!--    <androidx.appcompat.widget.SearchView-->
     <!--        android:id="@+id/searchView"-->

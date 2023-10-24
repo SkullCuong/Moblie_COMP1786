@@ -1,4 +1,4 @@
-package com.example.hiking_app.controller.hike_controller;
+package com.example.hiking_app.controller.observation_controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
-import com.example.hiking_app.databinding.ActivityUpdateHikeBinding;
+import com.example.hiking_app.controller.observation_controller.ViewListObservations;
 import com.example.hiking_app.databinding.ActivityUpdateObservationBinding;
 import com.example.hiking_app.model.Observations;
 

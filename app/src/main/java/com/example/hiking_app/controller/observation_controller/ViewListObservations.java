@@ -1,4 +1,4 @@
-package com.example.hiking_app.controller.hike_controller;
+package com.example.hiking_app.controller.observation_controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
-import com.example.hiking_app.model.Hikes;
+import com.example.hiking_app.controller.observation_controller.ListObservationAdapter;
 import com.example.hiking_app.model.Observations;
 
 import java.util.List;

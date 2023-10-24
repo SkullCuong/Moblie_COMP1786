@@ -1,4 +1,4 @@
-package com.example.hiking_app.controller.hike_controller;
+package com.example.hiking_app.controller.observation_controller;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,13 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Delete;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
-import com.example.hiking_app.model.Hikes;
 import com.example.hiking_app.model.Observations;
 
 import java.util.List;

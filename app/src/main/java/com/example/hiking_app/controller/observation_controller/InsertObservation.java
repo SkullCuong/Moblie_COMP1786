@@ -1,4 +1,4 @@
-package com.example.hiking_app.controller.hike_controller;
+package com.example.hiking_app.controller.observation_controller;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;

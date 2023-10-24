@@ -23,10 +23,10 @@
 <!--            android:exported="false" />-->
         <activity
 
-            android:name=".controller.hike_controller.UpdateObservation"
+            android:name=".controller.observation_controller.UpdateObservation"
             android:exported="false" />
         <activity
-            android:name=".controller.hike_controller.ViewListObservations"
+            android:name=".controller.observation_controller.ViewListObservations"
             android:exported="false" />
         <activity
             android:name=".controller.hike_controller.UpdateHike"
@@ -41,7 +41,7 @@
             android:name=".controller.hike_controller.ViewHike"
             android:exported="false" />
         <activity
-            android:name=".controller.hike_controller.InsertObservation"
+            android:name=".controller.observation_controller.InsertObservation"
             android:exported="false" />
         <activity
             android:name=".controller.hike_controller.InsertHikeActivity"

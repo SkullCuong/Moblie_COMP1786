@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
+import com.example.hiking_app.controller.observation_controller.InsertObservation;
+import com.example.hiking_app.controller.observation_controller.ViewListObservations;
 import com.example.hiking_app.controller.review_controller.ViewReview;
 import com.example.hiking_app.controller.review_controller.insertReview;
 import com.example.hiking_app.databinding.ActivityHikeDetailsBinding;
@@ -68,14 +70,14 @@ public class HikeDetails extends AppCompatActivity {
         });
         binding.AddOservation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(HikeDetails.this,InsertObservation.class);
+                Intent intent = new Intent(HikeDetails.this, InsertObservation.class);
                 intent.putExtra("hike_id", hikeId);
                 HikeDetails.this.startActivity(intent);
             }
         });
         binding.ViewOservation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(HikeDetails.this,ViewListObservations.class);
+                Intent intent = new Intent(HikeDetails.this, ViewListObservations.class);
                 intent.putExtra("hike_id", hikeId);
                 HikeDetails.this.startActivity(intent);
             }

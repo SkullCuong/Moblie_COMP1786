@@ -5,7 +5,7 @@
     android:padding="@dimen/_24sdp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.hike_controller.UpdateObservation"
+    tools:context=".controller.observation_controller.UpdateObservation"
     >
     <LinearLayout
         android:layout_width="match_parent"
