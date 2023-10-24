@@ -2,7 +2,9 @@ package com.example.hiking_app.controller.hike_controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
@@ -19,7 +21,7 @@ public class HikeDetails extends AppCompatActivity {
         setContentView(R.layout.activity_hike_details);
         binding = ActivityHikeDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //setListener();
+        setListener();
         // Inside the "DeleteHike" activity
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         Hikes foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
@@ -43,6 +45,16 @@ public class HikeDetails extends AppCompatActivity {
             // Handle the case where the ID is not found
             binding.hikeName.setText("Not found");
         }
+    }
+
+    private void setListener() {
+        binding.AddOservation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(HikeDetails.this,InsertObservation.class);
+                intent.putExtra("hike_id", hikeId);
+                HikeDetails.this.startActivity(intent);
+            }
+        });
     }
 
 }
