@@ -16,6 +16,8 @@ import java.util.List;
 public interface AppDao {
     @Insert
     long insertUser(Users user);
+    @Query("SELECT * FROM users WHERE id = :userId")
+    Users findUserById(int userId);
     @Query("SELECT * FROM users WHERE userName = :username")
     Users getUserByUsername(String username);
 
@@ -36,6 +38,8 @@ public interface AppDao {
 
     @Insert
     long insertReview(Reviews review);
+    @Query("SELECT * FROM reviews WHERE hikeId = :hikeId ORDER BY id DESC ")
+    List<Reviews> getListReviewOfHike(int hikeId);
     @Insert
     long insertObservations(Observations observations);
 

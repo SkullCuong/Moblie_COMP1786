@@ -55,6 +55,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             ></TextView>
+        <Button
+            android:id="@+id/addReviewBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add review"
+            ></Button>
+        <Button
+            android:id="@+id/showReviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show review"
+            ></Button>
 
     </LinearLayout>
 </ScrollView>
