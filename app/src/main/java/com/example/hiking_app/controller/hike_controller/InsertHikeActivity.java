@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.hiking_app.Dao.AppDao;
 import com.example.hiking_app.DbContext;
-import com.example.hiking_app.InsertObservation;
+import com.example.hiking_app.controller.observation_controller.InsertObservation;
 import com.example.hiking_app.R;
 import com.example.hiking_app.controller.review_controller.insertReview;
 import com.example.hiking_app.databinding.ActivityInsertHikeBinding;

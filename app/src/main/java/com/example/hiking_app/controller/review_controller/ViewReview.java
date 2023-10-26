@@ -23,7 +23,6 @@ public class ViewReview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews);
         hikeId = getIntent().getIntExtra("hike_id", -1);
-        System.out.println(hikeId+"--------");
         reviews = DbContext.getInstance(this).appDao().getListReviewOfHike(hikeId);
         ListReviewAdapter listAdapter = new ListReviewAdapter(reviews,this);
         RecyclerView recyclerView = findViewById(R.id.listReviews);
