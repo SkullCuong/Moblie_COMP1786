@@ -43,7 +43,7 @@ public class insertReview extends AppCompatActivity {
         int userId = 1;
         int hikeId = HikeId;
 
-        Reviews review = new Reviews(rating, comment,userId, hikeId );
+        Reviews review = new Reviews(rating, comment,userId, hikeId);
 
         DbContext.getInstance(this.getApplicationContext()).appDao().insertReview(review);
         showMessage("Add review successful");

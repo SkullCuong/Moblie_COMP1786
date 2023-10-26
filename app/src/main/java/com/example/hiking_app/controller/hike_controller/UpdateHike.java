@@ -58,14 +58,13 @@ public class UpdateHike extends AppCompatActivity {
         String updatedDate = binding.hikeDate.getText().toString();
         // Update parking_available based on the CheckBox state
         boolean isParkingAvailable = binding.hikeParkingAvailable.isChecked();
-
         float updateLength = Float.parseFloat(binding.hikeLength.getText().toString());
         int updateDifficulty = Integer.parseInt(binding.hikeDifficulty.getText().toString());
         String updatedDescription = binding.hikeDescription.getText().toString();
         String updatedEquipment = binding.hikeEquipment.getText().toString();
         String updatedQuality = binding.hikeQuality.getText().toString();
 
-        // Uodate data
+        // Update data
         foundHike.setName(updatedName);
         foundHike.setLocation(updatedLocation);
         foundHike.setDate(updatedDate);

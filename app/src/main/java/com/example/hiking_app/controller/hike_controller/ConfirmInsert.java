@@ -4,30 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
-import com.example.hiking_app.controller.review_controller.ViewReview;
-import com.example.hiking_app.controller.review_controller.insertReview;
-import com.example.hiking_app.databinding.ActivityHikeDetailsBinding;
+import com.example.hiking_app.databinding.ActivityConfirmInsertBinding;
+import com.example.hiking_app.databinding.ActivityDeleteHikeBinding;
 import com.example.hiking_app.model.Hikes;
 
-public class HikeDetails extends AppCompatActivity {
-
-    private ActivityHikeDetailsBinding binding;
+public class ConfirmInsert extends AppCompatActivity {
+    private ActivityConfirmInsertBinding binding;
     int hikeId;
+    Hikes foundHike;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hike_details);
-        binding = ActivityHikeDetailsBinding.inflate(getLayoutInflater());
+        setContentView(R.layout.activity_confirm_insert);
+        binding = ActivityConfirmInsertBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListener();
-
+        // Inside the "DeleteHike" activity
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
-        Hikes foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
-
+        foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
+        System.out.println(hikeId+"----------");
         if (hikeId != -1) {
             binding.hikeName.setText(foundHike.getName());
             binding.hikeLocation.setText(foundHike.getLocation());
@@ -48,24 +47,29 @@ public class HikeDetails extends AppCompatActivity {
             binding.hikeName.setText("Not found");
         }
     }
-
     private void setListener() {
-        binding.addReviewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HikeDetails.this, insertReview.class);
-                intent.putExtra("hike_id", hikeId);
-                startActivity(intent);
-            }
-        });
-        binding.showReviews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HikeDetails.this, ViewReview.class);
-                intent.putExtra("hike_id", hikeId);
-                startActivity(intent);
-            }
-        });
+        binding.addHike.setOnClickListener(view ->{
+            InserHike();
+        } );
+        binding.CancelBtn.setOnClickListener(view ->{
+            DeleteConfirmHike();
+        } );
     }
 
+    private void DeleteConfirmHike() {
+//        DbContext.getInstance(this.getApplicationContext()).appDao().deleteHikeById(hikeId);
+        Intent intent = new Intent(this, InsertHikeActivity.class);
+        intent.putExtra("hike_id", hikeId);
+        startActivity(intent);
+    }
+
+    private void InserHike() {
+        //DbContext.getInstance(this.getApplicationContext()).appDao().insertHike(hikeId);
+        showMessage("Add successful");
+        Intent intent = new Intent(this, ViewHike.class);
+        startActivity(intent);
+    }
+    private void showMessage(String message) {
+        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+    }
 }

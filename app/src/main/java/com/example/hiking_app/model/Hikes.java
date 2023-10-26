@@ -134,4 +134,7 @@ public class Hikes {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+    public interface OnHikeInsertedListener {
+        void onHikeInserted(int hikeId);
+    }
 }
