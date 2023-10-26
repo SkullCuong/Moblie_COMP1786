@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
+import com.example.hiking_app.controller.observation_controller.UpdateObservation;
 import com.example.hiking_app.controller.review_controller.ListReviewAdapter;
 import com.example.hiking_app.model.Reviews;
 import com.example.hiking_app.model.Reviews;
@@ -51,7 +53,8 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
     public class ReviewsViewHolder extends RecyclerView.ViewHolder {
         ImageView userImg;
         TextView userName, rate, comment;
-
+        Button buttonEdit;
+        Button buttonDelete;
 
         public ReviewsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,7 +62,8 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
             userName = itemView.findViewById(R.id.userName);
             rate = itemView.findViewById(R.id.hikeRate);
             comment = itemView.findViewById(R.id.comment);
-
+            buttonEdit = itemView.findViewById(R.id.editBtn);
+            buttonDelete = itemView.findViewById(R.id.deleteBtn);
         }
 
         void bindData(final Reviews review) {
@@ -72,6 +76,27 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
             comment.setText(review.getComment());
             // Set the ID for the current item
             final int itemId = review.getId();
+
+
+            buttonDelete.setOnClickListener(v -> {
+                int userAction = 1;
+                int reviewOwner = user.getId();
+                if(userAction == reviewOwner) {
+                    DbContext.getInstance(context).appDao().deleteReviewById(review.getId());
+                    showMessage("Delete success!");
+                }else{
+                    showMessage("You are not auth to do this action!");
+                }
+            });
+            buttonEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, UpdateReview.class);
+                    intent.putExtra("review_id", itemId);
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 //    public void setFilteredList(List<Hikes> filteredList) {
@@ -83,5 +108,8 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
         byte[] bytes = Base64.decode(image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
+    }
+    private void showMessage(String message) {
+        Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
     }
 }

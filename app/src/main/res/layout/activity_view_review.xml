@@ -81,6 +81,18 @@
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     />
+                <Button
+                    android:id="@+id/editBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    ></Button>
+                <Button
+                    android:id="@+id/deleteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+                    ></Button>
 
             </LinearLayout>
         </RelativeLayout>

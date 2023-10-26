@@ -25,7 +25,7 @@ public class UpdateHike extends AppCompatActivity {
         binding = ActivityUpdateHikeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListener();
-        // Inside the "DeleteHike" activity
+
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
         CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
@@ -77,11 +77,12 @@ public class UpdateHike extends AppCompatActivity {
 
         // Save to db
         DbContext.getInstance(this.getApplicationContext()).appDao().updateHike(foundHike);
+        //send message successful
+        showMessage("Update successful!");
         //Start activity
         Intent intent = new Intent(this, ViewHike.class);
         startActivity(intent);
-        //send message successful
-        showMessage("Update successful!");
+
     }
     private void showMessage(String message) {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();

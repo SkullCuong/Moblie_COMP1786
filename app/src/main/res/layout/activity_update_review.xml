@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/_24sdp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/rating"
+            android:hint="Rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:height="@dimen/_20sdp"
+            android:width="@dimen/_45sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            />
+        <EditText
+            android:id="@+id/comment"
+            android:hint="Comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:height="@dimen/_20sdp"
+            android:width="@dimen/_45sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            />
+        <Button
+            android:id="@+id/reviewUpdateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Review"></Button>
+    </LinearLayout>
+</ScrollView>

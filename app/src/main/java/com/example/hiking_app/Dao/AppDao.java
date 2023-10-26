@@ -39,6 +39,12 @@ public interface AppDao {
     long insertReview(Reviews review);
     @Query("SELECT * FROM reviews WHERE hikeId = :hikeId ORDER BY id DESC ")
     List<Reviews> getListReviewOfHike(int hikeId);
+    @Query("DELETE FROM reviews WHERE id = :reviewId")
+    void deleteReviewById(int reviewId);
+    @Query("SELECT * FROM reviews WHERE id = :reviewId")
+    Reviews findReviewById(int reviewId);
+    @Update
+    void updateReview(Reviews review);
 
 
     // Observation Start
