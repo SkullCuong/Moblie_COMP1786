@@ -35,8 +35,6 @@ public interface AppDao {
     @Update
     void updateHike(Hikes hike);
 
-
-
     @Insert
     long insertReview(Reviews review);
     @Query("SELECT * FROM reviews WHERE hikeId = :hikeId ORDER BY id DESC ")

@@ -26,7 +26,7 @@ public class HikeDetails extends AppCompatActivity {
         binding = ActivityHikeDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListener();
-        // Inside the "DeleteHike" activity
+
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         Hikes foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
 
