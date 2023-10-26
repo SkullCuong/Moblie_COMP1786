@@ -52,7 +52,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/input_background"
         android:hint="Username"
-        android:imeOptions="actionNext"
+        android:imeOptions="actionDone"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:paddingStart="@dimen/_15sdp"
