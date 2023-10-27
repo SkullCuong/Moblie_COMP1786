@@ -124,7 +124,7 @@ public class InsertHikeActivity extends AppCompatActivity {
             String description = binding.hikeDescription.getText().toString().trim();
             String equipment = binding.hikeEquipment.getText().toString().trim();
             String quality = binding.hikeQuality.getText().toString().trim();
-            int userId = 1;
+            int userId = 5;
 
             Hikes hike = new Hikes(name, location, date, parkingAV, length, difficulty, description, equipment, quality, userId);
             AppDao appDao = DbContext.getInstance(this.getApplicationContext()).appDao();
