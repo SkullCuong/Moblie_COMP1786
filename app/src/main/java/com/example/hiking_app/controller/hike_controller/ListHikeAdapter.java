@@ -80,7 +80,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             Users user = DbContext.getInstance(context).appDao().findUserById(hike.getUserId());
             List<Observations> observations = DbContext.getInstance(context).appDao().getObservationsByHikeId(hike.getId());
             //personImage.setImageBitmap(getUserImage(hike.getImage()));
-            HikeImg.setImageBitmap(getImage(user.getProfile_Picture()));
+            //HikeImg.setImageBitmap(getImage(user.getProfile_Picture()));
             name.setText(hike.getName());
             date.setText(hike.getDate());
             location.setText(hike.getLocation());
