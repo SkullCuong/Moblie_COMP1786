@@ -26,6 +26,8 @@ public interface AppDao {
     Users getUserByEmail(String email);
     @Insert
     long insertHike(Hikes hike);
+    @Query("SELECT * FROM hikes WHERE name like '%'|| :name ||'%' ORDER BY date")
+    List<Hikes> getListHikeByName(String name);
     @Query("SELECT * FROM hikes ORDER BY id DESC ")
     List<Hikes> getListHike();
     @Query("SELECT * FROM hikes WHERE id = :hikeId")

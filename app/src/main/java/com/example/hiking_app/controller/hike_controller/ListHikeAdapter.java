@@ -132,10 +132,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
         this.hikes.addAll(filteredList);
         notifyDataSetChanged();
     }
-//    private Bitmap getImage(String image) {
-//        byte[] bytes = Base64.decode(image, Base64.DEFAULT);
-//        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//    }
+
 private Bitmap getImage(String image) {
     try {
         byte[] bytes = Base64.decode(image, Base64.DEFAULT);
