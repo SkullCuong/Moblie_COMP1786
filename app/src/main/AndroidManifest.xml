@@ -61,6 +61,8 @@
         </activity>
         <activity android:name=".controller.user_controller.RegistrationActivity" />
         <activity android:name=".controller.user_controller.LoginActivity" />
+        <activity android:name=".controller.user_controller.ProfileActivity" />
+
     </application>
 
 </manifest>

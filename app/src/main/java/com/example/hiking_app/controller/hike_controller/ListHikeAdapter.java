@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
+import com.example.hiking_app.controller.user_controller.SessionManager;
 import com.example.hiking_app.model.Hikes;
 import com.example.hiking_app.model.Observations;
 import com.example.hiking_app.model.Users;
@@ -91,7 +92,9 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
                 Log.e("ImageError", "Error when load the image: " + e.getMessage());
             }
 
-            name.setText(hike.getName());
+            SessionManager sessionManager = new SessionManager(context);
+            int username1 = sessionManager.getKeyUserid();
+            name.setText(hike.getName() + username1);
             date.setText(hike.getDate());
             location.setText(hike.getLocation());
             length.setText(String.valueOf(hike.getLength()));
