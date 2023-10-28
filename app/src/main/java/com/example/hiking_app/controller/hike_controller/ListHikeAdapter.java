@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hiking_app.DbContext;
@@ -53,9 +54,8 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
     public class HikesViewHolder extends RecyclerView.ViewHolder {
         ImageView HikeImg, hikeImg1;
         TextView name, location, date, length;
-        Button buttonDeleteActivity;
-        Button buttonDetails;
         Button buttonUpdate;
+        CardView cardView;
 
 
         public HikesViewHolder(@NonNull View itemView) {
@@ -66,10 +66,8 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             date = itemView.findViewById(R.id.hikeDate);
             length = itemView.findViewById(R.id.hikeLength);
             hikeImg1 = itemView.findViewById(R.id.img1);
-            buttonDeleteActivity = itemView.findViewById(R.id.deleteHike);
-            buttonDetails = itemView.findViewById(R.id.HikeDetails);
             buttonUpdate = itemView.findViewById(R.id.HikeUpdate);
-
+            cardView = itemView.findViewById(R.id.cardHike);
         }
         public void setFilteredList(List<Hikes> filteredList){
 
@@ -101,26 +99,18 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             //hikeImg1.setImageBitmap(getImage(observations[0].getPhoto()));
             // Set the ID for the current item
             final int itemId = hike.getId();
-            buttonDeleteActivity.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, DeleteHike.class);
-                    intent.putExtra("hike_id", itemId);
-                    context.startActivity(intent);
-                }
-            });
-            buttonDetails.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, HikeDetails.class);
-                    intent.putExtra("hike_id", itemId);
-                    context.startActivity(intent);
-                }
-            });
             buttonUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, UpdateHike.class);
+                    intent.putExtra("hike_id", itemId);
+                    context.startActivity(intent);
+                }
+            });
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, HikeDetails.class);
                     intent.putExtra("hike_id", itemId);
                     context.startActivity(intent);
                 }

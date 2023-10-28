@@ -28,7 +28,6 @@ public class ViewHike extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(listAdapter);
         setListener(listAdapter);
-
     }
 
     private void setListener(ListHikeAdapter listAdapter ) {

@@ -82,6 +82,14 @@ public class HikeDetails extends AppCompatActivity {
                 HikeDetails.this.startActivity(intent);
             }
         });
+        binding.hikeDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HikeDetails.this, DeleteHike.class);
+                intent.putExtra("hike_id", hikeId);
+                HikeDetails.this.startActivity(intent);
+            }
+        });
     }
 
 }

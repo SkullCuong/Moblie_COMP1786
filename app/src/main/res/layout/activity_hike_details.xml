@@ -79,5 +79,11 @@
             android:layout_height="wrap_content"
             android:text="View Observations"
             />
+        <Button
+            android:id="@+id/hikeDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            />
     </LinearLayout>
 </ScrollView>
