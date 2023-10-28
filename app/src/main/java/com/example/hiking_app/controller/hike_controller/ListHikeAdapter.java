@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,17 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             List<Observations> observations = DbContext.getInstance(context).appDao().getObservationsByHikeId(hike.getId());
             //personImage.setImageBitmap(getUserImage(hike.getImage()));
             //HikeImg.setImageBitmap(getImage(user.getProfile_Picture()));
+            try {
+                Bitmap imageBitmap = getImage(user.getProfile_Picture());
+                if (imageBitmap != null) {
+                    HikeImg.setImageBitmap(imageBitmap);
+                } else {
+                    Log.e("ImageError", "Can't convert image");
+                }
+            } catch (Exception e) {
+                Log.e("ImageError", "Error when load the image: " + e.getMessage());
+            }
+
             name.setText(hike.getName());
             date.setText(hike.getDate());
             location.setText(hike.getLocation());
@@ -122,9 +134,18 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
         this.hikes.addAll(filteredList);
         notifyDataSetChanged();
     }
-    private Bitmap getImage(String image) {
+//    private Bitmap getImage(String image) {
+//        byte[] bytes = Base64.decode(image, Base64.DEFAULT);
+//        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//    }
+private Bitmap getImage(String image) {
+    try {
         byte[] bytes = Base64.decode(image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-
+    } catch (Exception e) {
+        // Xử lý lỗi ở đây, ví dụ in log hoặc hiển thị thông báo cho người dùng
+        Log.e("ImageError", "Error when convert the image (at getImage): " + e.getMessage());
+        return null; // Trả về null nếu có lỗi
     }
+}
 }
