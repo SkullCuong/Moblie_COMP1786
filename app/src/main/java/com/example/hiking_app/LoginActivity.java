@@ -13,6 +13,8 @@ import androidx.room.Room;
 
 import com.example.hiking_app.model.Users;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
@@ -49,9 +51,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isValidCredentials(String username, String password) {
-        // Query the database to check if the user exists with the provided username and password
+        // Query the database to check if the user exists with the provided username
         Users user = dbContext.appDao().getUserByUsername(username);
-        return user != null && user.getPassword().equals(password);
+
+        // Check if the user exists and compare the hashed password
+        return user != null && BCrypt.checkpw(password, user.getPassword());
     }
 }
 
