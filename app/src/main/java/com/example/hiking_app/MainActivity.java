@@ -14,6 +14,7 @@ import com.example.hiking_app.controller.hike_controller.ViewHike;
 import com.example.hiking_app.controller.user_controller.LoginActivity;
 import com.example.hiking_app.controller.user_controller.RegistrationActivity;
 import com.example.hiking_app.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +25,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.home);
         setListener();
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.home) {
+                return true;
+            } else if (item.getItemId() == R.id.add) {
+                startActivity(new Intent(getApplicationContext(), InsertHikeActivity.class));
+                finish();
+                return true;
+            }
+            return false;
+        });
         Button buttonGoToRegistration = findViewById(R.id.buttonGoToRegistration);
         buttonGoToRegistration.setOnClickListener(new View.OnClickListener() {
             @Override

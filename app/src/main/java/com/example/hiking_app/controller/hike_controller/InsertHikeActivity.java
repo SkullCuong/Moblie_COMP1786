@@ -12,11 +12,13 @@ import android.widget.Toast;
 
 import com.example.hiking_app.Dao.AppDao;
 import com.example.hiking_app.DbContext;
+import com.example.hiking_app.MainActivity;
 import com.example.hiking_app.controller.observation_controller.InsertObservation;
 import com.example.hiking_app.R;
 import com.example.hiking_app.controller.review_controller.insertReview;
 import com.example.hiking_app.databinding.ActivityInsertHikeBinding;
 import com.example.hiking_app.model.Hikes;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
 
@@ -32,8 +34,19 @@ public class InsertHikeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_insert_hike);
         binding = ActivityInsertHikeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.add);
         setListener();
-
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.home) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+                return true;
+            } else if (item.getItemId() == R.id.add) {
+                return true;
+            }
+            return false;
+        });
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
         CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
