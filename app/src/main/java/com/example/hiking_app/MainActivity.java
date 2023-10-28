@@ -11,6 +11,8 @@ import android.widget.Button;
 import com.example.hiking_app.controller.hike_controller.InsertHikeActivity;
 import com.example.hiking_app.controller.observation_controller.InsertObservation;
 import com.example.hiking_app.controller.hike_controller.ViewHike;
+import com.example.hiking_app.controller.user_controller.LoginActivity;
+import com.example.hiking_app.controller.user_controller.RegistrationActivity;
 import com.example.hiking_app.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

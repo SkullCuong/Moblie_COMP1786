@@ -17,9 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hiking_app.DbContext;
-import com.example.hiking_app.MainActivity;
 import com.example.hiking_app.R;
-import com.example.hiking_app.RegistrationActivity;
 import com.example.hiking_app.model.Hikes;
 import com.example.hiking_app.model.Observations;
 import com.example.hiking_app.model.Users;
@@ -143,9 +141,8 @@ private Bitmap getImage(String image) {
         byte[] bytes = Base64.decode(image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     } catch (Exception e) {
-        // Xử lý lỗi ở đây, ví dụ in log hoặc hiển thị thông báo cho người dùng
         Log.e("ImageError", "Error when convert the image (at getImage): " + e.getMessage());
-        return null; // Trả về null nếu có lỗi
+        return null;
     }
 }
 }

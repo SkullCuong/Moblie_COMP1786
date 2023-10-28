@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 xmlns:tools="http://schemas.android.com/tools"
-tools:context=".RegistrationActivity">
+tools:context=".controller.user_controller.RegistrationActivity">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
