@@ -105,5 +105,17 @@
             android:textColor="#0000FF"
             android:textStyle = "bold"/>
     </LinearLayout>
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:text="Logout"
+        android:visibility="gone"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/_8sdp" />
+
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

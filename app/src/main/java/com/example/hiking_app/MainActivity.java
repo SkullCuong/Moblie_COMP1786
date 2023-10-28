@@ -12,6 +12,7 @@ import com.example.hiking_app.controller.hike_controller.InsertHikeActivity;
 import com.example.hiking_app.controller.observation_controller.InsertObservation;
 import com.example.hiking_app.controller.hike_controller.ViewHike;
 import com.example.hiking_app.controller.user_controller.LoginActivity;
+import com.example.hiking_app.controller.user_controller.ProfileActivity;
 import com.example.hiking_app.controller.user_controller.RegistrationActivity;
 import com.example.hiking_app.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,6 +54,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Navigate to LoginActivity when the button is clicked
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button buttonGoToProfile = findViewById(R.id.buttonGoToProfile);
+        buttonGoToProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Navigate to ProfileActivity when the button is clicked
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                // Pass the necessary user data to the ProfileActivity if needed
+                // intent.putExtra("key", value);
                 startActivity(intent);
             }
         });
