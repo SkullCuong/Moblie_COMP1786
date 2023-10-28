@@ -1,9 +1,17 @@
 package com.example.hiking_app.controller.hike_controller;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,18 +20,30 @@ import android.widget.Toast;
 
 import com.example.hiking_app.Dao.AppDao;
 import com.example.hiking_app.DbContext;
+
 import com.example.hiking_app.controller.observation_controller.InsertObservation;
 import com.example.hiking_app.R;
 import com.example.hiking_app.controller.review_controller.insertReview;
 import com.example.hiking_app.databinding.ActivityInsertHikeBinding;
 import com.example.hiking_app.model.Hikes;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 public class InsertHikeActivity extends AppCompatActivity {
 
     private ActivityInsertHikeBinding binding;
     private DatePickerDialog datePickerDialog;
+
+    private  final static int REQUEST_CODE = 100;
+
+    FusedLocationProviderClient fusedLocationProviderClient;
     int hikeId;
     Hikes foundHike;
     @Override
@@ -32,6 +52,8 @@ public class InsertHikeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_insert_hike);
         binding = ActivityInsertHikeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        getLastLocation();
         setListener();
 
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
@@ -63,7 +85,9 @@ public class InsertHikeActivity extends AppCompatActivity {
 
     private void setListener() {
         binding.HikeAdd.setOnClickListener(v ->{
+
             insertHike();
+
         });
         binding.hikeDate.setOnClickListener(v ->{
             getCalendar();
@@ -124,7 +148,7 @@ public class InsertHikeActivity extends AppCompatActivity {
             String description = binding.hikeDescription.getText().toString().trim();
             String equipment = binding.hikeEquipment.getText().toString().trim();
             String quality = binding.hikeQuality.getText().toString().trim();
-            int userId = 5;
+            int userId = 1;
 
             Hikes hike = new Hikes(name, location, date, parkingAV, length, difficulty, description, equipment, quality, userId);
             AppDao appDao = DbContext.getInstance(this.getApplicationContext()).appDao();
@@ -137,8 +161,51 @@ public class InsertHikeActivity extends AppCompatActivity {
         }
         //showMessage("Add successful");
     }
+    public void getLastLocation(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+
+            fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+                    .addOnSuccessListener(new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            System.out.println("1231231212312312");
+                            if(location != null){
+                                Geocoder geocoder = new Geocoder(InsertHikeActivity.this, Locale.getDefault());
+                               try{
+                                   Address addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1).get(0);
+                                   String address = addresses.getAddressLine(0) + " ," + addresses.getLocality() +
+                                           " ," + addresses.getCountryName();
+                                   binding.hikeLocation.setText(address);
+                               }
+                               catch (Exception e){
+                                   System.out.println(e.getMessage());
+                               }
+                            }
+                        }
+                    });
+        } else {
+            askPermisson();
+        }
+    }
+
+    private void askPermisson() {
+        ActivityCompat.requestPermissions(InsertHikeActivity.this, new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+    }
 
     private void showMessage(String message) {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_CODE){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                getLastLocation();
+            } else {
+                showMessage("Permission required");
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
