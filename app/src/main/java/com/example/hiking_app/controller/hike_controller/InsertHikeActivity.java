@@ -62,9 +62,15 @@ public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyC
         binding = ActivityInsertHikeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        getLastLocation();
+        String address = getIntent().getStringExtra("address");
+        if (address == null){
+            getLastLocation();
+        } else {
+            latitude = getIntent().getDoubleExtra("latitude",-1);
+            longitude = getIntent().getDoubleExtra("longitude",-1);
+            binding.hikeLocation.setText(address);
+        }
         setListener();
-
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
         CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
@@ -105,8 +111,6 @@ public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyC
             Intent intent = new Intent(InsertHikeActivity.this, MapsActivity.class);
             intent.putExtra("latitude", latitude);
             intent.putExtra("longitude",longitude);
-            System.out.println(latitude);
-            System.out.println(longitude);
             InsertHikeActivity.this.startActivity(intent);
         });
     }
@@ -191,8 +195,7 @@ public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyC
                                 longitude =location.getLongitude();
                                try{
                                    Address addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1).get(0);
-                                   String address = addresses.getAddressLine(0) + " ," + addresses.getLocality() +
-                                           " ," + addresses.getCountryName();
+                                   String address = addresses.getAddressLine(0);
                                    binding.hikeLocation.setText(address);
                                }
                                catch (Exception e){
