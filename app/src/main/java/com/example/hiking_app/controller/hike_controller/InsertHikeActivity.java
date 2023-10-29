@@ -30,16 +30,25 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class InsertHikeActivity extends AppCompatActivity {
+public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private ActivityInsertHikeBinding binding;
     private DatePickerDialog datePickerDialog;
+    double latitude,longitude;
+
+    GoogleMap mMap;
+
 
     private  final static int REQUEST_CODE = 100;
 
@@ -91,6 +100,14 @@ public class InsertHikeActivity extends AppCompatActivity {
         });
         binding.hikeDate.setOnClickListener(v ->{
             getCalendar();
+        });
+        binding.openMap.setOnClickListener(v ->{
+            Intent intent = new Intent(InsertHikeActivity.this, MapsActivity.class);
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude",longitude);
+            System.out.println(latitude);
+            System.out.println(longitude);
+            InsertHikeActivity.this.startActivity(intent);
         });
     }
     private void getCalendar() {
@@ -168,9 +185,10 @@ public class InsertHikeActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Location>() {
                         @Override
                         public void onSuccess(Location location) {
-                            System.out.println("1231231212312312");
                             if(location != null){
                                 Geocoder geocoder = new Geocoder(InsertHikeActivity.this, Locale.getDefault());
+                                latitude = location.getLatitude();
+                                longitude =location.getLongitude();
                                try{
                                    Address addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1).get(0);
                                    String address = addresses.getAddressLine(0) + " ," + addresses.getLocality() +
@@ -207,5 +225,10 @@ public class InsertHikeActivity extends AppCompatActivity {
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mMap = googleMap;
     }
 }
