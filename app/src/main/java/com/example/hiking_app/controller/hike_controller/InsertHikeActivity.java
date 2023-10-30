@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
@@ -33,6 +34,7 @@ import com.google.android.gms.location.Priority;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,13 +43,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private ActivityInsertHikeBinding binding;
     private DatePickerDialog datePickerDialog;
     double latitude,longitude;
 
     GoogleMap mMap;
+
+    SupportMapFragment  mapFragment;
 
 
     private  final static int REQUEST_CODE = 100;
@@ -63,13 +67,7 @@ public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyC
         setContentView(binding.getRoot());
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         String address = getIntent().getStringExtra("address");
-        if (address == null){
-            getLastLocation();
-        } else {
-            latitude = getIntent().getDoubleExtra("latitude",-1);
-            longitude = getIntent().getDoubleExtra("longitude",-1);
-            binding.hikeLocation.setText(address);
-        }
+        checkAddressIsExisted(address);
         setListener();
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
@@ -97,21 +95,24 @@ public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyC
 
         }
     }
-
+    private void checkAddressIsExisted(String address){
+        if (address == null){
+            getLastLocation();
+        } else {
+            latitude = getIntent().getDoubleExtra("latitude",-1);
+            longitude = getIntent().getDoubleExtra("longitude",-1);
+            binding.hikeLocation.setText(address);
+        }
+    }
     private void setListener() {
         binding.HikeAdd.setOnClickListener(v ->{
-
             insertHike();
-
         });
         binding.hikeDate.setOnClickListener(v ->{
             getCalendar();
         });
         binding.openMap.setOnClickListener(v ->{
-            Intent intent = new Intent(InsertHikeActivity.this, MapsActivity.class);
-            intent.putExtra("latitude", latitude);
-            intent.putExtra("longitude",longitude);
-            InsertHikeActivity.this.startActivity(intent);
+            openMap(latitude,longitude);
         });
     }
     private void getCalendar() {
@@ -128,6 +129,12 @@ public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyC
         datePickerDialog.show();
     }
 
+    private  void openMap(double latitude, double longitude){
+        Intent intent = new Intent(InsertHikeActivity.this, MapsActivity.class);
+        intent.putExtra("latitude", latitude);
+        intent.putExtra("longitude",longitude);
+        InsertHikeActivity.this.startActivity(intent);
+    }
     private void insertHike() {
         if(hikeId != -1 && foundHike != null){
             // take data from EditText
@@ -183,6 +190,7 @@ public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyC
         //showMessage("Add successful");
     }
     public void getLastLocation(){
+        binding.progressBar.setVisibility(View.VISIBLE);
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
 
             fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
@@ -196,6 +204,7 @@ public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyC
                                try{
                                    Address addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1).get(0);
                                    String address = addresses.getAddressLine(0);
+                                   binding.progressBar.setVisibility(View.INVISIBLE);
                                    binding.hikeLocation.setText(address);
                                }
                                catch (Exception e){
@@ -212,6 +221,9 @@ public class InsertHikeActivity extends AppCompatActivity implements OnMapReadyC
     private void askPermisson() {
         ActivityCompat.requestPermissions(InsertHikeActivity.this, new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+
+
+
     }
 
     private void showMessage(String message) {
