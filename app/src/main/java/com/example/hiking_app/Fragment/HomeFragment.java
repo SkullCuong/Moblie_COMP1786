@@ -1,14 +1,23 @@
 package com.example.hiking_app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.hiking_app.MainActivity;
 import com.example.hiking_app.R;
+import com.example.hiking_app.controller.user_controller.LoginActivity;
+import com.example.hiking_app.controller.user_controller.RegistrationActivity;
+import com.example.hiking_app.databinding.ActivityMain2Binding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,15 +39,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -58,9 +58,31 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_main, container, false);
+        // Find the button within the layout
+        Button buttonGoToRegistration = view.findViewById(R.id.buttonGoToRegistration);
+        // Set an OnClickListener for the button
+        buttonGoToRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Define the click behavior here
+                // For example, navigating to another activity
+                Intent intent = new Intent(requireActivity(), RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button buttonGoToLogin = view.findViewById(R.id.buttonGoToLogin);
+        buttonGoToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Navigate to LoginActivity when the button is clicked
+                Intent intent = new Intent(requireActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
+
 }
