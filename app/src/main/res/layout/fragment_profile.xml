@@ -39,10 +39,12 @@
                     android:src="@drawable/arc_3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:ignore="MissingConstraints"/>
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/profileImageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:scaleType="centerCrop"
+                    app:riv_oval="true"
                     android:src="@drawable/user_2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -68,21 +70,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="@dimen/_12sdp">
+                android:padding="@dimen/_20sdp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Username"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     android:textColor="@color/dark_blue"/>
 
                 <EditText
                     android:id="@+id/usernameEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/edittext_background"
-                    android:elevation="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:hint="Username"
                     android:imeOptions="actionDone"
@@ -96,16 +97,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     android:textColor="@color/dark_blue"/>
 
                 <EditText
                     android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/edittext_background"
-                    android:elevation="@dimen/_5sdp"
                     android:hint="Email"
                     android:imeOptions="actionDone"
                     android:importantForAutofill="no"
@@ -119,15 +119,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Address"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     android:textColor="@color/dark_blue"/>
                 <EditText
                     android:id="@+id/addressEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/edittext_background"
-                    android:elevation="@dimen/_5sdp"
                     android:hint="Address"
                     android:imeOptions="actionDone"
                     android:layout_marginBottom="@dimen/_5sdp"
@@ -141,14 +140,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Password"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     android:textColor="@color/dark_blue"/>
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/edittext_background"
-                    android:elevation="@dimen/_5sdp"
                     android:hint="Password"
                     android:imeOptions="actionDone"
                     android:importantForAutofill="no"
