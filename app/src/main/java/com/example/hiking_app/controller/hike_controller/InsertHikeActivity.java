@@ -230,6 +230,7 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
                                    Address addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1).get(0);
                                    String address = addresses.getAddressLine(0);
                                    binding.progressBar.setVisibility(View.INVISIBLE);
+                                   binding.openMap.setVisibility(View.VISIBLE);
                                    binding.hikeLocation.setText(address);
                                }
                                catch (Exception e){

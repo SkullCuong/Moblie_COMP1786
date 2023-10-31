@@ -150,7 +150,9 @@
             android:id="@+id/openMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Open Map"/>
+            android:text="Open Map"
+            android:visibility="invisible"
+            />
 
     </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
