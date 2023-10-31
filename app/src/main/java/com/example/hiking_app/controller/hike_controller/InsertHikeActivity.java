@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -95,12 +96,35 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
 
         }
     }
+
+    private void putHikeDetails(Intent intent){
+        intent.putExtra("name",binding.hikeName.getText().toString());
+        intent.putExtra("date",binding.hikeDate.getText().toString());
+        intent.putExtra("parkingAvailable",binding.hikeParkingAvailable.isChecked());
+        intent.putExtra("length",binding.hikeLength.getText().toString());
+        intent.putExtra("difficulty",binding.hikeDifficulty.getText().toString());
+        intent.putExtra("description",binding.hikeDescription.getText().toString());
+        intent.putExtra("equipment",binding.hikeEquipment.getText().toString());
+        intent.putExtra("quality",binding.hikeEquipment.getText().toString());
+    }
+    private void getHikeDetails(){
+        latitude = getIntent().getDoubleExtra("latitude",-1);
+        longitude = getIntent().getDoubleExtra("longitude",-1);
+        binding.hikeName.setText(getIntent().getStringExtra("name"));
+        binding.hikeDate.setText(getIntent().getStringExtra("date"));
+        binding.hikeParkingAvailable.setChecked(getIntent().getBooleanExtra("parkingAvailable",false));
+        binding.hikeLength.setText(getIntent().getStringExtra("length"));
+        binding.hikeDifficulty.setText(getIntent().getStringExtra("difficulty"));
+        binding.hikeDescription.setText(getIntent().getStringExtra("description"));
+        binding.hikeEquipment.setText(getIntent().getStringExtra("equipment"));
+        binding.hikeQuality.setText(getIntent().getStringExtra("quality"));
+    }
+
     private void checkAddressIsExisted(String address){
         if (address == null){
             getLastLocation();
         } else {
-            latitude = getIntent().getDoubleExtra("latitude",-1);
-            longitude = getIntent().getDoubleExtra("longitude",-1);
+            getHikeDetails();
             binding.hikeLocation.setText(address);
         }
     }
@@ -133,6 +157,7 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
         Intent intent = new Intent(InsertHikeActivity.this, MapsActivity.class);
         intent.putExtra("latitude", latitude);
         intent.putExtra("longitude",longitude);
+        putHikeDetails(intent);
         InsertHikeActivity.this.startActivity(intent);
     }
     private void insertHike() {
@@ -221,8 +246,6 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
     private void askPermisson() {
         ActivityCompat.requestPermissions(InsertHikeActivity.this, new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
-
-
 
     }
 
