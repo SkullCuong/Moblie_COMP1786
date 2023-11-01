@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
+import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
 import com.example.hiking_app.databinding.ActivityConfirmInsertBinding;
 import com.example.hiking_app.databinding.ActivityDeleteHikeBinding;
@@ -58,15 +59,19 @@ public class ConfirmInsert extends AppCompatActivity {
 
     private void DeleteConfirmHike() {
 //        DbContext.getInstance(this.getApplicationContext()).appDao().deleteHikeById(hikeId);
-        Intent intent = new Intent(this, InsertHikeActivity.class);
+        Intent intent = new Intent(this, MainActivity2.class);
         intent.putExtra("hike_id", hikeId);
+        intent.putExtra("FRAGMENT_TO_LOAD", "AddHikeFragmentForConfirm");
         startActivity(intent);
     }
 
     private void InserHike() {
         //DbContext.getInstance(this.getApplicationContext()).appDao().insertHike(hikeId);
         showMessage("Add successful");
-        Intent intent = new Intent(this, ViewHike.class);
+//        Intent intent = new Intent(this, ViewHike.class);
+//        startActivity(intent);
+        Intent intent = new Intent(this, MainActivity2.class);
+        intent.putExtra("FRAGMENT_TO_LOAD", "ViewHikeFragment");
         startActivity(intent);
     }
     private void showMessage(String message) {

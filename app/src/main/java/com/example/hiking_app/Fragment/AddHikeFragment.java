@@ -27,10 +27,12 @@ import android.widget.Toast;
 import com.example.hiking_app.Dao.AppDao;
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.MainActivity;
+import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
 import com.example.hiking_app.controller.hike_controller.ConfirmInsert;
 import com.example.hiking_app.controller.hike_controller.InsertHikeActivity;
 import com.example.hiking_app.controller.hike_controller.MapsActivity;
+import com.example.hiking_app.controller.user_controller.SessionManager;
 import com.example.hiking_app.databinding.ActivityInsertHikeBinding;
 import com.example.hiking_app.model.Hikes;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -70,9 +72,6 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
 
     SupportMapFragment mapFragment;
 
-    Bundle args = getArguments();
-
-
     private  final static int REQUEST_CODE = 100;
 
     FusedLocationProviderClient fusedLocationProviderClient ;
@@ -110,24 +109,17 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         Bundle data = getArguments();
         if(data != null){
             address = data.getString("address");
+            hikeId = data.getInt("hike_id", -1);
         }
-        //String address = getIntent().getStringExtra("address");
         checkAddressIsExisted(address);
         setListener();
-        //hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
-        // Retrieve the arguments
-        //Bundle args = getArguments();
-//        if (args != null) {
-//            int hikeId = args.getInt("hike_id", -1);
-//            address = args.getString("address", "address");
-//            System.out.println(address+" ------");
-//            checkAddressIsExisted(address);
-//            // Now you have the hikeId
-//            // Use it as needed
-//        }
+        renderHikeIfExist();
+        return view;
+    }
+
+    private void renderHikeIfExist() {
         foundHike = DbContext.getInstance(requireContext().getApplicationContext()).appDao().findHikeById(hikeId);
         CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
-
         if (hikeId != -1 && foundHike != null) {
             binding.hikeName.setText(foundHike.getName());
             binding.hikeLocation.setText(foundHike.getLocation());
@@ -143,7 +135,6 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             binding.hikeEquipment.setText(foundHike.getEquipment());
             binding.hikeQuality.setText(foundHike.getQuality());
         }
-        return view;
     }
 
     private void setListener() {
@@ -252,7 +243,6 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             String updatedDescription = binding.hikeDescription.getText().toString();
             String updatedEquipment = binding.hikeEquipment.getText().toString();
             String updatedQuality = binding.hikeQuality.getText().toString();
-
             // Update data
             foundHike.setName(updatedName);
             foundHike.setLocation(updatedLocation);
@@ -266,10 +256,10 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
 
             // Save to db
             DbContext.getInstance(requireContext().getApplicationContext()).appDao().updateHike(foundHike);
-            //Start activity
-//            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
-//            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
-//            startActivity(intent);
+            //Start fragment
+            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
+            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
+            startActivity(intent);
         }else {
             String name = binding.hikeName.getText().toString().trim();
             String location = binding.hikeLocation.getText().toString().trim();
@@ -280,22 +270,24 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             String description = binding.hikeDescription.getText().toString().trim();
             String equipment = binding.hikeEquipment.getText().toString().trim();
             String quality = binding.hikeQuality.getText().toString().trim();
-            int userId = 5;
+
+            SessionManager sessionManager = new SessionManager(getContext());
+            int userIdSession = sessionManager.getKeyUserid();
+            int userId = userIdSession;
 
             Hikes hike = new Hikes(name, location, date, parkingAV, length, difficulty, description, equipment, quality, userId);
             AppDao appDao = DbContext.getInstance(requireContext().getApplicationContext()).appDao();
 
             long hikeId = appDao.insertHike(hike);
 
-//            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
-//            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
-//            startActivity(intent);
+            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
+            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
+            startActivity(intent);
         }
         //showMessage("Add successful");
     }
 
     private void askPermisson() {
-        System.out.println("296");
         ActivityCompat.requestPermissions(requireActivity(), new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
     }

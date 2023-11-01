@@ -62,9 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     // Redirect to the next activity or perform other actions after successful login
                     Intent intent = new Intent(LoginActivity.this, MainActivity2.class);
                     Intent profileIntent = new Intent(LoginActivity.this, ProfileActivity.class);
-
                     profileIntent.putExtra("userId", userId); // Pass the user ID to fetch user data in ProfileActivity
-
                     startActivity(intent);
                     finish(); // Close the LoginActivity
 
