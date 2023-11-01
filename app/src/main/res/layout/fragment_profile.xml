@@ -16,56 +16,35 @@
             android:layout_height="match_parent"
             android:background="@color/light_blue"
             android:orientation="vertical">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/dark_blue">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Profile"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_20ssp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="MissingConstraints" />
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="51dp"
-                    android:src="@drawable/arc_3"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    tools:ignore="MissingConstraints"/>
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/profileImageView"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:scaleType="centerCrop"
-                    app:riv_oval="true"
-                    android:src="@drawable/user_2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="MissingConstraints" />
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_140sdp"
+                    android:background="@drawable/imageloginbackgroundmobile"
+                    android:orientation="vertical"
+                    tools:ignore="MissingConstraints">
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/profileImageView"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_60sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/user_2"
+                        app:riv_oval="true"
+                        tools:ignore="MissingConstraints" />
+                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/changeImageButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <Button
-                    android:id="@+id/changeImageButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Select Image"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imageViewProfile"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-
+                android:text="Select Image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageViewProfile"
+                android:layout_gravity="center"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -74,11 +53,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Private Information"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="@dimen/_15sdp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Username"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     android:textColor="@color/dark_blue"/>
-
                 <EditText
                     android:id="@+id/usernameEditText"
                     android:layout_width="match_parent"
@@ -136,26 +121,6 @@
                     android:paddingEnd="@dimen/_16sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_13ssp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Password"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold"
-                    android:textColor="@color/dark_blue"/>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/edittext_background"
-                    android:hint="Password"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="textPassword"
-                    android:paddingStart="@dimen/_15sdp"
-                    android:paddingEnd="@dimen/_16sdp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp" />
-
                 <Button
                     android:id="@+id/saveButton"
                     android:layout_width="match_parent"
@@ -171,3 +136,6 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
+
+
+

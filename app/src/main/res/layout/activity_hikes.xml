@@ -18,8 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:iconifiedByDefault="false"
         app:queryHint="Search Here..."
-        android:imeOptions="actionDone"
-        />
+        android:imeOptions="actionDone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listHikes"
