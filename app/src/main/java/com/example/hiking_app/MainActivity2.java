@@ -1,6 +1,7 @@
 package com.example.hiking_app;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -69,8 +70,7 @@ public class MainActivity2 extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
-        replaceFragment(new HomeFragment());
+        initPage();
         // Bottom Menu Fragment
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -108,6 +108,33 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
 
+    private void  initPage(){
+        Intent intent = getIntent();
+        if (intent != null) {
+            String fragmentToLoad = intent.getStringExtra("FRAGMENT_TO_LOAD");
+            if ("AddHikeFragment".equals(fragmentToLoad)) {
+                AddHikeFragment addHikeFragment = new AddHikeFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                Bundle hike = new Bundle();
+                hike.putString("address",intent.getStringExtra("address"));
+                hike.putDouble("latitude",intent.getDoubleExtra("latitude",1000));
+                hike.putDouble("longitude",intent.getDoubleExtra("longitude",1000));
+                hike.putString("name",getIntent().getStringExtra("name"));
+                hike.putString("date",intent.getStringExtra("date"));
+                hike.putBoolean("parkingAvailable",getIntent().getBooleanExtra("parkingAvailable",false));
+                hike.putString("length",intent.getStringExtra("length"));
+                hike.putString("difficulty",intent.getStringExtra("difficulty"));
+                hike.putString("description",intent.getStringExtra("description"));
+                hike.putString("equipment",intent.getStringExtra("equipment"));
+                hike.putString("quality",intent.getStringExtra("quality"));
+                addHikeFragment.setArguments(hike);
+                fragmentTransaction.replace(R.id.frame_layout, addHikeFragment).commit();
+            } else{
+                replaceFragment(new HomeFragment());
+            }
+        }
+
+    }
     // Menu bar Outside Oncreate
     private  void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -70,6 +70,8 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
 
     SupportMapFragment mapFragment;
 
+    Bundle args = getArguments();
+
 
     private  final static int REQUEST_CODE = 100;
 
@@ -96,7 +98,7 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         }
     }
 
-    Bundle args = getArguments();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,21 +106,25 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         binding = ActivityInsertHikeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
-        String address ="";
+        String address = "";
+        Bundle data = getArguments();
+        if(data != null){
+            address = data.getString("address");
+        }
         //String address = getIntent().getStringExtra("address");
         checkAddressIsExisted(address);
         setListener();
         //hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         // Retrieve the arguments
         //Bundle args = getArguments();
-        if (args != null) {
-            int hikeId = args.getInt("hike_id", -1);
-            address = args.getString("address", "address");
-            System.out.println(address+" ------");
-            checkAddressIsExisted(address);
-            // Now you have the hikeId
-            // Use it as needed
-        }
+//        if (args != null) {
+//            int hikeId = args.getInt("hike_id", -1);
+//            address = args.getString("address", "address");
+//            System.out.println(address+" ------");
+//            checkAddressIsExisted(address);
+//            // Now you have the hikeId
+//            // Use it as needed
+//        }
         foundHike = DbContext.getInstance(requireContext().getApplicationContext()).appDao().findHikeById(hikeId);
         CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
 
@@ -152,7 +158,6 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         });
     }
     private void putHikeDetails(Intent intent){
-        if (args != null) {
             intent.putExtra("name", binding.hikeName.getText().toString());
             intent.putExtra("date", binding.hikeDate.getText().toString());
             intent.putExtra("parkingAvailable", binding.hikeParkingAvailable.isChecked());
@@ -161,32 +166,28 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             intent.putExtra("description", binding.hikeDescription.getText().toString());
             intent.putExtra("equipment", binding.hikeEquipment.getText().toString());
             intent.putExtra("quality", binding.hikeEquipment.getText().toString());
-        } else {
-            System.out.println("165");
-        }
     }
-    private void getHikeDetails(){
-        System.out.println("169");
-        latitude = args.getDouble("latitude",-1);
-        longitude = args.getDouble("longitude",-1);
-        binding.hikeName.setText(args.getString("name"));
-        binding.hikeDate.setText(args.getString("date"));
-        binding.hikeParkingAvailable.setChecked(args.getBoolean("parkingAvailable",false));
-        binding.hikeLength.setText(args.getString("length"));
-        binding.hikeDifficulty.setText(args.getString("difficulty"));
-        binding.hikeDescription.setText(args.getString("description"));
-        binding.hikeEquipment.setText(args.getString("equipment"));
-        binding.hikeQuality.setText(args.getString("quality"));
+    private void getHikeDetails(Bundle data){
+        latitude = data.getDouble("latitude",-1);
+        longitude = data.getDouble("longitude",-1);
+        binding.hikeName.setText(data.getString("name"));
+        binding.hikeDate.setText(data.getString("date"));
+        binding.hikeParkingAvailable.setChecked(data.getBoolean("parkingAvailable",false));
+        binding.hikeLength.setText(data.getString("length"));
+        binding.hikeDifficulty.setText(data.getString("difficulty"));
+        binding.hikeDescription.setText(data.getString("description"));
+        binding.hikeEquipment.setText(data.getString("equipment"));
+        binding.hikeQuality.setText(data.getString("quality"));
     }
 
     private void checkAddressIsExisted(String address){
         if (address == ""){
-            System.out.println("183");
             getLastLocation();
         } else {
-            System.out.println("186");
-            getHikeDetails();
+            Bundle data = getArguments();
+            getHikeDetails(data);
             binding.hikeLocation.setText(address);
+            binding.openMap.setVisibility(View.VISIBLE);
         }
     }
     private void getCalendar() {
@@ -203,11 +204,11 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         datePickerDialog.show();
     }
     private  void openMap(double latitude, double longitude){
-        Intent intent = new Intent(requireContext(), MapsActivity.class);
+        Intent intent = new Intent(requireActivity(), MapsActivity.class);
         intent.putExtra("latitude", latitude);
         intent.putExtra("longitude",longitude);
         putHikeDetails(intent);
-        requireContext().startActivity(intent);
+        startActivity(intent);
     }
     public void getLastLocation(){
         binding.progressBar.setVisibility(View.VISIBLE);
@@ -217,25 +218,24 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
                     .addOnSuccessListener(new OnSuccessListener<Location>() {
                         @Override
                         public void onSuccess(Location location) {
-                            if(location != null){
-                                Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
-                                latitude = location.getLatitude();
-                                longitude =location.getLongitude();
-                                try{
-                                    Address addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1).get(0);
-                                    String address = addresses.getAddressLine(0);
-                                    binding.progressBar.setVisibility(View.INVISIBLE);
-                                    binding.openMap.setVisibility(View.VISIBLE);
-                                    binding.hikeLocation.setText(address);
+                                if (location != null) {
+                                    Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
+                                    latitude = location.getLatitude();
+                                    longitude = location.getLongitude();
+                                    try {
+                                        Address addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1).get(0);
+                                        String address = addresses.getAddressLine(0);
+                                        binding.progressBar.setVisibility(View.INVISIBLE);
+                                        binding.openMap.setVisibility(View.VISIBLE);
+                                        binding.hikeLocation.setText(address);
+                                    } catch (Exception e) {
+                                        System.out.println(e.getMessage());
+                                    }
                                 }
-                                catch (Exception e){
-                                    System.out.println(e.getMessage());
-                                }
-                            }
+
                         }
                     });
         } else {
-            System.out.println("236");
             askPermisson();
         }
     }
@@ -267,9 +267,9 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             // Save to db
             DbContext.getInstance(requireContext().getApplicationContext()).appDao().updateHike(foundHike);
             //Start activity
-            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
-            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
-            startActivity(intent);
+//            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
+//            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
+//            startActivity(intent);
         }else {
             String name = binding.hikeName.getText().toString().trim();
             String location = binding.hikeLocation.getText().toString().trim();
@@ -287,9 +287,9 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
 
             long hikeId = appDao.insertHike(hike);
 
-            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
-            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
-            startActivity(intent);
+//            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
+//            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
+//            startActivity(intent);
         }
         //showMessage("Add successful");
     }
@@ -302,12 +302,9 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == REQUEST_CODE){
-            System.out.println("303");
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                System.out.println("305");
                 getLastLocation();
             } else {
-                System.out.println("308");
                 showMessage("Permission required");
             }
         }

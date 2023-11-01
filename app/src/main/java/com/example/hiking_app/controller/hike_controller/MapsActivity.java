@@ -11,6 +11,8 @@ import android.location.Geocoder;
 import android.os.Bundle;
 
 import com.example.hiking_app.Fragment.AddHikeFragment;
+import com.example.hiking_app.MainActivity;
+import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -73,13 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 try{
                     Address addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1).get(0);
                     String address = addresses.getAddressLine(0) ;
-                    System.out.println("81");
-                    Intent intent = new Intent();
-
-                    //Intent intent = new Intent(MapsActivity.this, AddHikeFragment.class);
-                    hikeDetails(intent,address,latLng);
-
-                    //startActivity(intent);
+                    hikeDetails(address,latLng);
                 }
                 catch (Exception e){
                     System.out.println(e.getMessage());
@@ -88,8 +84,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    private void hikeDetails(Intent intent, String address , LatLng latLng){
-        System.out.println("97");
+    private void hikeDetails(String address,LatLng latLng){
+        Intent intent = new Intent(this, MainActivity2.class);
         intent.putExtra("address", address);
         intent.putExtra("latitude", latLng.latitude);
         intent.putExtra("longitude", latLng.longitude);
@@ -102,10 +98,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         intent.putExtra("equipment",getIntent().getStringExtra("equipment"));
         intent.putExtra("quality",getIntent().getStringExtra("quality"));
 
-        //AddHikeFragment addHikeFragment = AddHikeFragment.newInstance("param1","param2");
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,new AddHikeFragment());
-        fragmentTransaction.commit();
+        intent.putExtra("FRAGMENT_TO_LOAD", "AddHikeFragment");
+        startActivity(intent);
+
+
     }
 }
