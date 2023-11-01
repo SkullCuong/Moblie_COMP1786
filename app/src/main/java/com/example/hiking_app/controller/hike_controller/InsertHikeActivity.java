@@ -85,7 +85,6 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         String address = getIntent().getStringExtra("address");
         checkAddressIsExisted(address);
-        setListener();
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
         CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
@@ -114,24 +113,24 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void putHikeDetails(Intent intent){
-        intent.putExtra("name",binding.hikeName.getText().toString());
-        intent.putExtra("date",binding.hikeDate.getText().toString());
-        intent.putExtra("parkingAvailable",binding.hikeParkingAvailable.isChecked());
-        intent.putExtra("length",binding.hikeLength.getText().toString());
-        intent.putExtra("difficulty",binding.hikeDifficulty.getText().toString());
-        intent.putExtra("description",binding.hikeDescription.getText().toString());
-        intent.putExtra("equipment",binding.hikeEquipment.getText().toString());
-        intent.putExtra("quality",binding.hikeEquipment.getText().toString());
-    }
-    private void getHikeDetails(){
-        latitude = getIntent().getDoubleExtra("latitude",-1);
-        longitude = getIntent().getDoubleExtra("longitude",-1);
-        binding.hikeName.setText(getIntent().getStringExtra("name"));
-        binding.hikeDate.setText(getIntent().getStringExtra("date"));
-        binding.hikeParkingAvailable.setChecked(getIntent().getBooleanExtra("parkingAvailable",false));
-        binding.hikeLength.setText(getIntent().getStringExtra("length"));
-        binding.hikeDifficulty.setText(getIntent().getStringExtra("difficulty"));
-        binding.hikeDescription.setText(getIntent().getStringExtra("description"));
+            intent.putExtra("name",binding.hikeName.getText().toString());
+            intent.putExtra("date",binding.hikeDate.getText().toString());
+            intent.putExtra("parkingAvailable",binding.hikeParkingAvailable.isChecked());
+            intent.putExtra("length",binding.hikeLength.getText().toString());
+            intent.putExtra("difficulty",binding.hikeDifficulty.getText().toString());
+            intent.putExtra("description",binding.hikeDescription.getText().toString());
+            intent.putExtra("equipment",binding.hikeEquipment.getText().toString());
+            intent.putExtra("quality",binding.hikeEquipment.getText().toString());
+        }
+        private void getHikeDetails(){
+            latitude = getIntent().getDoubleExtra("latitude",-1);
+            longitude = getIntent().getDoubleExtra("longitude",-1);
+            binding.hikeName.setText(getIntent().getStringExtra("name"));
+            binding.hikeDate.setText(getIntent().getStringExtra("date"));
+            binding.hikeParkingAvailable.setChecked(getIntent().getBooleanExtra("parkingAvailable",false));
+            binding.hikeLength.setText(getIntent().getStringExtra("length"));
+            binding.hikeDifficulty.setText(getIntent().getStringExtra("difficulty"));
+            binding.hikeDescription.setText(getIntent().getStringExtra("description"));
         binding.hikeEquipment.setText(getIntent().getStringExtra("equipment"));
         binding.hikeQuality.setText(getIntent().getStringExtra("quality"));
     }
@@ -263,7 +262,6 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
     private void askPermisson() {
         ActivityCompat.requestPermissions(InsertHikeActivity.this, new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
-
     }
 
     private void showMessage(String message) {

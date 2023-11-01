@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.MainActivity;
+import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
 import com.example.hiking_app.model.Users;
 
@@ -59,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                     setLoginStatus(true);
 
                     // Redirect to the next activity or perform other actions after successful login
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity2.class);
                     Intent profileIntent = new Intent(LoginActivity.this, ProfileActivity.class);
 
                     profileIntent.putExtra("userId", userId); // Pass the user ID to fetch user data in ProfileActivity

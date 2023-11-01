@@ -2,12 +2,15 @@ package com.example.hiking_app.controller.hike_controller;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
+import com.example.hiking_app.Fragment.AddHikeFragment;
 import com.example.hiking_app.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,6 +27,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
     }
+
 
     /**
      * Manipulates the map once available.
@@ -58,6 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(location).title("You are in"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15));
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull LatLng latLng) {
@@ -67,9 +73,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 try{
                     Address addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1).get(0);
                     String address = addresses.getAddressLine(0) ;
-                    Intent intent = new Intent(MapsActivity.this, InsertHikeActivity.class);
+                    System.out.println("81");
+                    Intent intent = new Intent();
+
+                    //Intent intent = new Intent(MapsActivity.this, AddHikeFragment.class);
                     hikeDetails(intent,address,latLng);
-                    startActivity(intent);
+
+                    //startActivity(intent);
                 }
                 catch (Exception e){
                     System.out.println(e.getMessage());
@@ -79,6 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void hikeDetails(Intent intent, String address , LatLng latLng){
+        System.out.println("97");
         intent.putExtra("address", address);
         intent.putExtra("latitude", latLng.latitude);
         intent.putExtra("longitude", latLng.longitude);
@@ -90,5 +101,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         intent.putExtra("description",getIntent().getStringExtra("description"));
         intent.putExtra("equipment",getIntent().getStringExtra("equipment"));
         intent.putExtra("quality",getIntent().getStringExtra("quality"));
+
+        //AddHikeFragment addHikeFragment = AddHikeFragment.newInstance("param1","param2");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,new AddHikeFragment());
+        fragmentTransaction.commit();
     }
 }

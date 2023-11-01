@@ -1,9 +1,19 @@
 package com.example.hiking_app.Fragment;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -20,18 +30,27 @@ import com.example.hiking_app.MainActivity;
 import com.example.hiking_app.R;
 import com.example.hiking_app.controller.hike_controller.ConfirmInsert;
 import com.example.hiking_app.controller.hike_controller.InsertHikeActivity;
+import com.example.hiking_app.controller.hike_controller.MapsActivity;
 import com.example.hiking_app.databinding.ActivityInsertHikeBinding;
 import com.example.hiking_app.model.Hikes;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddHikeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddHikeFragment extends Fragment {
+public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,6 +64,16 @@ public class AddHikeFragment extends Fragment {
     private ActivityInsertHikeBinding binding;
     int hikeId;
     Hikes foundHike;
+    double latitude,longitude;
+
+    GoogleMap mMap;
+
+    SupportMapFragment mapFragment;
+
+
+    private  final static int REQUEST_CODE = 100;
+
+    FusedLocationProviderClient fusedLocationProviderClient ;
 
     public AddHikeFragment() {
         // Required empty public constructor
@@ -67,17 +96,26 @@ public class AddHikeFragment extends Fragment {
         }
     }
 
+    Bundle args = getArguments();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = ActivityInsertHikeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
+        String address ="";
+        //String address = getIntent().getStringExtra("address");
+        checkAddressIsExisted(address);
         setListener();
         //hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         // Retrieve the arguments
-        Bundle args = getArguments();
+        //Bundle args = getArguments();
         if (args != null) {
             int hikeId = args.getInt("hike_id", -1);
+            address = args.getString("address", "address");
+            System.out.println(address+" ------");
+            checkAddressIsExisted(address);
             // Now you have the hikeId
             // Use it as needed
         }
@@ -88,11 +126,6 @@ public class AddHikeFragment extends Fragment {
             binding.hikeName.setText(foundHike.getName());
             binding.hikeLocation.setText(foundHike.getLocation());
             binding.hikeDate.setText(foundHike.getDate());
-//            if(foundHike.getParking_available() == true){
-//                binding.hikeParkingAvailable.setText("Yes");
-//            }else {
-//                binding.hikeParkingAvailable.setText("No");
-//            }
             if (foundHike.getParking_available() == true) {
                 parkingAvailableCheckBox.setChecked(true);
             } else {
@@ -114,6 +147,47 @@ public class AddHikeFragment extends Fragment {
         binding.hikeDate.setOnClickListener(v ->{
             getCalendar();
         });
+        binding.openMap.setOnClickListener(v ->{
+            openMap(latitude,longitude);
+        });
+    }
+    private void putHikeDetails(Intent intent){
+        if (args != null) {
+            intent.putExtra("name", binding.hikeName.getText().toString());
+            intent.putExtra("date", binding.hikeDate.getText().toString());
+            intent.putExtra("parkingAvailable", binding.hikeParkingAvailable.isChecked());
+            intent.putExtra("length", binding.hikeLength.getText().toString());
+            intent.putExtra("difficulty", binding.hikeDifficulty.getText().toString());
+            intent.putExtra("description", binding.hikeDescription.getText().toString());
+            intent.putExtra("equipment", binding.hikeEquipment.getText().toString());
+            intent.putExtra("quality", binding.hikeEquipment.getText().toString());
+        } else {
+            System.out.println("165");
+        }
+    }
+    private void getHikeDetails(){
+        System.out.println("169");
+        latitude = args.getDouble("latitude",-1);
+        longitude = args.getDouble("longitude",-1);
+        binding.hikeName.setText(args.getString("name"));
+        binding.hikeDate.setText(args.getString("date"));
+        binding.hikeParkingAvailable.setChecked(args.getBoolean("parkingAvailable",false));
+        binding.hikeLength.setText(args.getString("length"));
+        binding.hikeDifficulty.setText(args.getString("difficulty"));
+        binding.hikeDescription.setText(args.getString("description"));
+        binding.hikeEquipment.setText(args.getString("equipment"));
+        binding.hikeQuality.setText(args.getString("quality"));
+    }
+
+    private void checkAddressIsExisted(String address){
+        if (address == ""){
+            System.out.println("183");
+            getLastLocation();
+        } else {
+            System.out.println("186");
+            getHikeDetails();
+            binding.hikeLocation.setText(address);
+        }
     }
     private void getCalendar() {
         Calendar calendar = Calendar.getInstance();
@@ -128,7 +202,43 @@ public class AddHikeFragment extends Fragment {
         },currentYear,currentMonth,currentDay);
         datePickerDialog.show();
     }
+    private  void openMap(double latitude, double longitude){
+        Intent intent = new Intent(requireContext(), MapsActivity.class);
+        intent.putExtra("latitude", latitude);
+        intent.putExtra("longitude",longitude);
+        putHikeDetails(intent);
+        requireContext().startActivity(intent);
+    }
+    public void getLastLocation(){
+        binding.progressBar.setVisibility(View.VISIBLE);
+        if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
 
+            fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+                    .addOnSuccessListener(new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if(location != null){
+                                Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
+                                latitude = location.getLatitude();
+                                longitude =location.getLongitude();
+                                try{
+                                    Address addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1).get(0);
+                                    String address = addresses.getAddressLine(0);
+                                    binding.progressBar.setVisibility(View.INVISIBLE);
+                                    binding.openMap.setVisibility(View.VISIBLE);
+                                    binding.hikeLocation.setText(address);
+                                }
+                                catch (Exception e){
+                                    System.out.println(e.getMessage());
+                                }
+                            }
+                        }
+                    });
+        } else {
+            System.out.println("236");
+            askPermisson();
+        }
+    }
     private void insertHike() {
         if(hikeId != -1 && foundHike != null){
             // take data from EditText
@@ -184,6 +294,30 @@ public class AddHikeFragment extends Fragment {
         //showMessage("Add successful");
     }
 
+    private void askPermisson() {
+        System.out.println("296");
+        ActivityCompat.requestPermissions(requireActivity(), new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_CODE){
+            System.out.println("303");
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                System.out.println("305");
+                getLastLocation();
+            } else {
+                System.out.println("308");
+                showMessage("Permission required");
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mMap = googleMap;
+    }
     private void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
