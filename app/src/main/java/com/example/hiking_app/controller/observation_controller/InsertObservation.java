@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -51,20 +52,32 @@ public class InsertObservation extends AppCompatActivity {
             pickImage.launch(intent);
 
         });
+        binding.btnCaptureImage.setOnClickListener(v -> {
+            // Open camera to capture image
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            captureImage.launch(cameraIntent);
+        });
     }
     private void insertOb() {
         String name = binding.ObName.getText().toString().trim();
         String date = binding.ObDate.getText().toString().trim();
         String comment = binding.ObComment.getText().toString().trim();
-        String photo = encodedImage;
-        int hikeId = getIntent().getIntExtra("hike_id", -1);;
 
-        Observations observation = new Observations(name,date,comment,photo,hikeId);
+
+        int hikeId = getIntent().getIntExtra("hike_id", -1);
+
+        if (name.isEmpty() || date.isEmpty() || comment.isEmpty() || encodedImage.isEmpty()) {
+            showMessage("Please fill in all fields and select/capture an image.");
+            return;
+        }
+
+        Observations observation = new Observations(name, date, comment, encodedImage, hikeId);
 
         DbContext.getInstance(this.getApplicationContext()).appDao().insertObservations(observation);
         System.out.println(observation);
         showMessage("Add observation successful");
     }
+
 
     private void getCalendar() {
         Calendar calendar = Calendar.getInstance();
@@ -128,4 +141,37 @@ public class InsertObservation extends AppCompatActivity {
     private void showMessage(String message) {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
     }
+    private final ActivityResultLauncher<Intent> captureImage = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Bundle extras = result.getData().getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    if (imageBitmap != null) {
+                        binding.capturedImageView.setImageBitmap(imageBitmap);
+                        binding.capturedImageView.setVisibility(View.VISIBLE);
+                        encodedImage = encodedImage(imageBitmap);
+                    }
+                }
+            }
+    );
+
+    private final ActivityResultLauncher<Intent> pickImageLauncher  = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    if (result.getData() != null) {
+                        Uri imageUri = result.getData().getData();
+                        try {
+                            InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                            binding.imageView.setImageBitmap(bitmap);
+                            encodedImage = encodedImage(bitmap);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+    );
 }
