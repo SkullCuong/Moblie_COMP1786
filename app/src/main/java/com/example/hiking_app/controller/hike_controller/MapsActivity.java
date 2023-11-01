@@ -68,9 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Address addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1).get(0);
                     String address = addresses.getAddressLine(0) ;
                     Intent intent = new Intent(MapsActivity.this, InsertHikeActivity.class);
-                    intent.putExtra("address", address);
-                    intent.putExtra("latitude", latLng.latitude);
-                    intent.putExtra("longitude", latLng.longitude);
+                    hikeDetails(intent,address,latLng);
                     startActivity(intent);
                 }
                 catch (Exception e){
@@ -78,5 +76,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
+    }
+
+    private void hikeDetails(Intent intent, String address , LatLng latLng){
+        intent.putExtra("address", address);
+        intent.putExtra("latitude", latLng.latitude);
+        intent.putExtra("longitude", latLng.longitude);
+        intent.putExtra("name",getIntent().getStringExtra("name"));
+        intent.putExtra("date",getIntent().getStringExtra("date"));
+        intent.putExtra("parkingAvailable",getIntent().getBooleanExtra("parkingAvailable",false));
+        intent.putExtra("length",getIntent().getStringExtra("length"));
+        intent.putExtra("difficulty",getIntent().getStringExtra("difficulty"));
+        intent.putExtra("description",getIntent().getStringExtra("description"));
+        intent.putExtra("equipment",getIntent().getStringExtra("equipment"));
+        intent.putExtra("quality",getIntent().getStringExtra("quality"));
     }
 }
