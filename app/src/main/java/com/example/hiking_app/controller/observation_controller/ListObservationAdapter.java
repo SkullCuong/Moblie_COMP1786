@@ -30,7 +30,6 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
     private LayoutInflater inflater;
     private Context context;
     public ListObservationAdapter(List<Observations> observations, Context context) {
-
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.observations = observations;
@@ -63,7 +62,6 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
             image = itemView.findViewById(R.id.observationImage);
             update = itemView.findViewById(R.id.updateObservation);
             delete = itemView.findViewById(R.id.deleteObservation);
-
         }
         public void bindData(Observations observation) {
                 nameTextView.setText(observation.getName());

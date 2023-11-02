@@ -5,22 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.observation_controller.ViewListObservations">
-
-    <!--    <androidx.appcompat.widget.SearchView-->
-    <!--        android:id="@+id/searchView"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="8dp"-->
-    <!--        android:background="@drawable/search_view_bg"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.5"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:iconifiedByDefault="false"-->
-    <!--        app:queryHint="Search Here..."-->
-    <!--        android:imeOptions="actionDone"-->
-    <!--        />-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listObservations"
         android:layout_width="438dp"

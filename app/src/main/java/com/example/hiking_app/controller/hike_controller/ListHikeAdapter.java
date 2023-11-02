@@ -53,7 +53,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
     }
 
     public class HikesViewHolder extends RecyclerView.ViewHolder {
-        ImageView HikeImg, hikeImg1;
+        ImageView HikeImg, hikeImg1, hikeImg2, hikeImg3;
         TextView name, location, date, length;
         Button buttonUpdate;
         CardView cardView;
@@ -67,6 +67,8 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             date = itemView.findViewById(R.id.hikeDate);
             length = itemView.findViewById(R.id.hikeLength);
             hikeImg1 = itemView.findViewById(R.id.img1);
+            hikeImg2 = itemView.findViewById(R.id.img2);
+            hikeImg3 = itemView.findViewById(R.id.img3);
             buttonUpdate = itemView.findViewById(R.id.HikeUpdate);
             cardView = itemView.findViewById(R.id.cardHike);
         }
@@ -84,22 +86,41 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
                 if (imageBitmap != null) {
                     HikeImg.setImageBitmap(imageBitmap);
                 } else {
-                    Log.e("ImageError", "Can't convert image");
+                    Log.e("ImageError", "Failed to convert image");
                 }
+            } catch (IllegalArgumentException e) {
+                Log.e("ImageError", "IllegalArgumentException when loading the image: " + e.getMessage());
+            } catch (OutOfMemoryError e) {
+                Log.e("ImageError", "OutOfMemoryError when loading the image: " + e.getMessage());
             } catch (Exception e) {
-                Log.e("ImageError", "Error when load the image: " + e.getMessage());
+                Log.e("ImageError", "Error when loading the image: " + e.getMessage());
             }
 
-            SessionManager sessionManager = new SessionManager(context);
-            int username1 = sessionManager.getKeyUserid();
-            name.setText(hike.getName() + username1);
+//            SessionManager sessionManager = new SessionManager(context);
+//            int username1 = sessionManager.getKeyUserid();
+            name.setText(hike.getName());
             date.setText(hike.getDate());
             location.setText(hike.getLocation());
             length.setText(String.valueOf(hike.getLength()));
             if (!observations.isEmpty()) {
-                hikeImg1.setImageBitmap(getImage(observations.get(0).getPhoto()));
+                if (observations.size() > 0) {
+                    hikeImg1.setImageBitmap(getImage(observations.get(0).getPhoto()));
+                } else {
+                    hikeImg1.setImageDrawable(null); // or set a placeholder image
+                }
+
+                if (observations.size() > 1) {
+                    hikeImg2.setImageBitmap(getImage(observations.get(1).getPhoto()));
+                } else {
+                    hikeImg2.setImageDrawable(null); // or set a placeholder image
+                }
+
+                if (observations.size() > 2) {
+                    hikeImg3.setImageBitmap(getImage(observations.get(2).getPhoto()));
+                } else {
+                    hikeImg3.setImageDrawable(null); // or set a placeholder image
+                }
             }
-            //hikeImg1.setImageBitmap(getImage(observations[0].getPhoto()));
             // Set the ID for the current item
             final int itemId = hike.getId();
             buttonUpdate.setOnClickListener(new View.OnClickListener() {
@@ -126,13 +147,17 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
         notifyDataSetChanged();
     }
 
-private Bitmap getImage(String image) {
-    try {
-        byte[] bytes = Base64.decode(image, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    } catch (Exception e) {
-        Log.e("ImageError", "Error when convert the image (at getImage): " + e.getMessage());
+    private Bitmap getImage(String image) {
+        try {
+            byte[] decodedBytes = Base64.decode(image, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+        } catch (IllegalArgumentException e) {
+            Log.e("ImageError", "IllegalArgumentException when converting the image (at getImage): " + e.getMessage());
+        } catch (OutOfMemoryError e) {
+            Log.e("ImageError", "OutOfMemoryError when converting the image (at getImage): " + e.getMessage());
+        } catch (Exception e) {
+            Log.e("ImageError", "Error when converting the image (at getImage): " + e.getMessage());
+        }
         return null;
     }
-}
 }

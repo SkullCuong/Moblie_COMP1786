@@ -1,6 +1,8 @@
 package com.example.hiking_app.controller.hike_controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +11,24 @@ import android.view.View;
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
 import com.example.hiking_app.controller.observation_controller.InsertObservation;
+import com.example.hiking_app.controller.observation_controller.ListObservationAdapter;
 import com.example.hiking_app.controller.observation_controller.ViewListObservations;
+import com.example.hiking_app.controller.review_controller.ListReviewAdapter;
 import com.example.hiking_app.controller.review_controller.ViewReview;
 import com.example.hiking_app.controller.review_controller.insertReview;
 import com.example.hiking_app.databinding.ActivityHikeDetailsBinding;
 import com.example.hiking_app.model.Hikes;
+import com.example.hiking_app.model.Observations;
+import com.example.hiking_app.model.Reviews;
+
+import java.util.List;
 
 public class HikeDetails extends AppCompatActivity {
 
     private ActivityHikeDetailsBinding binding;
     int hikeId;
+    private List<Observations> observations;
+    private List<Reviews> reviews;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +39,21 @@ public class HikeDetails extends AppCompatActivity {
 
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         Hikes foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
+        //List Obs
+        observations = DbContext.getInstance(this).appDao().getObservationsByHikeId(hikeId);
+        ListObservationAdapter listAdapter = new ListObservationAdapter(observations,this);
+
+        RecyclerView recyclerView = findViewById(R.id.listObservationsAtHikeDetails);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(listAdapter);
+        //List Reviews
+        reviews = DbContext.getInstance(this).appDao().getListReviewOfHike(hikeId);
+        ListReviewAdapter listReviewAdapter = new ListReviewAdapter(reviews,this);
+
+        RecyclerView recyclerReviewsView = findViewById(R.id.listReviewsAtHikeDetails);
+        recyclerReviewsView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerReviewsView.setAdapter(listReviewAdapter);
+
 
         if (hikeId != -1) {
             binding.hikeName.setText(foundHike.getName());

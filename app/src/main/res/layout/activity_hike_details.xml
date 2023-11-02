@@ -2,88 +2,108 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/_24sdp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/_24sdp"
+    tools:context=".controller.hike_controller.HikeDetails">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/hikeName"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:id="@+id/hikeDetails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/hikeLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/hikeDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/hikeParking_available"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/hikeLength"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/hikeDifficulty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/hikeDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/hikeEquipment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/hikeQuality"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <Button
-            android:id="@+id/addReviewBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add review"
-            ></Button>
-        <Button
-            android:id="@+id/showReviews"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Show review"
-            ></Button>
-        <Button
-            android:id="@+id/AddOservation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AddOservation"
-            />
-        <Button
-            android:id="@+id/ViewOservation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View Observations"
-            />
-        <Button
-            android:id="@+id/hikeDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hikeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <TextView
+                android:id="@+id/hikeLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <TextView
+                android:id="@+id/hikeDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <TextView
+                android:id="@+id/hikeParking_available"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <TextView
+                android:id="@+id/hikeLength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <TextView
+                android:id="@+id/hikeDifficulty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <TextView
+                android:id="@+id/hikeDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <TextView
+                android:id="@+id/hikeEquipment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <TextView
+                android:id="@+id/hikeQuality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <Button
+                android:id="@+id/addReviewBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add review"></Button>
+
+            <Button
+                android:id="@+id/showReviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show review"></Button>
+
+            <Button
+                android:id="@+id/AddOservation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AddOservation" />
+
+            <Button
+                android:id="@+id/ViewOservation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Observations" />
+
+            <Button
+                android:id="@+id/hikeDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listObservationsAtHikeDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listReviewsAtHikeDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
 </ScrollView>
