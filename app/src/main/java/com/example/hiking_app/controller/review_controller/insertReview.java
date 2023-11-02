@@ -1,10 +1,14 @@
 package com.example.hiking_app.controller.review_controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
@@ -15,9 +19,12 @@ import com.example.hiking_app.databinding.ActivityInsertReviewBinding;
 import com.example.hiking_app.model.Hikes;
 import com.example.hiking_app.model.Reviews;
 
+import java.util.List;
+
 public class insertReview extends AppCompatActivity {
     private ActivityInsertReviewBinding binding;
     private DatePickerDialog datePickerDialog;
+    private List<Reviews> reviews;
     int HikeId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +35,6 @@ public class insertReview extends AppCompatActivity {
         setListener();
         HikeId = getIntent().getIntExtra("hike_id", -1);
     }
-
-
     private void setListener() {
         binding.reviewAddBtn.setOnClickListener(v ->{
             insertReviewActivity();
