@@ -82,9 +82,10 @@
                     <ImageView
                         android:id="@+id/img1"
                         android:layout_width="@dimen/_120sdp"
-                        android:layout_height="@dimen/_200sdp"
+                        android:layout_height="@dimen/_150sdp"
                         android:background="@drawable/input_background"
-                        android:layout_marginBottom="@dimen/_4sdp"/>
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:scaleType="centerCrop"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -96,6 +97,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:background="@drawable/input_background"
                             android:layout_weight="1"
+                            android:scaleType="centerCrop"
                             />
                         <ImageView
                             android:id="@+id/img3"
@@ -103,6 +105,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:background="@drawable/input_background"
                             android:layout_weight="1"
+                            android:scaleType="centerCrop"
                             android:layout_marginTop="@dimen/_4sdp"/>
                     </LinearLayout>
                 </LinearLayout>

@@ -60,8 +60,8 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
             nameTextView = itemView.findViewById(R.id.observationName);
             dateTextView = itemView.findViewById(R.id.observationDate);
             image = itemView.findViewById(R.id.observationImage);
-            update = itemView.findViewById(R.id.updateObservation);
-            delete = itemView.findViewById(R.id.deleteObservation);
+            //update = itemView.findViewById(R.id.updateObservation);
+            //delete = itemView.findViewById(R.id.deleteObservation);
         }
         public void bindData(Observations observation) {
                 nameTextView.setText(observation.getName());
@@ -70,7 +70,7 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
                 // Set the ID for the current item
                 final int itemId = observation.getId();
 
-            update.setOnClickListener(new View.OnClickListener() {
+            /*update.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, UpdateObservation.class);
@@ -84,7 +84,7 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
                    Observations observation= DbContext.getInstance(this).appDao().getObservationById(itemId);
                     DbContext.getInstance(this).appDao().deleteObservation(observation);
                 }
-            });
+            });*/
         }
     }
     private Bitmap getUserImage(String image) {
