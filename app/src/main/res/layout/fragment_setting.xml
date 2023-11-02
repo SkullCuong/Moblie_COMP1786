@@ -13,7 +13,6 @@
             android:layout_height="match_parent"
             android:background="@color/light_blue"
             android:orientation="vertical">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/_15sdp"
@@ -80,7 +79,7 @@
                             android:id="@+id/profileAccount"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@drawable/btn_1"
+                            android:src="@drawable/user"
                             tools:ignore="MissingConstraints" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -113,7 +112,7 @@
                         android:id="@+id/NotificationIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/btn_1"
+                        android:src="@drawable/notification"
                         tools:ignore="MissingConstraints" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -146,7 +145,7 @@
                         android:id="@+id/securityIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/btn_1"
+                        android:src="@drawable/shield"
                         tools:ignore="MissingConstraints" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -179,7 +178,7 @@
                         android:id="@+id/AboutusIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/btn_1"
+                        android:src="@drawable/info"
                         tools:ignore="MissingConstraints" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -212,7 +211,7 @@
                         android:id="@+id/SupportIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/btn_1"
+                        android:src="@drawable/support"
                         tools:ignore="MissingConstraints" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -245,7 +244,7 @@
                         android:id="@+id/LogoutIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/btn_6"
+                        android:src="@drawable/logout"
                         tools:ignore="MissingConstraints" />
                     <TextView
                         android:layout_width="wrap_content"
