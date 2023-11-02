@@ -69,7 +69,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             hikeImg1 = itemView.findViewById(R.id.img1);
             hikeImg2 = itemView.findViewById(R.id.img2);
             hikeImg3 = itemView.findViewById(R.id.img3);
-            buttonUpdate = itemView.findViewById(R.id.HikeUpdate);
+            //buttonUpdate = itemView.findViewById(R.id.HikeUpdate);
             cardView = itemView.findViewById(R.id.cardHike);
         }
         public void setFilteredList(List<Hikes> filteredList){
@@ -123,14 +123,14 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             }
             // Set the ID for the current item
             final int itemId = hike.getId();
-            buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            /*buttonUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, UpdateHike.class);
                     intent.putExtra("hike_id", itemId);
                     context.startActivity(intent);
                 }
-            });
+            });*/
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

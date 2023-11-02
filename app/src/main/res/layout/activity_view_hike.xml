@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,17 +109,6 @@
                             android:scaleType="centerCrop"
                             android:layout_marginTop="@dimen/_4sdp"/>
                     </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/_30sdp"
-                    android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/HikeUpdate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Update"/>
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
