@@ -53,14 +53,15 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
     public class ReviewsViewHolder extends RecyclerView.ViewHolder {
         ImageView userImg;
         TextView userName, rate, comment;
-        Button buttonEdit;
-        Button buttonDelete;
+        TextView buttonEdit;
+        TextView buttonDelete;
 
         public ReviewsViewHolder(@NonNull View itemView) {
             super(itemView);
             //userImg = itemView.findViewById(R.id);
+            ///////////////////////////////////////////////// Help me fix this code
             userName = itemView.findViewById(R.id.userName);
-            rate = itemView.findViewById(R.id.hikeRate);
+            //rate = itemView.findViewById(R.id.hikeRate);
             comment = itemView.findViewById(R.id.comment);
             buttonEdit = itemView.findViewById(R.id.editBtn);
             buttonDelete = itemView.findViewById(R.id.deleteBtn);
@@ -72,7 +73,7 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
 //            HikeImg.setImageBitmap(getUserImage());
             Users user = DbContext.getInstance(context).appDao().findUserById(review.getUserId());
             userName.setText(user.getUserName());
-            rate.setText(String.valueOf(review.getRating()));
+            //rate.setText(String.valueOf(review.getRating()));
             comment.setText(review.getComment());
             // Set the ID for the current item
             final int itemId = review.getId();

@@ -16,54 +16,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="6dp"
             android:radius="8dp">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="200dp"
-                android:layout_height="200dp">
-                <ImageView
+                android:layout_height="250dp">
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/observationImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_5sdp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
-                    android:paddingLeft="14dp"
-                    android:paddingRight="14dp" />
+                    android:scaleType="centerCrop" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_gravity="bottom"
+                    android:layout_height="50dp"
                     android:background="@drawable/white_half_background"
-                    android:padding="@dimen/_5sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/observationImage"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/observationName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:layout_marginBottom="2dp"
-                            android:text="Luu Huu Phuoc"
-                            android:textColor="@android:color/black"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                            <TextView
-                                android:id="@+id/observationDate"
-                                android:layout_width="match_parent"
-                                android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="2dp"
-                                android:text="Date"
-                                android:textColor="@android:color/black"
-                                android:textSize="18sp"/>
-                    </LinearLayout>
+                    app:layout_constraintBottom_toBottomOf="@+id/observationImage">
+                    <TextView
+                        android:id="@+id/observationName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Luu Huu Phuoc"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/observationDate"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/observationDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>
