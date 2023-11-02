@@ -30,6 +30,9 @@ public interface AppDao {
     List<Hikes> getListHikeByName(String name);
     @Query("SELECT * FROM hikes ORDER BY id DESC ")
     List<Hikes> getListHike();
+    @Query("SELECT * FROM hikes")
+    List<Hikes> getListHikeOldest();
+
     @Query("SELECT * FROM hikes WHERE id = :hikeId")
     Hikes findHikeById(int hikeId);
     @Query("DELETE FROM hikes WHERE id = :hikeId")

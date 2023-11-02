@@ -59,6 +59,7 @@ public class MainActivity2 extends AppCompatActivity {
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         // Menu Bar Navigation Bottom
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         navigationView = findViewById(R.id.nav_view);
