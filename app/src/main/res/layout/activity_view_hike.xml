@@ -66,13 +66,6 @@
                             android:text="26/10/2023"
                             android:textStyle="bold"
                             android:layout_marginStart="8dp"/>
-                        <TextView
-                            android:id="@+id/hikeLength"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Difficulty"
-                            android:textStyle="bold"
-                            android:layout_marginStart="8dp"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -110,6 +103,93 @@
                             android:layout_marginTop="@dimen/_4sdp"/>
                     </LinearLayout>
                 </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_25sdp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        tools:ignore="MissingConstraints">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Length: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/hikeLength"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5 km"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+                        tools:ignore="MissingConstraints">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Quality: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/hikeQuality"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5"
+                            android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:src="@drawable/star" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="MissingConstraints">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Difficulty: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:src="@drawable/star" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

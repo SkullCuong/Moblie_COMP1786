@@ -54,7 +54,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
 
     public class HikesViewHolder extends RecyclerView.ViewHolder {
         ImageView HikeImg, hikeImg1, hikeImg2, hikeImg3;
-        TextView name, location, date, length;
+        TextView name, location, date, length, difficulty;
         Button buttonUpdate;
         CardView cardView;
 
@@ -65,6 +65,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             name = itemView.findViewById(R.id.hikeName);
             location = itemView.findViewById(R.id.hikeLocation);
             date = itemView.findViewById(R.id.hikeDate);
+            difficulty = itemView.findViewById(R.id.hikeDifficulty);
             length = itemView.findViewById(R.id.hikeLength);
             hikeImg1 = itemView.findViewById(R.id.img1);
             hikeImg2 = itemView.findViewById(R.id.img2);
