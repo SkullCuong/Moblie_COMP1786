@@ -85,14 +85,7 @@ public class HikeDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        binding.showReviews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HikeDetails.this, ViewReview.class);
-                intent.putExtra("hike_id", hikeId);
-                startActivity(intent);
-            }
-        });
+
         binding.AddOservation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(HikeDetails.this, InsertObservation.class);
@@ -100,13 +93,7 @@ public class HikeDetails extends AppCompatActivity {
                 HikeDetails.this.startActivity(intent);
             }
         });
-        binding.ViewOservation.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(HikeDetails.this, ViewListObservations.class);
-                intent.putExtra("hike_id", hikeId);
-                HikeDetails.this.startActivity(intent);
-            }
-        });
+
         binding.hikeDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

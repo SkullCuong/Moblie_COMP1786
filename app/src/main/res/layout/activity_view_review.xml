@@ -73,14 +73,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_alignParentRight="true"
                 >
-                <TextView
-                    android:id="@+id/hikeRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    />
+
                 <Button
                     android:id="@+id/editBtn"
                     android:layout_width="wrap_content"

@@ -9,101 +9,221 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="355dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/hikeImgObs"
+            android:layout_width="wrap_content"
+            android:layout_height="355dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"></ImageView>
 
         <LinearLayout
             android:id="@+id/hikeDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/hikeName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-
-            <TextView
-                android:id="@+id/hikeLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-
-            <TextView
-                android:id="@+id/hikeDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-
-            <TextView
-                android:id="@+id/hikeParking_available"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-
-            <TextView
-                android:id="@+id/hikeLength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-
-            <TextView
-                android:id="@+id/hikeDifficulty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-
-            <TextView
-                android:id="@+id/hikeDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-
-            <TextView
-                android:id="@+id/hikeEquipment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-
-            <TextView
-                android:id="@+id/hikeQuality"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-
-            <Button
-                android:id="@+id/addReviewBtn"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add review"></Button>
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/showReviews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Show review"></Button>
+                <TextView
+                    android:id="@+id/hikeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="LongBinh"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"></TextView>
 
-            <Button
-                android:id="@+id/AddOservation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="AddOservation" />
+                <TextView
+                    android:id="@+id/hikeDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="20/11/2023"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"></TextView>
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/ViewOservation"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="View Observations" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/hikeDelete"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/hikeLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Long Binh, An Giang"
+                    android:textSize="15sp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Delete" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Have Parking: "
+                    android:textSize="19sp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/hikeParking_available"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Have Parking"
+                    android:textSize="18sp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Length: "
+                    android:textSize="19sp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/hikeLength"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10 Km"
+                    android:textSize="18sp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Difficulty level: "
+                    android:textSize="19sp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/hikeDifficulty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textSize="18sp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Equipment: "
+                    android:textSize="19sp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/hikeEquipment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Equipment"
+                    android:textSize="18sp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quality: "
+                    android:textSize="19sp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/hikeQuality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quality"
+                    android:textSize="18sp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textSize="19sp"
+                    android:textStyle="bold"></TextView>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp">
+
+                    <TextView
+                        android:id="@+id/hikeDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="We organise what we write into sentences and paragraphs. A paragraph begins on a new line within the text and there is often a blank line between paragraphs. A paragraph usually contains more than one sentence and it is usually about one topic. ..."
+                        android:textSize="16sp" />
+                </ScrollView>
+            </LinearLayout>
+
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/AddOservation"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_gravity="end"
+            android:text="AddOservation" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listObservationsAtHikeDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/addReviewBtn"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_gravity="end"
+            android:text="Add review"></Button>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listReviewsAtHikeDetails"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="250dp" />
+
+        <Button
+            android:id="@+id/hikeDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete" />
     </LinearLayout>
 
 </ScrollView>
