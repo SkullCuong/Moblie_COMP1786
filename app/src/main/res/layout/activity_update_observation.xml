@@ -134,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <ImageButton
+                    android:id="@+id/ObPicture"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="50dp"
@@ -141,7 +142,6 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/insert_picture_icon"></ImageButton>
                 <TextView
-                    android:id="@+id/ObPicture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

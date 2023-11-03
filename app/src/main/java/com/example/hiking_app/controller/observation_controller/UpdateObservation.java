@@ -90,17 +90,11 @@ public class UpdateObservation extends AppCompatActivity {
                 if(result.getResultCode() == RESULT_OK){
                     // check value
                     if(result.getData() != null){
-                        // get date of image choosed
                         Uri imageUri = result.getData().getData();
                         try {
-                            // Input is Image from URL
                             InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                            // use it to convert Uri from string to bitmap
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            // diplay image choosed
                             binding.ObsPhoto.setImageBitmap(bitmap);
-//                            binding.textAddImage.setVisibility(View.GONE);
-                            // encrypt this image into string base64
                             encodedImage = encodedImage(bitmap);
                         }catch (FileNotFoundException e){
                             e.printStackTrace();
@@ -109,6 +103,7 @@ public class UpdateObservation extends AppCompatActivity {
                 }
             }
     );
+
     private String encodedImage(Bitmap bitmap){
         // First we determine the size
         // we fixed width
@@ -132,8 +127,8 @@ public class UpdateObservation extends AppCompatActivity {
         String name = binding.ObsName.getText().toString();
         String date = binding.ObsDate.getText().toString();
         String comment = binding.ObsComment.getText().toString();
-        String photo = "Chèn cái String dô đây";
-        //observation.setPhoto(photo);
+        String photo = encodedImage;
+        observation.setPhoto(photo);
         observation.setName(name);
         observation.setComment(comment);
         observation.setDateTime(date);
