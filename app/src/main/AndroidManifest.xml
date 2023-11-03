@@ -47,14 +47,8 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".MainActivity2"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.Hiking_App.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -101,7 +95,14 @@
             android:name=".MainActivity"
             android:exported="false"></activity>
         <activity android:name=".controller.user_controller.RegistrationActivity" />
-        <activity android:name=".controller.user_controller.LoginActivity" />
+        <activity android:name=".controller.user_controller.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".controller.user_controller.ProfileActivity" />
     </application>
 
