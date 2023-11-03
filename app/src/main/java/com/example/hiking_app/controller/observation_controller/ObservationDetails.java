@@ -2,14 +2,19 @@ package com.example.hiking_app.controller.observation_controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 
 import com.example.hiking_app.DbContext;
+import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
+import com.example.hiking_app.controller.hike_controller.HikeDetails;
+import com.example.hiking_app.controller.hike_controller.UpdateHike;
 import com.example.hiking_app.databinding.ActivityConfirmInsertBinding;
 import com.example.hiking_app.databinding.ActivityObservationDetailsBinding;
 import com.example.hiking_app.model.Observations;
@@ -35,6 +40,10 @@ public class ObservationDetails extends AppCompatActivity {
             // Handle the case where the ID is not found
             binding.ObsName.setText("Not found");
         }
+        setListenter();
+    }
+    private void setListenter(){
+
     }
     private Bitmap getImage(String image) {
         try {

@@ -1,33 +1,43 @@
 package com.example.hiking_app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
-import com.example.hiking_app.MainActivity;
+import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
-import com.example.hiking_app.controller.user_controller.LoginActivity;
-import com.example.hiking_app.controller.user_controller.RegistrationActivity;
-import com.example.hiking_app.databinding.ActivityMain2Binding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.hiking_app.controller.hike_controller.ListHikeAdapter;
+import com.example.hiking_app.controller.hike_controller.ViewHike;
+import com.example.hiking_app.databinding.FragmentProfileBinding;
+import com.example.hiking_app.model.Hikes;
 
+import java.util.List;
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link DetailsHikeFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    private List<Hikes> hikes;
+    private SearchView searchView;
+    private Spinner spinner;
+    private String[] choices;
+
     private String mParam1;
     private String mParam2;
 
@@ -35,8 +45,8 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static DetailsHikeFragment newInstance(String param1, String param2) {
+        DetailsHikeFragment fragment = new DetailsHikeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -54,31 +64,61 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_main, container, false);
-        // Find the button within the layout
-        Button buttonGoToRegistration = view.findViewById(R.id.buttonGoToRegistration);
-        // Set an OnClickListener for the button
-        buttonGoToRegistration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Define the click behavior here
-                // For example, navigating to another activity
-                Intent intent = new Intent(requireActivity(), RegistrationActivity.class);
-                startActivity(intent);
-            }
-        });
-        Button buttonGoToLogin = view.findViewById(R.id.buttonGoToLogin);
-        buttonGoToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Navigate to LoginActivity when the button is clicked
-                Intent intent = new Intent(requireActivity(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_hikes, container, false);
+        searchView = view.findViewById(R.id.searchView);
+        searchView.clearFocus();
+        hikes = DbContext.getInstance(requireContext()).appDao().getListHike();
+        ListHikeAdapter listAdapter = new ListHikeAdapter(hikes, requireContext());
+        RecyclerView recyclerView = view.findViewById(R.id.listHikes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setAdapter(listAdapter);
+
+
+        spinner = view.findViewById(R.id.spinner);
+        choices = new String[]{"Newest", "Oldest"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, choices);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        setListener(listAdapter);
 
         return view;
     }
 
+    private void setListener(ListHikeAdapter listAdapter) {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newQuery) {
+                hikes = DbContext.getInstance(requireActivity()).appDao().getListHikeByName(newQuery);
+                listAdapter.setFilteredList(hikes);
+                return false;
+            }
+        });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selectedChoice = choices[position];
+
+                if (selectedChoice.equals("Newest")) {
+                    hikes = DbContext.getInstance(requireContext()).appDao().getListHike();
+                    listAdapter.setFilteredList(hikes);
+                } else if (selectedChoice.equals("Oldest")) {
+                    hikes = DbContext.getInstance(requireContext()).appDao().getListHikeOldest();
+                    listAdapter.setFilteredList(hikes);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
+
+    }
 }

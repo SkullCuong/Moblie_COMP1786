@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -155,7 +156,7 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
 
     private void renderHikeIfExist() {
         foundHike = DbContext.getInstance(requireContext().getApplicationContext()).appDao().findHikeById(hikeId);
-        CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
+        RadioButton parkingAvailableCheckBox = binding.hikeParkingAvailable;
         if (hikeId != -1 && foundHike != null) {
             binding.hikeName.setText(foundHike.getName());
             binding.hikeLocation.setText(foundHike.getLocation());

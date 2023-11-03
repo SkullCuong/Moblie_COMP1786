@@ -65,7 +65,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             name = itemView.findViewById(R.id.hikeName);
             location = itemView.findViewById(R.id.hikeLocation);
             date = itemView.findViewById(R.id.hikeDate);
-            difficulty = itemView.findViewById(R.id.hikeDifficulty);
+            difficulty = itemView.findViewById(R.id.hikeDifficulty1);
             length = itemView.findViewById(R.id.hikeLength);
             hikeImg1 = itemView.findViewById(R.id.img1);
             hikeImg2 = itemView.findViewById(R.id.img2);
@@ -121,6 +121,15 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
                 } else {
                     hikeImg3.setImageDrawable(null); // or set a placeholder image
                 }
+            }
+            if(hike.getDifficulty() == 1){
+                difficulty.setText("Easy");
+            } else if (hike.getDifficulty() == 2) {
+                difficulty.setText("Moderate");
+            } else if (hike.getDifficulty() == 3) {
+                difficulty.setText("Difficult");
+            } else if (hike.getDifficulty() == 4) {
+                difficulty.setText("Very Difficult");
             }
             // Set the ID for the current item
             final int itemId = hike.getId();

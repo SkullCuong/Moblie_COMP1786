@@ -10,21 +10,31 @@
             android:icon="@drawable/baseline_home_24"
             android:title="Home"/>
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/baseline_settings_24"
-            android:title="Settings"/>
-        <item
-            android:id="@+id/nav_share"
-            android:icon="@drawable/baseline_share_24"
-            android:title="Share"/>
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/baseline_info_24"
-            android:title="About Us"/>
+            android:title="Feature">
+            <menu>
+                <item
+                    android:id="@+id/nav_weather"
+                    android:icon="@drawable/baseline_cloud_24"
+                    android:title="Weather"/>
+
+                <item
+                    android:id="@+id/nav_hiking"
+                    android:icon="@drawable/baseline_hiking_24"
+                    android:title="Hiking"/>
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/baseline_settings_24"
+                    android:title="Setting"/>
+            </menu>
+        </item>
     </group>
     <item
-        android:title="">
+        android:title="More">
         <menu>
+            <item
+                android:id="@+id/nav_support"
+                android:icon="@drawable/info"
+                android:title="Support"/>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/baseline_exit_to_app_24"

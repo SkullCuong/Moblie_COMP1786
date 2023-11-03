@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.hiking_app.Dao.AppDao;
@@ -87,7 +88,7 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
         checkAddressIsExisted(address);
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
-        CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
+        RadioButton parkingAvailableCheckBox = binding.hikeParkingAvailable;
 
         if (hikeId != -1 && foundHike != null) {
             binding.hikeName.setText(foundHike.getName());
@@ -126,8 +127,8 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
             binding.hikeLength.setText(getIntent().getStringExtra("length"));
             //binding.hikeDifficulty.setText(getIntent().getStringExtra("difficulty"));
             binding.hikeDescription.setText(getIntent().getStringExtra("description"));
-        binding.hikeEquipment.setText(getIntent().getStringExtra("equipment"));
-        binding.hikeQuality.setText(getIntent().getStringExtra("quality"));
+            binding.hikeEquipment.setText(getIntent().getStringExtra("equipment"));
+            binding.hikeQuality.setText(getIntent().getStringExtra("quality"));
     }
 
     private void checkAddressIsExisted(String address){
