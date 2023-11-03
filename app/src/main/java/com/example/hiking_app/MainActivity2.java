@@ -123,7 +123,7 @@ public class MainActivity2 extends AppCompatActivity {
                     replaceFragment(new HomeFragment());
                 }
                 else if (itemId == R.id.nav_weather) {
-                    replaceFragment(new ViewHikeFragment());
+                    replaceFragment(new  WeatherForecast());
                 }
                 else if (itemId == R.id.nav_hiking) {
                     replaceFragment(new AddHikeFragment());
@@ -145,7 +145,7 @@ public class MainActivity2 extends AppCompatActivity {
             if (itemId == R.id.home) {
                 replaceFragment(new HomeFragment());
             } else if (itemId == R.id.weather) {
-                replaceFragment(new ViewHikeFragment());
+                replaceFragment(new WeatherForecast());
             } else if (itemId == R.id.add) {
                 replaceFragment(new AddHikeFragment());
             } else if (itemId == R.id.settings) {
@@ -167,8 +167,6 @@ public class MainActivity2 extends AppCompatActivity {
             profileImageView.setImageBitmap(decodedBitmap);
         }
     }
-
-
     private void  initPage(){
         Intent intent = getIntent();
         if (intent != null) {
@@ -211,8 +209,7 @@ public class MainActivity2 extends AppCompatActivity {
                 weatherForecast.setArguments(weather);
                 replaceFragment(weatherForecast);
             } else{
-//                replaceFragment(new HomeFragment());
-                  replaceFragment(new WeatherForecast());
+               replaceFragment(new HomeFragment());
             }
         }
 
