@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
+import com.example.hiking_app.controller.hike_controller.HikeDetails;
 import com.example.hiking_app.controller.observation_controller.UpdateObservation;
 import com.example.hiking_app.controller.review_controller.ListReviewAdapter;
 import com.example.hiking_app.model.Reviews;
@@ -82,13 +83,13 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
 
 
             buttonDelete.setOnClickListener(v -> {
-                int userAction = 1;
+                int userAction = user.getId();
                 int reviewOwner = user.getId();
                 if(userAction == reviewOwner) {
                     DbContext.getInstance(context).appDao().deleteReviewById(review.getId());
-                    showMessage("Delete success!");
+                    showMessage(review.getHikeId(),"Delete success!");
                 }else{
-                    showMessage("You are not auth to do this action!");
+                    showMessage(review.getHikeId(),"You are not auth to do this action!");
                 }
             });
             buttonEdit.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +122,11 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
         return null;
 
     }
-    private void showMessage(String message) {
+    private void showMessage(int hikeId,String message) {
         Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+        System.out.println("hikeId: "+hikeId);
+        Intent intent = new Intent(context, HikeDetails.class);
+        intent.putExtra("hike_id", hikeId);
+        context.startActivity(intent);
     }
 }

@@ -43,6 +43,7 @@ public class insertReview extends AppCompatActivity {
         setContentView(binding.getRoot());
         setListener();
         HikeId = getIntent().getIntExtra("hike_id", -1);
+
         SessionManager sessionManager = new SessionManager(insertReview.this);
         int userIdSession = sessionManager.getKeyUserid();
         userId = userIdSession;

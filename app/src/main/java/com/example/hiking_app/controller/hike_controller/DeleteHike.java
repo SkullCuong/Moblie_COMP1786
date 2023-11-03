@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.hiking_app.Dao.AppDao;
 import com.example.hiking_app.DbContext;
+import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
 import com.example.hiking_app.databinding.ActivityDeleteHikeBinding;
 import com.example.hiking_app.databinding.ActivityInsertHikeBinding;
@@ -58,10 +59,13 @@ public class DeleteHike extends AppCompatActivity {
     private void deleteHike() {
         DbContext.getInstance(this.getApplicationContext()).appDao().deleteHikeById(hikeId);
         showMessage("Delete successful");
-        Intent intent = new Intent(this, ViewHike.class);
-        startActivity(intent);
     }
     private void showMessage(String message) {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, MainActivity2.class);
+        intent.putExtra("hike_id", hikeId);
+        intent.putExtra("FRAGMENT_TO_LOAD", "HikeDetailsToListHikes");
+        startActivity(intent);
     }
 }
