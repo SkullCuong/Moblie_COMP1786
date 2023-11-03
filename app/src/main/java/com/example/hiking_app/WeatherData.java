@@ -8,6 +8,14 @@ public class WeatherData {
 
     private Wind wind;
 
+    private Sys sys;
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
     public class Main {
         private double temp;
         private double feels_like;
@@ -75,6 +83,13 @@ public class WeatherData {
             return deg;
         }
     }
+    public class Sys {
+        private String country;
+
+        public String getCountry() {
+            return country;
+        }
+    }
 
 
     public Main getMain() {
@@ -83,6 +98,8 @@ public class WeatherData {
     public Wind getWind() {
         return wind;
     }
+
+    public Sys getSys(){return  sys;}
 
     public Weather[] getWeather() {
         return weather;

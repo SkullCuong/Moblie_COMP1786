@@ -65,6 +65,8 @@ public class MainActivity2 extends AppCompatActivity {
     private TextView usernameEditText;
     private ImageView profileImageView;
 
+    private String city ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +79,7 @@ public class MainActivity2 extends AppCompatActivity {
         usernameEditText = findViewById(R.id.userNameNavbar);
         emailEditText = findViewById(R.id.emailNavbar);
         profileImageView = findViewById(R.id.imageNavbar);
+        city = getIntent().getStringExtra("city") == null ? "":getIntent().getStringExtra("city") ;
 //        int userId = sessionManager.getKeyUserid();
 //        if (userId != -1) {
 //            Users user = dbContext.appDao().findUserById(userId);
@@ -194,6 +197,12 @@ public class MainActivity2 extends AppCompatActivity {
                 hike.putInt("hike_id", intent.getIntExtra("hike_id",-1));
                 detailsHikeFragment.setArguments(hike);
                 fragmentTransaction.replace(R.id.frame_layout, detailsHikeFragment).commit();
+            } else if (!city.isEmpty()) {
+                WeatherForecast weatherForecast = new WeatherForecast();
+                Bundle weather = new Bundle();
+                weather.putString("city",city);
+                weatherForecast.setArguments(weather);
+                replaceFragment(weatherForecast);
             } else{
 //                replaceFragment(new HomeFragment());
                   replaceFragment(new WeatherForecast());

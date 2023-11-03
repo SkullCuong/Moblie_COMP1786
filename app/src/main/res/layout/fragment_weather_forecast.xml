@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/relative"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="450dp"
             android:background="@drawable/weather_forecast"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,35 +29,15 @@
                 android:layout_marginTop="8dp"
                 android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Friday, June 30"
-                android:textColor="@color/white"
-                android:layout_below="@+id/city"
-                android:layout_marginStart="16dp"
-                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/condition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Light Rain"
-                android:textColor="@color/white"
-                android:layout_below="@+id/date"
-                android:layout_marginStart="16dp"
-                android:textStyle="bold"
-                android:layout_marginTop="32dp"
-                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/weather_resource"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/art_light_rain"
                 android:layout_alignParentEnd="true"
-                android:padding="8dp"/>
+                android:layout_marginEnd="0dp"
+                android:padding="8dp" />
 
             <TextView
                 android:id="@+id/tempCondition"
@@ -217,23 +197,23 @@
                         android:src="@drawable/weather"/>
 
                     <TextView
-                        android:id="@+id/sun_txt"
+                        android:id="@+id/weather"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/sun"
                         android:textSize="14sp"
-                        android:text="UV Index"/>
+                        android:text="Weather"/>
 
                     <TextView
-                        android:id="@+id/uv_value"
+                        android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/sun"
-                        android:layout_below="@+id/sun_txt"
+                        android:layout_below="@+id/weather"
                         android:layout_marginTop="4dp"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        tools:text="22C"/>
+                        tools:text="description"/>
 
                 </RelativeLayout>
             </LinearLayout>
