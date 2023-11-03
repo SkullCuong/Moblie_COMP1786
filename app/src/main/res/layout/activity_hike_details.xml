@@ -174,14 +174,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="5"
+                    android:text="Easy"
                     android:textSize="18sp"/>
-                <ImageView
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_marginLeft="@dimen/_2sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/star"/>
             </LinearLayout>
 
             <LinearLayout
