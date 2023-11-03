@@ -81,7 +81,16 @@ public class HikeDetails extends AppCompatActivity {
                 binding.hikeParkingAvailable.setText("No");
             }
             binding.hikeLength.setText(String.valueOf(foundHike.getLength()));
-            binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
+            if(foundHike.getDifficulty() == 1){
+                binding.hikeDifficulty.setText("Easy");
+            } else if (foundHike.getDifficulty() == 2) {
+                binding.hikeDifficulty.setText("Moderate");
+            } else if (foundHike.getDifficulty() == 3) {
+                binding.hikeDifficulty.setText("Difficult");
+            } else if (foundHike.getDifficulty() == 4) {
+                binding.hikeDifficulty.setText("Very Difficult");
+            }
+            //binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
             binding.hikeDescription.setText(foundHike.getDescription());
             binding.hikeEquipment.setText(foundHike.getEquipment());
             binding.hikeQuality.setText(foundHike.getQuality());
