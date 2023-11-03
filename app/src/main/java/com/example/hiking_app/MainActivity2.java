@@ -2,6 +2,8 @@ package com.example.hiking_app;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import com.example.hiking_app.Fragment.HomeFragment;
 import com.example.hiking_app.Fragment.ProfileFragment;
 import com.example.hiking_app.Fragment.SettingFragment;
 import com.example.hiking_app.Fragment.ViewHikeFragment;
+import com.example.hiking_app.controller.user_controller.SessionManager;
+import com.example.hiking_app.model.Users;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -21,15 +25,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -52,12 +59,40 @@ public class MainActivity2 extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     NavigationView navigationView;
     private ActivityMain2Binding binding;
+    private DbContext dbContext;
+    private SessionManager sessionManager;
+    private TextView emailEditText;
+    private TextView usernameEditText;
+    private ImageView profileImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // user Image
+        dbContext = DbContext.getInstance(this.getApplicationContext());
+        sessionManager = new SessionManager(this);
+        // Header Nav bar
+        usernameEditText = findViewById(R.id.userNameNavbar);
+        emailEditText = findViewById(R.id.emailNavbar);
+        profileImageView = findViewById(R.id.imageNavbar);
+        int userId = sessionManager.getKeyUserid();
+        if (userId != -1) {
+            Users user = dbContext.appDao().findUserById(userId);
+            if (user != null) {
+                populateUI(user);
+            } else {
+                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
+                // Redirect to LoginActivity or handle the situation accordingly
+                finish();
+            }
+        } else {
+            // User is not logged in, redirect to LoginActivity
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            // Redirect to LoginActivity or handle the situation accordingly
+            finish();
+        }
 
 
         // Menu Bar Navigation Bottom
@@ -108,6 +143,18 @@ public class MainActivity2 extends AppCompatActivity {
             return true;
         });
     }
+
+    private void populateUI(Users user) {
+        usernameEditText.setText(user.getUserName());
+        emailEditText.setText(user.getEmail());
+
+        if (user.getProfile_Picture() != null && !user.getProfile_Picture().isEmpty()) {
+            byte[] decodedString = Base64.decode(user.getProfile_Picture(), Base64.DEFAULT);
+            Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profileImageView.setImageBitmap(decodedBitmap);
+        }
+    }
+
 
     private void  initPage(){
         Intent intent = getIntent();
