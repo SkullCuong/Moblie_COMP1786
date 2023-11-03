@@ -99,7 +99,7 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
                 parkingAvailableCheckBox.setChecked(false);
             }
             binding.hikeLength.setText(String.valueOf(foundHike.getLength()));
-            binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
+            //binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
             binding.hikeDescription.setText(foundHike.getDescription());
             binding.hikeEquipment.setText(foundHike.getEquipment());
             binding.hikeQuality.setText(foundHike.getQuality());
@@ -112,7 +112,7 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
             intent.putExtra("date",binding.hikeDate.getText().toString());
             intent.putExtra("parkingAvailable",binding.hikeParkingAvailable.isChecked());
             intent.putExtra("length",binding.hikeLength.getText().toString());
-            intent.putExtra("difficulty",binding.hikeDifficulty.getText().toString());
+            //intent.putExtra("difficulty",binding.hikeDifficulty.getText().toString());
             intent.putExtra("description",binding.hikeDescription.getText().toString());
             intent.putExtra("equipment",binding.hikeEquipment.getText().toString());
             intent.putExtra("quality",binding.hikeEquipment.getText().toString());
@@ -124,7 +124,7 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
             binding.hikeDate.setText(getIntent().getStringExtra("date"));
             binding.hikeParkingAvailable.setChecked(getIntent().getBooleanExtra("parkingAvailable",false));
             binding.hikeLength.setText(getIntent().getStringExtra("length"));
-            binding.hikeDifficulty.setText(getIntent().getStringExtra("difficulty"));
+            //binding.hikeDifficulty.setText(getIntent().getStringExtra("difficulty"));
             binding.hikeDescription.setText(getIntent().getStringExtra("description"));
         binding.hikeEquipment.setText(getIntent().getStringExtra("equipment"));
         binding.hikeQuality.setText(getIntent().getStringExtra("quality"));
@@ -179,7 +179,7 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
             // Update parking_available based on the CheckBox state
             boolean isParkingAvailable = binding.hikeParkingAvailable.isChecked();
             float updateLength = Float.parseFloat(binding.hikeLength.getText().toString());
-            int updateDifficulty = Integer.parseInt(binding.hikeDifficulty.getText().toString());
+            //int updateDifficulty = Integer.parseInt(binding.hikeDifficulty.getText().toString());
             String updatedDescription = binding.hikeDescription.getText().toString();
             String updatedEquipment = binding.hikeEquipment.getText().toString();
             String updatedQuality = binding.hikeQuality.getText().toString();
@@ -189,7 +189,7 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
             foundHike.setLocation(updatedLocation);
             foundHike.setDate(updatedDate);
             foundHike.setLength(updateLength);
-            foundHike.setDifficulty(updateDifficulty);
+            //foundHike.setDifficulty(updateDifficulty);
             foundHike.setDescription(updatedDescription);
             foundHike.setEquipment(updatedEquipment);
             foundHike.setQuality(updatedQuality);
@@ -207,16 +207,16 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
             String date = binding.hikeDate.getText().toString().trim();
             boolean parkingAV = true;
             float length = Float.parseFloat(binding.hikeLength.getText().toString().trim());
-            int difficulty = Integer.parseInt(binding.hikeDifficulty.getText().toString().trim());
+            //int difficulty = Integer.parseInt(binding.hikeDifficulty.getText().toString().trim());
             String description = binding.hikeDescription.getText().toString().trim();
             String equipment = binding.hikeEquipment.getText().toString().trim();
             String quality = binding.hikeQuality.getText().toString().trim();
             int userId = 1;
 
-            Hikes hike = new Hikes(name, location, date, parkingAV, length, difficulty, description, equipment, quality, userId);
+            //Hikes hike = new Hikes(name, location, date, parkingAV, length, difficulty, description, equipment, quality, userId);
             AppDao appDao = DbContext.getInstance(this.getApplicationContext()).appDao();
 
-            long hikeId = appDao.insertHike(hike);
+            //long hikeId = appDao.insertHike(hike);
 
             Intent intent = new Intent(InsertHikeActivity.this, ConfirmInsert.class);
             intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));

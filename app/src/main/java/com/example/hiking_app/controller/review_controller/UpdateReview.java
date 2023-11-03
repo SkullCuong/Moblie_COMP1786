@@ -46,10 +46,10 @@ public class UpdateReview extends AppCompatActivity {
         binding.userName.setText(user.getUserName());
 
         if (reviewId != -1) {
-            binding.rating.setText(String.valueOf(foundReview.getRating()));
+            //binding.rating.setText(String.valueOf(foundReview.getRating()));
             binding.comment.setText(foundReview.getComment());
         }else {
-            binding.rating.setText("Not fount");
+            binding.comment.setText("Not fount");
         }
     }
 
@@ -60,11 +60,11 @@ public class UpdateReview extends AppCompatActivity {
     }
 
     private void UpdateReviewActivity() {
-        int updateRating = Integer.parseInt(binding.rating.getText().toString());
+        //int updateRating = Integer.parseInt(binding.rating.getText().toString());
         String updatedComment = binding.comment.getText().toString();
 
         // Update data
-        foundReview.setRating(updateRating);
+        //foundReview.setRating(updateRating);
         foundReview.setComment(updatedComment);
 
         // Save to db

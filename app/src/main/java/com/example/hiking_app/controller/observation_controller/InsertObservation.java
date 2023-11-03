@@ -76,7 +76,6 @@ public class InsertObservation extends AppCompatActivity {
         Observations observation = new Observations(name, date, comment, encodedImage, hikeId);
 
         DbContext.getInstance(this.getApplicationContext()).appDao().insertObservations(observation);
-        System.out.println(observation);
         showMessage("Add observation successful");
     }
 

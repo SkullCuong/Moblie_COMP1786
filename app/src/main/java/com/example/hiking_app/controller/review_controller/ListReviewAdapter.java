@@ -124,7 +124,6 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
     }
     private void showMessage(int hikeId,String message) {
         Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
-        System.out.println("hikeId: "+hikeId);
         Intent intent = new Intent(context, HikeDetails.class);
         intent.putExtra("hike_id", hikeId);
         context.startActivity(intent);

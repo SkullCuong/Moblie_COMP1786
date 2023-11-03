@@ -52,17 +52,6 @@ tools:context=".Fragment.AddHikeFragment"
             android:width="@dimen/_45sdp"
             android:paddingEnd="@dimen/_15sdp"
             />
-        <!--        <EditText-->
-        <!--            android:id="@+id/hikeParking_available"-->
-        <!--            android:hint="Parking available"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@drawable/edittext_background"-->
-        <!--            android:layout_marginTop="@dimen/_10sdp"-->
-        <!--            android:height="@dimen/_20sdp"-->
-        <!--            android:width="@dimen/_45sdp"-->
-        <!--            android:paddingEnd="@dimen/_15sdp"-->
-        <!--            />-->
         <CheckBox
             android:id="@+id/hikeParking_available"
             android:layout_width="wrap_content"

@@ -60,20 +60,6 @@
                     android:layout_gravity="center"/>
             </LinearLayout>
             <EditText
-                android:id="@+id/rating"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:background="@drawable/edittext_background"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:hint="Rating"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
-                android:paddingStart="@dimen/_15sdp"
-                android:paddingEnd="@dimen/_16sdp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_13ssp" />
-            <EditText
                 android:id="@+id/comment"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"

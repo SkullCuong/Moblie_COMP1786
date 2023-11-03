@@ -19,9 +19,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.hiking_app.Dao.AppDao;
@@ -97,8 +100,10 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         }
     }
 
-
-
+    int difficulty;
+    Spinner hikeDifficulty;
+    String[] difficultyLevels;
+    ArrayAdapter<String> adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -113,6 +118,37 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         }
         checkAddressIsExisted(address);
         setListener();
+
+
+        //Spinner
+        hikeDifficulty = view.findViewById(R.id.hikeDifficulty);
+        difficultyLevels = new String[]{"Easy", "Moderate", "Difficult", "Very Difficult"};
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, difficultyLevels);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hikeDifficulty.setAdapter(adapter);
+
+        hikeDifficulty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selectedChoice = difficultyLevels[position];
+
+                if (selectedChoice.equals("Easy")) {
+                    difficulty = adapter.getPosition("Easy") + 1;
+                } else if (selectedChoice.equals("Moderate")) {
+                    difficulty = adapter.getPosition("Moderate") + 1;
+                } else if (selectedChoice.equals("Difficult")) {
+                    difficulty = adapter.getPosition("Difficult") + 1;
+                } else if (selectedChoice.equals("Very Difficult")) {
+                    difficulty = adapter.getPosition("Very Difficult") + 1;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
+
         renderHikeIfExist();
         return view;
     }
@@ -130,7 +166,16 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
                 parkingAvailableCheckBox.setChecked(false);
             }
             binding.hikeLength.setText(String.valueOf(foundHike.getLength()));
-            binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
+            //binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
+
+            // Check if the difficulty level is within the expected range before setting it
+            int difficultyValue = foundHike.getDifficulty();
+            if (difficultyValue >= 1 && difficultyValue <= 4) {
+                // Subtract 1 to get the index in the adapter
+                hikeDifficulty.setSelection(difficultyValue - 1);
+            }
+
+
             binding.hikeDescription.setText(foundHike.getDescription());
             binding.hikeEquipment.setText(foundHike.getEquipment());
             binding.hikeQuality.setText(foundHike.getQuality());
@@ -153,7 +198,7 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             intent.putExtra("date", binding.hikeDate.getText().toString());
             intent.putExtra("parkingAvailable", binding.hikeParkingAvailable.isChecked());
             intent.putExtra("length", binding.hikeLength.getText().toString());
-            intent.putExtra("difficulty", binding.hikeDifficulty.getText().toString());
+            intent.putExtra("difficulty", difficulty);
             intent.putExtra("description", binding.hikeDescription.getText().toString());
             intent.putExtra("equipment", binding.hikeEquipment.getText().toString());
             intent.putExtra("quality", binding.hikeEquipment.getText().toString());
@@ -165,7 +210,13 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         binding.hikeDate.setText(data.getString("date"));
         binding.hikeParkingAvailable.setChecked(data.getBoolean("parkingAvailable",false));
         binding.hikeLength.setText(data.getString("length"));
-        binding.hikeDifficulty.setText(data.getString("difficulty"));
+        //binding.hikeDifficulty.setText(data.getString("difficulty"));
+        // Check if the difficulty level is within the expected range before setting it
+        int difficultyValue = data.getInt("difficulty");
+        if (difficultyValue >= 1 && difficultyValue <= 4) {
+            // Subtract 1 to get the index in the adapter
+            hikeDifficulty.setSelection(difficultyValue - 1);
+        }
         binding.hikeDescription.setText(data.getString("description"));
         binding.hikeEquipment.setText(data.getString("equipment"));
         binding.hikeQuality.setText(data.getString("quality"));
@@ -248,7 +299,7 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             String updatedDate = binding.hikeDate.getText().toString();
             boolean isParkingAvailable = binding.hikeParkingAvailable.isChecked();
             float updateLength = parseFloatWithFallback(binding.hikeLength.getText().toString(), 0.0f);
-            int updateDifficulty = parseIntWithFallback(binding.hikeDifficulty.getText().toString(), 0);
+            ///int updateDifficulty = parseIntWithFallback(binding.hikeDifficulty.getText().toString(), 0);
             String updatedDescription = binding.hikeDescription.getText().toString();
             String updatedEquipment = binding.hikeEquipment.getText().toString();
             String updatedQuality = binding.hikeQuality.getText().toString();
@@ -258,7 +309,7 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             foundHike.setLocation(updatedLocation);
             foundHike.setDate(updatedDate);
             foundHike.setLength(updateLength);
-            foundHike.setDifficulty(updateDifficulty);
+            foundHike.setDifficulty(difficulty);
             foundHike.setDescription(updatedDescription);
             foundHike.setEquipment(updatedEquipment);
             foundHike.setQuality(updatedQuality);
@@ -280,7 +331,7 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         String date = binding.hikeDate.getText().toString().trim();
         boolean parkingAvailable = false;
         float length = parseFloatWithFallback(binding.hikeLength.getText().toString().trim(), 0.0f);
-        int difficulty = parseIntWithFallback(binding.hikeDifficulty.getText().toString().trim(), 0);
+        //int difficulty = parseIntWithFallback(binding.hikeDifficulty.getText().toString().trim(), 0);
         String description = binding.hikeDescription.getText().toString().trim();
         String equipment = binding.hikeEquipment.getText().toString().trim();
         String quality = binding.hikeQuality.getText().toString().trim();
