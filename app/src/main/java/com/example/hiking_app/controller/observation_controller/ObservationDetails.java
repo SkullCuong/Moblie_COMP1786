@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
+import com.example.hiking_app.controller.hike_controller.DeleteHike;
 import com.example.hiking_app.controller.hike_controller.HikeDetails;
 import com.example.hiking_app.controller.hike_controller.UpdateHike;
 import com.example.hiking_app.databinding.ActivityConfirmInsertBinding;
@@ -43,7 +44,22 @@ public class ObservationDetails extends AppCompatActivity {
         setListenter();
     }
     private void setListenter(){
-
+        binding.arrowLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ObservationDetails.this, HikeDetails.class);
+                intent.putExtra("hike_id", observation.getHikeId());
+                startActivity(intent);
+            }
+        });
+        binding.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ObservationDetails.this, UpdateObservation.class);
+                intent.putExtra("observationId", observation.getId());
+                startActivity(intent);
+            }
+        });
     }
     private Bitmap getImage(String image) {
         try {
