@@ -6,9 +6,9 @@
         android:title="Home"
         android:icon="@drawable/baseline_home_24"/>
     <item
-        android:id="@+id/subscriptions"
-        android:title="Details"
-        android:icon="@drawable/baseline_subscriptions_24"/>
+        android:id="@+id/weather"
+        android:title="Weather"
+        android:icon="@drawable/baseline_cloud_24"/>
     <item
         android:id="@+id/add"
         android:title="Add"

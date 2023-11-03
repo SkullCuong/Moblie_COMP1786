@@ -118,13 +118,20 @@ public class MainActivity2 extends AppCompatActivity {
                 int itemId = item.getItemId();
                 if (itemId == R.id.nav_home) {
                     replaceFragment(new HomeFragment());
-                } else if (itemId == R.id.nav_settings) {
+                }
+                else if (itemId == R.id.nav_weather) {
+                    replaceFragment(new ViewHikeFragment());
+                }
+                else if (itemId == R.id.nav_hiking) {
+                    replaceFragment(new AddHikeFragment());
+                }
+                else if (itemId == R.id.nav_settings) {
                     replaceFragment(new SettingFragment());
-                } else if (itemId == R.id.nav_share) {
-                    replaceFragment(new DetailsHikeFragment());
-                } else if (itemId == R.id.nav_about) {
-                    replaceFragment(new ProfileFragment());
-                } else if (itemId == R.id.nav_logout) {
+                }
+                else if (itemId == R.id.nav_support) {
+                    replaceFragment(new SettingFragment());
+                }
+                else if (itemId == R.id.nav_logout) {
                     replaceFragment(new ProfileFragment());
                 }
                 return true;
@@ -134,8 +141,8 @@ public class MainActivity2 extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
                 replaceFragment(new HomeFragment());
-            } else if (itemId == R.id.subscriptions) {
-                replaceFragment(new DetailsHikeFragment());
+            } else if (itemId == R.id.weather) {
+                replaceFragment(new ViewHikeFragment());
             } else if (itemId == R.id.add) {
                 replaceFragment(new AddHikeFragment());
             } else if (itemId == R.id.settings) {

@@ -55,7 +55,7 @@
                 android:id="@+id/ObsName"
                 android:layout_width="wrap_content"
                 android:text="Observation Name"
-                android:textSize="@dimen/_18sdp"
+                android:textSize="@dimen/_23sdp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"/>
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_15sdp"
                 android:text="Observation Date"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -73,18 +73,10 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_13sdp"
                 android:text="Indonesian specialties are a reflection of the diversity of cultures and traditions of this archipelago which consists of6,000 islands. In general, Indonesian food is rich in spices such as candlenut, chili, fingerroot, galangal, ginger, kencur, turmeric,coconut and palm sugar. These spices are used to give a distinctive aroma to Indonesian food."
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:backgroundTint="@android:color/black"
-            android:text="Save Change"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="bold"
-            app:cornerRadius="@dimen/_8sdp"/>
     </LinearLayout>
 </ScrollView>
