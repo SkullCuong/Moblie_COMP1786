@@ -93,6 +93,7 @@ public class HikeDetails extends AppCompatActivity {
     }
 
     private void setListener() {
+
         binding.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

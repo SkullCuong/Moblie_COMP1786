@@ -61,6 +61,8 @@ public interface AppDao {
 
     @Query("SELECT * FROM observations WHERE id =:observationId")
     Observations getObservationById(int observationId);
+    @Query("SELECT * FROM observations WHERE id = :observationId")
+    Observations findObsById(int observationId);
 
     @Update
     void updateObservation(Observations observation);

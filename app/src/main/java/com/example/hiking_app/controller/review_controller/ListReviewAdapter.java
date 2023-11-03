@@ -120,7 +120,6 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
             Log.e("ImageError", "Error when converting the image (at getImage): " + e.getMessage());
         }
         return null;
-
     }
     private void showMessage(int hikeId,String message) {
         Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
