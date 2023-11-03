@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
@@ -29,7 +30,7 @@ public class UpdateHike extends AppCompatActivity {
 
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
-        CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
+        RadioButton parkingAvailableCheckBox = binding.hikeParkingAvailable;
         if (hikeId != -1) {
             binding.hikeName.setText(foundHike.getName());
             binding.hikeLocation.setText(foundHike.getLocation());
@@ -40,7 +41,7 @@ public class UpdateHike extends AppCompatActivity {
                 parkingAvailableCheckBox.setChecked(false);
             }
             binding.hikeLength.setText(String.valueOf(foundHike.getLength()));
-            binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
+            //binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
             binding.hikeDescription.setText(foundHike.getDescription());
             binding.hikeEquipment.setText(foundHike.getEquipment());
             binding.hikeQuality.setText(foundHike.getQuality());
@@ -60,7 +61,7 @@ public class UpdateHike extends AppCompatActivity {
         // Update parking_available based on the CheckBox state
         boolean isParkingAvailable = binding.hikeParkingAvailable.isChecked();
         float updateLength = Float.parseFloat(binding.hikeLength.getText().toString());
-        int updateDifficulty = Integer.parseInt(binding.hikeDifficulty.getText().toString());
+        //int updateDifficulty = Integer.parseInt(binding.hikeDifficulty.getText().toString());
         String updatedDescription = binding.hikeDescription.getText().toString();
         String updatedEquipment = binding.hikeEquipment.getText().toString();
         String updatedQuality = binding.hikeQuality.getText().toString();
@@ -70,7 +71,7 @@ public class UpdateHike extends AppCompatActivity {
         foundHike.setLocation(updatedLocation);
         foundHike.setDate(updatedDate);
         foundHike.setLength(updateLength);
-        foundHike.setDifficulty(updateDifficulty);
+        //foundHike.setDifficulty(updateDifficulty);
         foundHike.setDescription(updatedDescription);
         foundHike.setEquipment(updatedEquipment);
         foundHike.setQuality(updatedQuality);

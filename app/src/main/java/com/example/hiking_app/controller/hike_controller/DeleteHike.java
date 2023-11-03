@@ -39,7 +39,7 @@ public class DeleteHike extends AppCompatActivity {
                 binding.hikeParkingAvailable.setText("No");
             }
             binding.hikeLength.setText(String.valueOf(foundHike.getLength()));
-            binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
+            //binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
             binding.hikeDescription.setText(foundHike.getDescription());
             binding.hikeEquipment.setText(foundHike.getEquipment());
             binding.hikeQuality.setText(foundHike.getQuality());
