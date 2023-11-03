@@ -8,12 +8,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
 import com.example.hiking_app.controller.hike_controller.HikeDetails;
 import com.example.hiking_app.controller.hike_controller.ViewHike;
+import com.example.hiking_app.controller.observation_controller.ObservationDetails;
 import com.example.hiking_app.controller.user_controller.SessionManager;
 import com.example.hiking_app.databinding.ActivityUpdateHikeBinding;
 import com.example.hiking_app.databinding.ActivityUpdateReviewBinding;
@@ -57,6 +59,14 @@ public class UpdateReview extends AppCompatActivity {
         binding.reviewUpdateBtn.setOnClickListener(view ->{
             UpdateReviewActivity();
         } );
+        binding.arrowLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UpdateReview.this, HikeDetails.class);
+                intent.putExtra("hike_id", foundReview.getHikeId());
+                startActivity(intent);
+            }
+        });
     }
 
     private void UpdateReviewActivity() {

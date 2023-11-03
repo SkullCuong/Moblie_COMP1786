@@ -38,6 +38,7 @@ public class InsertObservation extends AppCompatActivity {
         setContentView(R.layout.activity_insert_observation);
         binding = ActivityInsertObservationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        hikeId = getIntent().getIntExtra("hike_id", -1);
         setListener();
     }
 
@@ -59,14 +60,19 @@ public class InsertObservation extends AppCompatActivity {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             captureImage.launch(cameraIntent);
         });
+        binding.arrowLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InsertObservation.this, HikeDetails.class);
+                intent.putExtra("hike_id", hikeId);
+                startActivity(intent);
+            }
+        });
     }
     private void insertOb() {
         String name = binding.ObName.getText().toString().trim();
         String date = binding.ObDate.getText().toString().trim();
         String comment = binding.ObComment.getText().toString().trim();
-
-
-        hikeId = getIntent().getIntExtra("hike_id", -1);
 
         if (name.isEmpty() || date.isEmpty() || comment.isEmpty() || encodedImage.isEmpty()) {
             showMessage("Please fill in all fields and select/capture an image.");

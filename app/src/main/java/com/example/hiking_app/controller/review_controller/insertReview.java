@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
@@ -55,6 +56,14 @@ public class insertReview extends AppCompatActivity {
     private void setListener() {
         binding.reviewAddBtn.setOnClickListener(v ->{
             insertReviewActivity();
+        });
+        binding.arrowLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(insertReview.this, HikeDetails.class);
+                intent.putExtra("hike_id", HikeId);
+                startActivity(intent);
+            }
         });
     }
 
