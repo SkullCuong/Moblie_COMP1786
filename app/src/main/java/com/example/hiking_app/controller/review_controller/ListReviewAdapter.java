@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
 
         public ReviewsViewHolder(@NonNull View itemView) {
             super(itemView);
-            //userImg = itemView.findViewById(R.id);
+            userImg = itemView.findViewById(R.id.userImage);
             ///////////////////////////////////////////////// Help me fix this code
             userName = itemView.findViewById(R.id.userName);
             //rate = itemView.findViewById(R.id.hikeRate);
@@ -72,6 +73,7 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
             //personImage.setImageBitmap(getUserImage(hike.getImage()));
 //            HikeImg.setImageBitmap(getUserImage());
             Users user = DbContext.getInstance(context).appDao().findUserById(review.getUserId());
+            userImg.setImageBitmap(getUserImage(user.getProfile_Picture()));
             userName.setText(user.getUserName());
             //rate.setText(String.valueOf(review.getRating()));
             comment.setText(review.getComment());
@@ -106,8 +108,17 @@ public class ListReviewAdapter extends RecyclerView.Adapter<ListReviewAdapter.Re
 //        notifyDataSetChanged();
 //    }
     private Bitmap getUserImage(String image) {
-        byte[] bytes = Base64.decode(image, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        try {
+            byte[] decodedBytes = Base64.decode(image, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+        } catch (IllegalArgumentException e) {
+            Log.e("ImageError", "IllegalArgumentException when converting the image (at getImage): " + e.getMessage());
+        } catch (OutOfMemoryError e) {
+            Log.e("ImageError", "OutOfMemoryError when converting the image (at getImage): " + e.getMessage());
+        } catch (Exception e) {
+            Log.e("ImageError", "Error when converting the image (at getImage): " + e.getMessage());
+        }
+        return null;
 
     }
     private void showMessage(String message) {

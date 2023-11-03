@@ -137,6 +137,13 @@ public class MainActivity2 extends AppCompatActivity {
                 hike.putInt("hike_id", intent.getIntExtra("hike_id",-1));
                 addHikeFragment.setArguments(hike);
                 fragmentTransaction.replace(R.id.frame_layout, addHikeFragment).commit();
+            }else if("HikeDetailsToListHikes".equals(fragmentToLoad)){
+                DetailsHikeFragment detailsHikeFragment = new DetailsHikeFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                Bundle hike = new Bundle();
+                hike.putInt("hike_id", intent.getIntExtra("hike_id",-1));
+                detailsHikeFragment.setArguments(hike);
+                fragmentTransaction.replace(R.id.frame_layout, detailsHikeFragment).commit();
             } else{
                 replaceFragment(new HomeFragment());
             }

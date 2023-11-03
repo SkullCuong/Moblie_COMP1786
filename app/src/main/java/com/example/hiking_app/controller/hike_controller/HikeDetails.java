@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.hiking_app.DbContext;
+import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
 import com.example.hiking_app.controller.observation_controller.InsertObservation;
 import com.example.hiking_app.controller.observation_controller.ListObservationAdapter;
@@ -77,6 +78,15 @@ public class HikeDetails extends AppCompatActivity {
     }
 
     private void setListener() {
+        //binding.editBtn
+        binding.arrowLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HikeDetails.this, MainActivity2.class);
+                intent.putExtra("FRAGMENT_TO_LOAD", "HikeDetailsToListHikes");
+                startActivity(intent);
+            }
+        });
         binding.addReviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
