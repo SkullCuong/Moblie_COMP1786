@@ -77,22 +77,22 @@ public class MainActivity2 extends AppCompatActivity {
         usernameEditText = findViewById(R.id.userNameNavbar);
         emailEditText = findViewById(R.id.emailNavbar);
         profileImageView = findViewById(R.id.imageNavbar);
-        int userId = sessionManager.getKeyUserid();
-        if (userId != -1) {
-            Users user = dbContext.appDao().findUserById(userId);
-            if (user != null) {
-                populateUI(user);
-            } else {
-                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
-                // Redirect to LoginActivity or handle the situation accordingly
-                finish();
-            }
-        } else {
-            // User is not logged in, redirect to LoginActivity
-            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
-            // Redirect to LoginActivity or handle the situation accordingly
-            finish();
-        }
+//        int userId = sessionManager.getKeyUserid();
+//        if (userId != -1) {
+//            Users user = dbContext.appDao().findUserById(userId);
+//            if (user != null) {
+//                populateUI(user);
+//            } else {
+//                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
+//                // Redirect to LoginActivity or handle the situation accordingly
+//                finish();
+//            }
+//        } else {
+//            // User is not logged in, redirect to LoginActivity
+//            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+//            // Redirect to LoginActivity or handle the situation accordingly
+//            finish();
+//        }
 
 
         // Menu Bar Navigation Bottom
@@ -195,7 +195,8 @@ public class MainActivity2 extends AppCompatActivity {
                 detailsHikeFragment.setArguments(hike);
                 fragmentTransaction.replace(R.id.frame_layout, detailsHikeFragment).commit();
             } else{
-                replaceFragment(new HomeFragment());
+//                replaceFragment(new HomeFragment());
+                  replaceFragment(new WeatherForecast());
             }
         }
 
