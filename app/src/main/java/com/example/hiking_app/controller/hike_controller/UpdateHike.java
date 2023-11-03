@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
+import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
 import com.example.hiking_app.databinding.ActivityHikeDetailsBinding;
 import com.example.hiking_app.databinding.ActivityUpdateHikeBinding;
@@ -80,7 +81,8 @@ public class UpdateHike extends AppCompatActivity {
         //send message successful
         showMessage("Update successful!");
         //Start activity
-        Intent intent = new Intent(this, ViewHike.class);
+        Intent intent = new Intent(this, MainActivity2.class);
+        intent.putExtra("FRAGMENT_TO_LOAD", "HikeDetailsToListHikes");
         startActivity(intent);
 
     }

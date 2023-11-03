@@ -93,11 +93,6 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
             binding.hikeName.setText(foundHike.getName());
             binding.hikeLocation.setText(foundHike.getLocation());
             binding.hikeDate.setText(foundHike.getDate());
-//            if(foundHike.getParking_available() == true){
-//                binding.hikeParkingAvailable.setText("Yes");
-//            }else {
-//                binding.hikeParkingAvailable.setText("No");
-//            }
             if (foundHike.getParking_available() == true) {
                 parkingAvailableCheckBox.setChecked(true);
             } else {

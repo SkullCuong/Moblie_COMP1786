@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
+import com.example.hiking_app.controller.hike_controller.HikeDetails;
 import com.example.hiking_app.databinding.ActivityInsertObservationBinding;
 import com.example.hiking_app.model.Observations;
 
@@ -30,6 +31,7 @@ public class InsertObservation extends AppCompatActivity {
     private ActivityInsertObservationBinding binding;
     private DatePickerDialog datePickerDialog;
     private String encodedImage;
+    int hikeId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,7 @@ public class InsertObservation extends AppCompatActivity {
         String comment = binding.ObComment.getText().toString().trim();
 
 
-        int hikeId = getIntent().getIntExtra("hike_id", -1);
+        hikeId = getIntent().getIntExtra("hike_id", -1);
 
         if (name.isEmpty() || date.isEmpty() || comment.isEmpty() || encodedImage.isEmpty()) {
             showMessage("Please fill in all fields and select/capture an image.");
@@ -140,6 +142,10 @@ public class InsertObservation extends AppCompatActivity {
     }
     private void showMessage(String message) {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, HikeDetails.class);
+        intent.putExtra("hike_id", hikeId);
+        startActivity(intent);
     }
     private final ActivityResultLauncher<Intent> captureImage = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
