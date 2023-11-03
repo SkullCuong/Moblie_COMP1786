@@ -68,7 +68,7 @@ public class HikeDetails extends AppCompatActivity {
         recyclerReviewsView.setLayoutManager(new LinearLayoutManager(this));
         recyclerReviewsView.setAdapter(listReviewAdapter);
 
-
+        //binding details
         if (hikeId != -1) {
 
             binding.profileImageView.setImageBitmap(getUserImage(user.getProfile_Picture()));

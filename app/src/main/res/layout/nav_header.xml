@@ -9,6 +9,7 @@
     android:background="@drawable/imageloginbackgroundmobile"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
     <ImageView
+        android:id="@+id/userImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/aklogo1"/>

@@ -27,7 +27,6 @@ public class ConfirmInsert extends AppCompatActivity {
         // Inside the "DeleteHike" activity
         hikeId = getIntent().getIntExtra("hike_id", -1); // -1 is a default value if the ID is not found
         foundHike = DbContext.getInstance(this.getApplicationContext()).appDao().findHikeById(hikeId);
-        System.out.println(hikeId+"----------");
         if (hikeId != -1) {
             binding.hikeName.setText(foundHike.getName());
             binding.hikeLocation.setText(foundHike.getLocation());
