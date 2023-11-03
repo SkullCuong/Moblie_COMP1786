@@ -2,41 +2,89 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/_24sdp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/ObsName"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_300sdp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/ObsPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_300sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/imageloginbackgroundmobile"/>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/arrowLeft"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:src="@drawable/arrowleft"
+                            tools:ignore="MissingConstraints" />
+                        <ImageView
+                            android:id="@+id/editBtn"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/edit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:ignore="MissingConstraints" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/ObsDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:id="@+id/ObsComment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <ImageView
-            android:id="@+id/ObsPhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ></ImageView>
-
+            android:padding="@dimen/_5sdp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/ObsName"
+                android:layout_width="wrap_content"
+                android:text="Observation Name"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/ObsDate"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:text="Observation Date"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/ObsComment"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:text="Indonesian specialties are a reflection of the diversity of cultures and traditions of this archipelago which consists of6,000 islands. In general, Indonesian food is rich in spices such as candlenut, chili, fingerroot, galangal, ginger, kencur, turmeric,coconut and palm sugar. These spices are used to give a distinctive aroma to Indonesian food."
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
         <Button
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"></Button>
-
-
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:backgroundTint="@android:color/black"
+            android:text="Save Change"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/_8sdp"/>
     </LinearLayout>
 </ScrollView>

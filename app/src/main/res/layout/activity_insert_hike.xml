@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="@dimen/_24sdp"
+        android:padding="@dimen/_16sdp"
         tools:ignore="MissingConstraints">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,18 +21,37 @@
             android:text="Add Hike"
             android:textStyle="bold"
             android:textSize="30sp">
-
         </TextView>
-        <EditText
-            android:id="@+id/hikeName"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:width="@dimen/_45sdp"
-            android:height="@dimen/_20sdp"
+            android:text="Name"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+        <EditText
+            android:id="@+id/hikeName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+
             android:background="@drawable/edittext_background"
             android:hint="Name"
-            android:paddingEnd="@dimen/_15sdp" />
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Location"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,20 +63,20 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                     <EditText
                         android:id="@+id/hikeLocation"
-                        android:layout_width="0dp"
-                        android:layout_height="55dp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_45sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:background="@drawable/edittext_background"
                         android:hint="Location"
-                        android:paddingEnd="@dimen/_15sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
+                        android:importantForAutofill="no"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_16sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp" />
                     <ProgressBar
                         android:id="@+id/progressBar"
                         style="?android:attr/progressBarStyle"
@@ -66,159 +86,163 @@
                         android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.761" />
-
-
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:orientation="vertical">
-
                 <ImageButton
                     android:id="@+id/openMap"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginEnd="3dp"
+                    android:layout_gravity="center"
                     android:layout_marginStart="3dp"
                     android:layout_marginTop="7dp"
-                    android:text="Map"
-                    android:background="@drawable/distance"
+                    android:background="@drawable/baseline_add_location_24"
                     android:visibility="invisible" />
             </LinearLayout>
-
         </LinearLayout>
-
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/hikeDate"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:width="@dimen/_45sdp"
-                android:height="@dimen/_20sdp"
-                android:background="@drawable/edittext_background"
-                android:focusable="false"
-                android:hint="Date"
-                android:importantForAutofill="no"
-                android:inputType="none"
-                android:paddingEnd="@dimen/_15sdp" />
-            <CheckBox
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Date"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+        <EditText
+            android:id="@+id/hikeDate"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/edittext_background"
+            android:hint="Date"
+            android:inputType="none"
+            android:focusable="false"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp" />
+            <RadioButton
                 android:id="@+id/hikeParking_available"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Parking Available" />
-        </LinearLayout>
-
-
-
-        <!--        <EditText-->
-        <!--            android:id="@+id/hikeParking_available"-->
-        <!--            android:hint="Parking available"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@drawable/edittext_background"-->
-        <!--            android:layout_marginTop="@dimen/_10sdp"-->
-        <!--            android:height="@dimen/_20sdp"-->
-        <!--            android:width="@dimen/_45sdp"-->
-        <!--            android:paddingEnd="@dimen/_15sdp"-->
-        <!--            />-->
-        <LinearLayout
+                android:text="Parking Available"/>
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/hikeLength"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:width="@dimen/_45sdp"
-                android:height="@dimen/_20sdp"
-                android:background="@drawable/edittext_background"
-                android:hint="Length"
-                android:paddingEnd="@dimen/_15sdp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:width="@dimen/_45sdp"
-                android:height="@dimen/_20sdp"
-                android:text="Km"></TextView>
-
-<!--            <EditText-->
-<!--                android:id="@+id/hikeDifficulty"-->
-<!--                android:layout_width="170dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="@dimen/_10sdp"-->
-<!--                android:layout_marginLeft="4dp"-->
-<!--                android:width="@dimen/_45sdp"-->
-<!--                android:height="@dimen/_20sdp"-->
-<!--                android:background="@drawable/edittext_background"-->
-<!--                android:hint="Difficulty"-->
-<!--                android:paddingEnd="@dimen/_15sdp" />-->
-            <Spinner
-                android:id="@+id/hikeDifficulty"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginLeft="4dp"
-                android:width="@dimen/_45sdp"
-                android:height="@dimen/_20sdp"
-                android:background="@drawable/edittext_background" />
-
-        </LinearLayout>
-
-
-
-
-
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Location"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+        <EditText
+            android:id="@+id/hikeLength"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/edittext_background"
+            android:hint="Length"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Difficulty"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+        <Spinner
+            android:id="@+id/hikeDifficulty"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:width="@dimen/_45sdp"
+            android:height="@dimen/_20sdp"
+            android:background="@drawable/edittext_background"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Equipment"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
         <EditText
             android:id="@+id/hikeEquipment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:width="@dimen/_45sdp"
-            android:height="@dimen/_20sdp"
+            android:layout_height="@dimen/_45sdp"
             android:background="@drawable/edittext_background"
             android:hint="Equipment"
-            android:paddingEnd="@dimen/_15sdp" />
-
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Quality"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
         <EditText
             android:id="@+id/hikeQuality"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:width="@dimen/_45sdp"
-            android:height="@dimen/_20sdp"
+            android:layout_height="@dimen/_45sdp"
             android:background="@drawable/edittext_background"
             android:hint="Quality"
-            android:paddingEnd="@dimen/_15sdp" />
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Description"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
         <EditText
             android:id="@+id/hikeDescription"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:width="@dimen/_45sdp"
-            android:height="@dimen/_20sdp"
+            android:layout_height="@dimen/_45sdp"
             android:background="@drawable/edittext_background"
             android:hint="Description"
-            android:paddingEnd="@dimen/_15sdp" />
-
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp" />
         <Button
             android:id="@+id/HikeAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"></Button>
-
-
-    </LinearLayout>
-
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Add Hike"
+            android:backgroundTint="@color/black"/>
+        </LinearLayout>
+    </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
