@@ -70,7 +70,6 @@ public class HikeDetails extends AppCompatActivity {
 
         //binding details
         if (hikeId != -1) {
-
             binding.profileImageView.setImageBitmap(getUserImage(user.getProfile_Picture()));
             binding.hikeName.setText(foundHike.getName());
             binding.hikeLocation.setText(foundHike.getLocation());

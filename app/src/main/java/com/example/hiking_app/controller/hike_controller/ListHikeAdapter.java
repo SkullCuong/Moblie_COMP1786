@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,28 +33,36 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
     private LayoutInflater inflater;
     private Context context;
     private List<Hikes> filteredList;
+
     public ListHikeAdapter(List<Hikes> hikes, Context context) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.hikes = hikes;
     }
+
+    LinearLayout imgFrame1;
+    LinearLayout imgFrame2;
+    LinearLayout imgFrame3;
+
     @NonNull
     @Override
     public HikesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.activity_view_hike, null);
         return new ListHikeAdapter.HikesViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull HikesViewHolder holder, int position) {
         holder.bindData(hikes.get(position));
     }
+
     @Override
     public int getItemCount() {
         return hikes.size();
     }
 
     public class HikesViewHolder extends RecyclerView.ViewHolder {
-        ImageView HikeImg, hikeImg1, hikeImg2, hikeImg3;
+        ImageView HikeImg, imgFrame1img1, imgFrame2img1, imgFrame2img2, imgFrame3img1, imgFrame3img2, imgFrame3img3;
         TextView name, location, date, length, difficulty;
         Button buttonUpdate;
         CardView cardView;
@@ -67,15 +76,27 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             date = itemView.findViewById(R.id.hikeDate);
             difficulty = itemView.findViewById(R.id.hikeDifficulty1);
             length = itemView.findViewById(R.id.hikeLength);
-            hikeImg1 = itemView.findViewById(R.id.img1);
-            hikeImg2 = itemView.findViewById(R.id.img2);
-            hikeImg3 = itemView.findViewById(R.id.img3);
+
+            imgFrame1img1 = itemView.findViewById(R.id.imgFrame1img1);
+
+            imgFrame2img1 = itemView.findViewById(R.id.imgFrame2img1);
+            imgFrame2img2 = itemView.findViewById(R.id.imgFrame2img2);
+
+            imgFrame3img1 = itemView.findViewById(R.id.imgFrame3img1);
+            imgFrame3img2 = itemView.findViewById(R.id.imgFrame3img2);
+            imgFrame3img3 = itemView.findViewById(R.id.imgFrame3img3);
+
+            imgFrame1 = itemView.findViewById(R.id.imgFrame1);
+            imgFrame2 = itemView.findViewById(R.id.imgFrame2);
+            imgFrame3 = itemView.findViewById(R.id.imgFrame3);
             //buttonUpdate = itemView.findViewById(R.id.HikeUpdate);
             cardView = itemView.findViewById(R.id.cardHike);
         }
-        public void setFilteredList(List<Hikes> filteredList){
+
+        public void setFilteredList(List<Hikes> filteredList) {
 
         }
+
         void bindData(final Hikes hike) {
 
             Users user = DbContext.getInstance(context).appDao().findUserById(hike.getUserId());
@@ -103,26 +124,58 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             date.setText(hike.getDate());
             location.setText(hike.getLocation());
             length.setText(String.valueOf(hike.getLength()));
+
             if (!observations.isEmpty()) {
-                if (observations.size() > 0) {
-                    hikeImg1.setImageBitmap(getImage(observations.get(0).getPhoto()));
+//                if (observations.size() > 0) {
+//                    hikeImg1.setImageBitmap(getImage(observations.get(0).getPhoto()));
+//                } else {
+//                    hikeImg1.setImageDrawable(null); // or set a placeholder image
+//                }
+//
+//                if (observations.size() > 1) {
+//                    hikeImg2.setImageBitmap(getImage(observations.get(1).getPhoto()));
+//                } else {
+//                    hikeImg2.setImageDrawable(null); // or set a placeholder image
+//                }
+//
+//                if (observations.size() > 2) {
+//                    hikeImg3.setImageBitmap(getImage(observations.get(2).getPhoto()));
+//                } else {
+//                    hikeImg3.setImageDrawable(null); // or set a placeholder image
+//                }
+                if (observations.size() == 1) {
+                    imgFrame1.setVisibility(View.VISIBLE);
+                    imgFrame1img1.setImageBitmap(getImage(observations.get(0).getPhoto()));
                 } else {
-                    hikeImg1.setImageDrawable(null); // or set a placeholder image
+                    imgFrame1img1.setImageDrawable(null); // or set a placeholder image
                 }
 
-                if (observations.size() > 1) {
-                    hikeImg2.setImageBitmap(getImage(observations.get(1).getPhoto()));
+                if (observations.size() == 2) {
+                    imgFrame2.setVisibility(View.VISIBLE);
+                    imgFrame1.setVisibility(View.INVISIBLE);
+                    imgFrame2img1.setImageBitmap(getImage(observations.get(0).getPhoto()));
+                    imgFrame2img2.setImageBitmap(getImage(observations.get(1).getPhoto()));
                 } else {
-                    hikeImg2.setImageDrawable(null); // or set a placeholder image
+                    imgFrame2img1.setImageDrawable(null); // or set a placeholder image
+                    imgFrame2img2.setImageDrawable(null); // or set a placeholder image
                 }
 
                 if (observations.size() > 2) {
-                    hikeImg3.setImageBitmap(getImage(observations.get(2).getPhoto()));
+                    imgFrame3.setVisibility(View.VISIBLE);
+                    imgFrame2.setVisibility(View.INVISIBLE);
+                    imgFrame1.setVisibility(View.INVISIBLE);
+
+                    imgFrame3img1.setImageBitmap(getImage(observations.get(0).getPhoto()));
+                    imgFrame3img2.setImageBitmap(getImage(observations.get(1).getPhoto()));
+                    imgFrame3img3.setImageBitmap(getImage(observations.get(2).getPhoto()));
                 } else {
-                    hikeImg3.setImageDrawable(null); // or set a placeholder image
+                    imgFrame3img1.setImageDrawable(null); // or set a placeholder image
+                    imgFrame3img2.setImageDrawable(null); // or set a placeholder image
+                    imgFrame3img3.setImageDrawable(null); // or set a placeholder image
                 }
+
             }
-            if(hike.getDifficulty() == 1){
+            if (hike.getDifficulty() == 1) {
                 difficulty.setText("Easy");
             } else if (hike.getDifficulty() == 2) {
                 difficulty.setText("Moderate");
@@ -151,6 +204,7 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             });
         }
     }
+
     public void setFilteredList(List<Hikes> filteredList) {
         this.hikes.clear();
         this.hikes.addAll(filteredList);
