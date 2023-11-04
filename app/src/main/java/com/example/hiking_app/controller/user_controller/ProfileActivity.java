@@ -104,6 +104,10 @@ public class ProfileActivity extends AppCompatActivity {
         if (profileBitmap != null) {
             updatedProfilePicture = bitmapToBase64(profileBitmap);
         }
+        else{
+            Toast.makeText(ProfileActivity.this, "the image worng", Toast.LENGTH_SHORT).show();
+        }
+
 
         // Update user profile in the database
         Users updatedUser = new Users(updatedUsername, null, updatedEmail, updatedAddress, updatedProfilePicture);
