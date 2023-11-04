@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
+import com.example.hiking_app.controller.hike_controller.HikeDetails;
 import com.example.hiking_app.databinding.ActivityInsertObservationBinding;
 import com.example.hiking_app.model.Observations;
 
@@ -30,12 +31,14 @@ public class InsertObservation extends AppCompatActivity {
     private ActivityInsertObservationBinding binding;
     private DatePickerDialog datePickerDialog;
     private String encodedImage;
+    int hikeId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_observation);
         binding = ActivityInsertObservationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        hikeId = getIntent().getIntExtra("hike_id", -1);
         setListener();
     }
 
@@ -57,14 +60,19 @@ public class InsertObservation extends AppCompatActivity {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             captureImage.launch(cameraIntent);
         });
+        binding.arrowLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InsertObservation.this, HikeDetails.class);
+                intent.putExtra("hike_id", hikeId);
+                startActivity(intent);
+            }
+        });
     }
     private void insertOb() {
         String name = binding.ObName.getText().toString().trim();
         String date = binding.ObDate.getText().toString().trim();
         String comment = binding.ObComment.getText().toString().trim();
-
-
-        int hikeId = getIntent().getIntExtra("hike_id", -1);
 
         if (name.isEmpty() || date.isEmpty() || comment.isEmpty() || encodedImage.isEmpty()) {
             showMessage("Please fill in all fields and select/capture an image.");
@@ -74,7 +82,6 @@ public class InsertObservation extends AppCompatActivity {
         Observations observation = new Observations(name, date, comment, encodedImage, hikeId);
 
         DbContext.getInstance(this.getApplicationContext()).appDao().insertObservations(observation);
-        System.out.println(observation);
         showMessage("Add observation successful");
     }
 
@@ -140,6 +147,10 @@ public class InsertObservation extends AppCompatActivity {
     }
     private void showMessage(String message) {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, HikeDetails.class);
+        intent.putExtra("hike_id", hikeId);
+        startActivity(intent);
     }
     private final ActivityResultLauncher<Intent> captureImage = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

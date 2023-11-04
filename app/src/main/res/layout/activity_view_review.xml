@@ -1,40 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="4dp"
-    app:cardUseCompatPadding="true"
-    android:animateLayoutChanges="true"
     tools:context=".controller.review_controller.ViewReview">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="6dp"
-            android:radius="8dp"
-            >
-            <ImageView
+            android:radius="8dp">
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/userImage"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
+                android:src="@drawable/user_2"
                 android:layout_gravity="center"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp"
-                android:layout_alignParentLeft="true" />
+                android:scaleType="centerCrop"
+                app:riv_oval="true"/>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="4dp"
@@ -50,7 +42,7 @@
                     android:layout_marginBottom="2dp"
                     android:textColor="@android:color/black"
                     android:text="Name"
-                    android:textSize="24sp"
+                    android:textSize="18dp"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_marginRight="60dp"
@@ -60,41 +52,29 @@
                     android:layout_marginBottom="2dp"
                     android:textColor="@android:color/black"
                     android:text="Location"
-                    android:textSize="18sp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_alignParentRight="true"
-                >
-                <TextView
-                    android:id="@+id/hikeRate"
+                    android:textSize="15sp" />
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    />
-                <Button
-                    android:id="@+id/editBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit"
-                    ></Button>
-                <Button
-                    android:id="@+id/deleteBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Delete"
-                    ></Button>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/editBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit"
+                        android:textColor="@color/lavender"
+                        android:textSize="@dimen/_10ssp"/>
+                    <TextView
+                        android:id="@+id/deleteBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="Delete"
+                        android:textColor="@color/lavender"
+                        android:textSize="@dimen/_10ssp"/>
+                </LinearLayout>
 
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</ScrollView>

@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:id="@+id/hikeFragmentAdd"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout android:id="@+id/hikeFragmentAdd" xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".Fragment.AddHikeFragment"
-    >
-
+tools:context=".Fragment.AddHikeFragment">
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -52,17 +47,6 @@ tools:context=".Fragment.AddHikeFragment"
             android:width="@dimen/_45sdp"
             android:paddingEnd="@dimen/_15sdp"
             />
-        <!--        <EditText-->
-        <!--            android:id="@+id/hikeParking_available"-->
-        <!--            android:hint="Parking available"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@drawable/edittext_background"-->
-        <!--            android:layout_marginTop="@dimen/_10sdp"-->
-        <!--            android:height="@dimen/_20sdp"-->
-        <!--            android:width="@dimen/_45sdp"-->
-        <!--            android:paddingEnd="@dimen/_15sdp"-->
-        <!--            />-->
         <CheckBox
             android:id="@+id/hikeParking_available"
             android:layout_width="wrap_content"

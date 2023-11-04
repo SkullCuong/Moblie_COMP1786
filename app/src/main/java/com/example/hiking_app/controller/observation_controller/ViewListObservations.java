@@ -23,7 +23,7 @@ public class ViewListObservations extends AppCompatActivity {
         observations = DbContext.getInstance(this).appDao().getObservationsByHikeId(hikeId);
         ListObservationAdapter listAdapter = new ListObservationAdapter(observations,this);
         RecyclerView recyclerView = findViewById(R.id.listObservations);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(listAdapter);
     }
 }

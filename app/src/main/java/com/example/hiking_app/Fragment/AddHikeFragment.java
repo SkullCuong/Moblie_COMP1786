@@ -19,9 +19,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.hiking_app.Dao.AppDao;
@@ -97,8 +101,10 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         }
     }
 
-
-
+    int difficulty;
+    Spinner hikeDifficulty;
+    String[] difficultyLevels;
+    ArrayAdapter<String> adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -113,13 +119,44 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         }
         checkAddressIsExisted(address);
         setListener();
+
+
+        //Spinner
+        hikeDifficulty = view.findViewById(R.id.hikeDifficulty);
+        difficultyLevels = new String[]{"Easy", "Moderate", "Difficult", "Very Difficult"};
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, difficultyLevels);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hikeDifficulty.setAdapter(adapter);
+
+        hikeDifficulty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selectedChoice = difficultyLevels[position];
+
+                if (selectedChoice.equals("Easy")) {
+                    difficulty = adapter.getPosition("Easy") + 1;
+                } else if (selectedChoice.equals("Moderate")) {
+                    difficulty = adapter.getPosition("Moderate") + 1;
+                } else if (selectedChoice.equals("Difficult")) {
+                    difficulty = adapter.getPosition("Difficult") + 1;
+                } else if (selectedChoice.equals("Very Difficult")) {
+                    difficulty = adapter.getPosition("Very Difficult") + 1;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
+
         renderHikeIfExist();
         return view;
     }
 
     private void renderHikeIfExist() {
         foundHike = DbContext.getInstance(requireContext().getApplicationContext()).appDao().findHikeById(hikeId);
-        CheckBox parkingAvailableCheckBox = binding.hikeParkingAvailable;
+        RadioButton parkingAvailableCheckBox = binding.hikeParkingAvailable;
         if (hikeId != -1 && foundHike != null) {
             binding.hikeName.setText(foundHike.getName());
             binding.hikeLocation.setText(foundHike.getLocation());
@@ -130,7 +167,16 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
                 parkingAvailableCheckBox.setChecked(false);
             }
             binding.hikeLength.setText(String.valueOf(foundHike.getLength()));
-            binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
+            //binding.hikeDifficulty.setText(String.valueOf(foundHike.getDifficulty()));
+
+            // Check if the difficulty level is within the expected range before setting it
+            int difficultyValue = foundHike.getDifficulty();
+            if (difficultyValue >= 1 && difficultyValue <= 4) {
+                // Subtract 1 to get the index in the adapter
+                hikeDifficulty.setSelection(difficultyValue - 1);
+            }
+
+
             binding.hikeDescription.setText(foundHike.getDescription());
             binding.hikeEquipment.setText(foundHike.getEquipment());
             binding.hikeQuality.setText(foundHike.getQuality());
@@ -153,7 +199,7 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             intent.putExtra("date", binding.hikeDate.getText().toString());
             intent.putExtra("parkingAvailable", binding.hikeParkingAvailable.isChecked());
             intent.putExtra("length", binding.hikeLength.getText().toString());
-            intent.putExtra("difficulty", binding.hikeDifficulty.getText().toString());
+            intent.putExtra("difficulty", difficulty);
             intent.putExtra("description", binding.hikeDescription.getText().toString());
             intent.putExtra("equipment", binding.hikeEquipment.getText().toString());
             intent.putExtra("quality", binding.hikeEquipment.getText().toString());
@@ -165,7 +211,13 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         binding.hikeDate.setText(data.getString("date"));
         binding.hikeParkingAvailable.setChecked(data.getBoolean("parkingAvailable",false));
         binding.hikeLength.setText(data.getString("length"));
-        binding.hikeDifficulty.setText(data.getString("difficulty"));
+        //binding.hikeDifficulty.setText(data.getString("difficulty"));
+        // Check if the difficulty level is within the expected range before setting it
+        int difficultyValue = data.getInt("difficulty");
+        if (difficultyValue >= 1 && difficultyValue <= 4) {
+            // Subtract 1 to get the index in the adapter
+            hikeDifficulty.setSelection(difficultyValue - 1);
+        }
         binding.hikeDescription.setText(data.getString("description"));
         binding.hikeEquipment.setText(data.getString("equipment"));
         binding.hikeQuality.setText(data.getString("quality"));
@@ -231,61 +283,95 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         }
     }
     private void insertHike() {
-        if(hikeId != -1 && foundHike != null){
-            // take data from EditText
+        if (hikeId != -1 && foundHike != null) {
+            // Update an existing hike
+            updateExistingHike();
+        } else {
+            // Insert a new hike
+            insertNewHike();
+        }
+    }
+
+    private void updateExistingHike() {
+        if (foundHike != null) {
+            // Extract data from EditText fields
             String updatedName = binding.hikeName.getText().toString();
             String updatedLocation = binding.hikeLocation.getText().toString();
             String updatedDate = binding.hikeDate.getText().toString();
-            // Update parking_available based on the CheckBox state
             boolean isParkingAvailable = binding.hikeParkingAvailable.isChecked();
-            float updateLength = Float.parseFloat(binding.hikeLength.getText().toString());
-            int updateDifficulty = Integer.parseInt(binding.hikeDifficulty.getText().toString());
+            float updateLength = parseFloatWithFallback(binding.hikeLength.getText().toString(), 0.0f);
+            ///int updateDifficulty = parseIntWithFallback(binding.hikeDifficulty.getText().toString(), 0);
             String updatedDescription = binding.hikeDescription.getText().toString();
             String updatedEquipment = binding.hikeEquipment.getText().toString();
             String updatedQuality = binding.hikeQuality.getText().toString();
-            // Update data
+
+            // Update the found hike object
             foundHike.setName(updatedName);
             foundHike.setLocation(updatedLocation);
             foundHike.setDate(updatedDate);
             foundHike.setLength(updateLength);
-            foundHike.setDifficulty(updateDifficulty);
+            foundHike.setDifficulty(difficulty);
             foundHike.setDescription(updatedDescription);
             foundHike.setEquipment(updatedEquipment);
             foundHike.setQuality(updatedQuality);
             foundHike.setParking_available(isParkingAvailable);
 
-            // Save to db
+            // Save to the database
             DbContext.getInstance(requireContext().getApplicationContext()).appDao().updateHike(foundHike);
-            //Start fragment
-            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
-            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
-            startActivity(intent);
-        }else {
-            String name = binding.hikeName.getText().toString().trim();
-            String location = binding.hikeLocation.getText().toString().trim();
-            String date = binding.hikeDate.getText().toString().trim();
-            boolean parkingAV = true;
-            float length = Float.parseFloat(binding.hikeLength.getText().toString().trim());
-            int difficulty = Integer.parseInt(binding.hikeDifficulty.getText().toString().trim());
-            String description = binding.hikeDescription.getText().toString().trim();
-            String equipment = binding.hikeEquipment.getText().toString().trim();
-            String quality = binding.hikeQuality.getText().toString().trim();
-
-            SessionManager sessionManager = new SessionManager(getContext());
-            int userIdSession = sessionManager.getKeyUserid();
-            int userId = userIdSession;
-
-            Hikes hike = new Hikes(name, location, date, parkingAV, length, difficulty, description, equipment, quality, userId);
-            AppDao appDao = DbContext.getInstance(requireContext().getApplicationContext()).appDao();
-
-            long hikeId = appDao.insertHike(hike);
-
-            Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
-            intent.putExtra("hike_id", Integer.parseInt(String.valueOf(hikeId)));
-            startActivity(intent);
+            // Start the ConfirmInsert activity
+            startConfirmInsertActivity(hikeId);
+        } else {
+            // Handle the case when foundHike is null
         }
-        //showMessage("Add successful");
     }
+
+    private void insertNewHike() {
+        // Extract data from EditText fields
+        String name = binding.hikeName.getText().toString().trim();
+        String location = binding.hikeLocation.getText().toString().trim();
+        String date = binding.hikeDate.getText().toString().trim();
+        boolean parkingAvailable = false;
+        float length = parseFloatWithFallback(binding.hikeLength.getText().toString().trim(), 0.0f);
+        //int difficulty = parseIntWithFallback(binding.hikeDifficulty.getText().toString().trim(), 0);
+        String description = binding.hikeDescription.getText().toString().trim();
+        String equipment = binding.hikeEquipment.getText().toString().trim();
+        String quality = binding.hikeQuality.getText().toString().trim();
+
+        SessionManager sessionManager = new SessionManager(getContext());
+        int userIdSession = sessionManager.getKeyUserid();
+        int userId = userIdSession;
+
+        Hikes hike = new Hikes(name, location, date, parkingAvailable, length, difficulty, description, equipment, quality, userId);
+        AppDao appDao = DbContext.getInstance(requireContext().getApplicationContext()).appDao();
+
+        long hikeId = appDao.insertHike(hike);
+
+        // Start the ConfirmInsert activity
+        startConfirmInsertActivity(Integer.parseInt(String.valueOf(hikeId)));
+    }
+
+    private void startConfirmInsertActivity(int hikeId) {
+        Intent intent = new Intent(requireActivity(), ConfirmInsert.class);
+        intent.putExtra("hike_id", hikeId);
+        startActivity(intent);
+    }
+
+    private float parseFloatWithFallback(String value, float fallback) {
+        try {
+            return Float.parseFloat(value);
+        } catch (NumberFormatException e) {
+            return fallback;
+        }
+    }
+
+    private int parseIntWithFallback(String value, int fallback) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return fallback;
+        }
+    }
+
 
     private void askPermisson() {
         ActivityCompat.requestPermissions(requireActivity(), new String[]{

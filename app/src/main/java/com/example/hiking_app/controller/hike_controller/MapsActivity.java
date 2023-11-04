@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.hiking_app.Fragment.AddHikeFragment;
 import com.example.hiking_app.MainActivity;
@@ -29,6 +30,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
+    private String page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        double latitude = getIntent().getDoubleExtra("latitude", -1);;
-        double longitude = getIntent().getDoubleExtra("longitude", -1);;
+        double latitude = getIntent().getDoubleExtra("latitude", 37.423343);;
+        double longitude = getIntent().getDoubleExtra("longitude", -122.083763);;
+        page = getIntent().getStringExtra("page");
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         LatLng location = new LatLng(latitude, longitude);
@@ -75,7 +78,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 try{
                     Address addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1).get(0);
                     String address = addresses.getAddressLine(0) ;
-                    hikeDetails(address,latLng);
+                    String city =addresses.getLocality();
+                    hikeDetails(address,latLng,city);
                 }
                 catch (Exception e){
                     System.out.println(e.getMessage());
@@ -84,21 +88,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    private void hikeDetails(String address,LatLng latLng){
+    private void hikeDetails(String address,LatLng latLng,String city){
         Intent intent = new Intent(this, MainActivity2.class);
-        intent.putExtra("address", address);
-        intent.putExtra("latitude", latLng.latitude);
-        intent.putExtra("longitude", latLng.longitude);
-        intent.putExtra("name",getIntent().getStringExtra("name"));
-        intent.putExtra("date",getIntent().getStringExtra("date"));
-        intent.putExtra("parkingAvailable",getIntent().getBooleanExtra("parkingAvailable",false));
-        intent.putExtra("length",getIntent().getStringExtra("length"));
-        intent.putExtra("difficulty",getIntent().getStringExtra("difficulty"));
-        intent.putExtra("description",getIntent().getStringExtra("description"));
-        intent.putExtra("equipment",getIntent().getStringExtra("equipment"));
-        intent.putExtra("quality",getIntent().getStringExtra("quality"));
+        if(page == null){
+            intent.putExtra("address", address);
+            intent.putExtra("latitude", latLng.latitude);
+            intent.putExtra("longitude", latLng.longitude);
+            intent.putExtra("name",getIntent().getStringExtra("name"));
+            intent.putExtra("date",getIntent().getStringExtra("date"));
+            intent.putExtra("parkingAvailable",getIntent().getBooleanExtra("parkingAvailable",false));
+            intent.putExtra("length",getIntent().getStringExtra("length"));
+            intent.putExtra("difficulty",getIntent().getStringExtra("difficulty"));
+            intent.putExtra("description",getIntent().getStringExtra("description"));
+            intent.putExtra("equipment",getIntent().getStringExtra("equipment"));
+            intent.putExtra("quality",getIntent().getStringExtra("quality"));
+            intent.putExtra("FRAGMENT_TO_LOAD", "AddHikeFragment");
+        } else {
+            if(city == null){
+                Toast.makeText(this, "The city is not specific", Toast.LENGTH_SHORT).show();
+            }
+            intent.putExtra("city",city);
 
-        intent.putExtra("FRAGMENT_TO_LOAD", "AddHikeFragment");
+        }
         startActivity(intent);
 
 

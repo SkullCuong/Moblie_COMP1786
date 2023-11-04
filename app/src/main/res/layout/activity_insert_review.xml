@@ -5,37 +5,92 @@
     android:padding="@dimen/_24sdp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/rating"
-            android:hint="Rating"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/arrowLeft"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/arrowleft"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Review"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_25ssp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    tools:ignore="MissingConstraints" />
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/user_2"
+                    android:layout_gravity="center"
+                    app:riv_oval="true"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_background"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:height="@dimen/_20sdp"
-            android:width="@dimen/_45sdp"
-            android:paddingEnd="@dimen/_15sdp"
-            />
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lam Phi"
+                android:textStyle="bold"
+                android:textSize="@dimen/_15sdp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
         <EditText
             android:id="@+id/comment"
-            android:hint="Comment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_35sdp"
             android:background="@drawable/edittext_background"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:height="@dimen/_20sdp"
-            android:width="@dimen/_45sdp"
-            android:paddingEnd="@dimen/_15sdp"
-            />
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:hint="Comment"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp" />
         <Button
             android:id="@+id/reviewAddBtn"
             android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="Add Review"></Button>
+            android:text="Add Review"/>
+    </LinearLayout>
     </LinearLayout>
 </ScrollView>

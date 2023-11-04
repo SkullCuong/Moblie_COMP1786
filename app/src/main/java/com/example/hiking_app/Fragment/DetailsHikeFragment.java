@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.R;
@@ -32,6 +35,8 @@ public class DetailsHikeFragment extends Fragment {
 
     private List<Hikes> hikes;
     private SearchView searchView;
+    private Spinner spinner;
+    private String[] choices;
 
     private String mParam1;
     private String mParam2;
@@ -39,6 +44,7 @@ public class DetailsHikeFragment extends Fragment {
     public DetailsHikeFragment() {
         // Required empty public constructor
     }
+
     public static DetailsHikeFragment newInstance(String param1, String param2) {
         DetailsHikeFragment fragment = new DetailsHikeFragment();
         Bundle args = new Bundle();
@@ -68,10 +74,19 @@ public class DetailsHikeFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.listHikes);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(listAdapter);
+
+
+        spinner = view.findViewById(R.id.spinner);
+        choices = new String[]{"Newest", "Oldest"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, choices);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         setListener(listAdapter);
+
         return view;
     }
-    private void setListener(ListHikeAdapter listAdapter ) {
+
+    private void setListener(ListHikeAdapter listAdapter) {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -85,5 +100,25 @@ public class DetailsHikeFragment extends Fragment {
                 return false;
             }
         });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selectedChoice = choices[position];
+
+                if (selectedChoice.equals("Newest")) {
+                    hikes = DbContext.getInstance(requireContext()).appDao().getListHike();
+                    listAdapter.setFilteredList(hikes);
+                } else if (selectedChoice.equals("Oldest")) {
+                    hikes = DbContext.getInstance(requireContext()).appDao().getListHikeOldest();
+                    listAdapter.setFilteredList(hikes);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
+
     }
 }

@@ -6,15 +6,16 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
-
-
-
     <application
+        android:enableOnBackInvokedCallback="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -24,7 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hiking_App"
         tools:targetApi="31">
-
+        <activity
+            android:name=".controller.observation_controller.ObservationDetails"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -46,13 +49,8 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".MainActivity2"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.Hiking_App.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -97,13 +95,17 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity android:name=".controller.user_controller.RegistrationActivity" />
-        <activity android:name=".controller.user_controller.LoginActivity" />
+        <activity android:name=".controller.user_controller.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".controller.user_controller.ProfileActivity" />
-
-
     </application>
 
 </manifest>

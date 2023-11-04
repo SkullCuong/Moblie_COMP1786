@@ -60,5 +60,36 @@
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
         app:itemIconTint="@color/lavender"
-        app:itemTextColor="@color/lavender"/>
+        app:itemTextColor="@color/black">
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="176dp"
+            android:gravity="bottom"
+            android:padding="16dp"
+            android:background="@drawable/imageloginbackgroundmobile"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+            <ImageView
+                android:id="@+id/imageNavbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/aklogo1"/>
+            <TextView
+                android:id="@+id/userNameNavbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Android Knowledge"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/emailNavbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="contact@androidknowledge.com"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
+        </LinearLayout>
+    </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hiking_app.DbContext;
@@ -29,8 +31,8 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
     private List<Observations> observations;
     private LayoutInflater inflater;
     private Context context;
+    LinearLayout ObsCardObj;
     public ListObservationAdapter(List<Observations> observations, Context context) {
-
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.observations = observations;
@@ -61,9 +63,9 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
             nameTextView = itemView.findViewById(R.id.observationName);
             dateTextView = itemView.findViewById(R.id.observationDate);
             image = itemView.findViewById(R.id.observationImage);
-            update = itemView.findViewById(R.id.updateObservation);
-            delete = itemView.findViewById(R.id.deleteObservation);
-
+            ObsCardObj = itemView.findViewById(R.id.obsCardObj);
+            //update = itemView.findViewById(R.id.updateObservation);
+            //delete = itemView.findViewById(R.id.deleteObservation);
         }
         public void bindData(Observations observation) {
                 nameTextView.setText(observation.getName());
@@ -71,8 +73,17 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
                 image.setImageBitmap(getUserImage(observation.getPhoto()));
                 // Set the ID for the current item
                 final int itemId = observation.getId();
+                ObsCardObj.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, ObservationDetails.class);
+                        intent.putExtra("observationId", itemId);
+                        context.startActivity(intent);
+                    }
+                });
 
-            update.setOnClickListener(new View.OnClickListener() {
+
+            /*update.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, UpdateObservation.class);
@@ -86,7 +97,7 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
                    Observations observation= DbContext.getInstance(this).appDao().getObservationById(itemId);
                     DbContext.getInstance(this).appDao().deleteObservation(observation);
                 }
-            });
+            });*/
         }
     }
     private Bitmap getUserImage(String image) {

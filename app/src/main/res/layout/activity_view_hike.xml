@@ -31,6 +31,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:orientation="horizontal">
                     <ImageView
@@ -51,27 +52,44 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/_16sdp"
                             android:layout_marginStart="8dp"/>
-                        <TextView
-                            android:id="@+id/hikeLocation"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="A new Hiking for USA"
-                            android:textStyle="bold"
-                            android:layout_marginStart="8dp"/>
-                        <TextView
-                            android:id="@+id/hikeDate"
-                            android:layout_width="wrap_content"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:src="@drawable/locationicon"/>
+                            <TextView
+                                android:id="@+id/hikeLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="A new Hiking for USA"
+                                android:textStyle="bold"
+                                android:layout_marginStart="8dp"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="26/10/2023"
-                            android:textStyle="bold"
-                            android:layout_marginStart="8dp"/>
-                        <TextView
-                            android:id="@+id/hikeLength"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Difficulty"
-                            android:textStyle="bold"
-                            android:layout_marginStart="8dp"/>
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:src="@drawable/baseline_calendar_month_24"/>
+                            <TextView
+                                android:id="@+id/hikeDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:layout_gravity="center"
+                                android:text="26/10/2023"
+                                android:textStyle="bold"
+                                android:layout_marginStart="8dp"/>
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -82,39 +100,110 @@
                     <ImageView
                         android:id="@+id/img1"
                         android:layout_width="@dimen/_120sdp"
-                        android:layout_height="@dimen/_200sdp"
+                        android:layout_height="@dimen/_150sdp"
                         android:background="@drawable/input_background"
-                        android:layout_marginBottom="@dimen/_4sdp"/>
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:scaleType="centerCrop"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/_4sdp"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/img2"
                             android:layout_width="@dimen/_130sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:background="@drawable/input_background"
                             android:layout_weight="1"
+                            android:scaleType="centerCrop"
                             />
                         <ImageView
+                            android:id="@+id/img3"
                             android:layout_width="@dimen/_130sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:background="@drawable/input_background"
                             android:layout_weight="1"
+                            android:scaleType="centerCrop"
                             android:layout_marginTop="@dimen/_4sdp"/>
                     </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/_30sdp"
-                    android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/HikeUpdate"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_25sdp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Update"/>
-                </LinearLayout>
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        tools:ignore="MissingConstraints">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Length: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/hikeLength"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5 km"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/linearLayout3"-->
+<!--                        tools:ignore="MissingConstraints">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="2dp"-->
+<!--                            android:text="Quality: "-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/hikeQuality"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Goods"-->
+<!--                            android:textStyle="bold" />-->
+<!--                    </LinearLayout>-->
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="MissingConstraints">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Difficulty: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/hikeDifficulty1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Very Difficult"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
