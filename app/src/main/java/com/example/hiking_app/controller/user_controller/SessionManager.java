@@ -28,7 +28,6 @@ public class SessionManager {
 
 
     public int getKeyUserid(){
-        System.out.println(sharedPreferences.getInt(KEY_USERID, 0));
         return  sharedPreferences.getInt(KEY_USERID, 0);
     }
 

@@ -21,7 +21,8 @@ public interface AppDao {
     Users findUserById(int userId);
     @Query("SELECT * FROM users WHERE userName = :username")
     Users getUserByUsername(String username);
-
+    @Update
+    void updateUser(Users user);
     @Query("SELECT * FROM users WHERE email = :email")
     Users getUserByEmail(String email);
     @Insert

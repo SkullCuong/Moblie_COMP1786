@@ -20,6 +20,10 @@ public class Users {
         this.profile_Picture = profile_Picture;
     }
 
+
+
+
+
     public int getId() {
         return id;
     }
