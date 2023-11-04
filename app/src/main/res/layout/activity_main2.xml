@@ -70,11 +70,13 @@
             android:padding="16dp"
             android:background="@drawable/hikebackground2"
             android:theme="@style/ThemeOverlay.AppCompat.Dark">
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imageNavbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/aklogo1"/>
+                android:scaleType="centerCrop"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:src="@drawable/aklogo1"
+                app:riv_oval="true"/>
             <TextView
                 android:id="@+id/userNameNavbar"
                 android:layout_width="wrap_content"

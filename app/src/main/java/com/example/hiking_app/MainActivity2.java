@@ -52,6 +52,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.hiking_app.databinding.ActivityMain2Binding;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 public class MainActivity2 extends AppCompatActivity {
     // Menu Bar Navigation
@@ -63,7 +64,7 @@ public class MainActivity2 extends AppCompatActivity {
     private SessionManager sessionManager;
     private TextView emailEditText;
     private TextView usernameEditText;
-    private ImageView profileImageView;
+    private RoundedImageView profileImageView;
 
     private String city ;
 
@@ -80,22 +81,22 @@ public class MainActivity2 extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailNavbar);
         profileImageView = findViewById(R.id.imageNavbar);
         city = getIntent().getStringExtra("city") == null ? "":getIntent().getStringExtra("city") ;
-//        int userId = sessionManager.getKeyUserid();
-//        if (userId != -1) {
-//            Users user = dbContext.appDao().findUserById(userId);
-//            if (user != null) {
-//                populateUI(user);
-//            } else {
-//                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
-//                // Redirect to LoginActivity or handle the situation accordingly
-//                finish();
-//            }
-//        } else {
-//            // User is not logged in, redirect to LoginActivity
-//            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
-//            // Redirect to LoginActivity or handle the situation accordingly
-//            finish();
-//        }
+        int userId = sessionManager.getKeyUserid();
+        if (userId != -1) {
+            Users user = dbContext.appDao().findUserById(userId);
+            if (user != null) {
+                populateUI(user);
+            } else {
+                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
+                // Redirect to LoginActivity or handle the situation accordingly
+                finish();
+            }
+        } else {
+            // User is not logged in, redirect to LoginActivity
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            // Redirect to LoginActivity or handle the situation accordingly
+            finish();
+        }
 
 
         // Menu Bar Navigation Bottom
