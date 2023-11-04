@@ -130,9 +130,6 @@
                     android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
                     app:cornerRadius="@dimen/_8sdp" />
-
-
-
             </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

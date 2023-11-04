@@ -14,6 +14,8 @@ import com.example.hiking_app.Fragment.HomeFragment;
 import com.example.hiking_app.Fragment.ProfileFragment;
 import com.example.hiking_app.Fragment.SettingFragment;
 import com.example.hiking_app.Fragment.ViewHikeFragment;
+import com.example.hiking_app.controller.user_controller.LoginActivity;
+import com.example.hiking_app.controller.user_controller.RegistrationActivity;
 import com.example.hiking_app.controller.user_controller.SessionManager;
 import com.example.hiking_app.model.Users;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -136,7 +138,9 @@ public class MainActivity2 extends AppCompatActivity {
                     replaceFragment(new SettingFragment());
                 }
                 else if (itemId == R.id.nav_logout) {
-                    replaceFragment(new ProfileFragment());
+                    sessionManager.logoutUser();
+                    Intent intent = new Intent(MainActivity2.this, LoginActivity.class);
+                    startActivity(intent);
                 }
                 return true;
             }

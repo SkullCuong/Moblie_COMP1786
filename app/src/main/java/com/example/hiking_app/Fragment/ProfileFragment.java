@@ -79,7 +79,6 @@ public class ProfileFragment extends Fragment {
         View view = binding.getRoot();
         dbContext = DbContext.getInstance(requireContext());
         sessionManager = new SessionManager(requireContext());
-
         return view;
     }
 

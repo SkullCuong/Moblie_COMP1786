@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
@@ -23,6 +24,8 @@ import com.example.hiking_app.databinding.FragmentProfileBinding;
 import com.example.hiking_app.databinding.FragmentSettingBinding;
 import com.example.hiking_app.model.Users;
 
+import org.w3c.dom.Text;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SettingFragment#newInstance} factory method to
@@ -30,9 +33,8 @@ import com.example.hiking_app.model.Users;
  */
 public class SettingFragment extends Fragment {
 
-    private EditText usernameEditText;
-    private EditText emailEditText;
-    private EditText addressEditText;
+    private TextView usernameEditText;
+    private TextView emailEditText;
     private ImageView profileImageView; // Declare profileImageView
     private FragmentSettingBinding binding;
     private DbContext dbContext;
@@ -89,9 +91,8 @@ public class SettingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*usernameEditText = view.findViewById(R.id.usernameEditText);
-        emailEditText = view.findViewById(R.id.emailEditText);
-        addressEditText = view.findViewById(R.id.addressEditText);
+        usernameEditText = view.findViewById(R.id.userNameSetting);
+        emailEditText = view.findViewById(R.id.gmailSetting);
         profileImageView = view.findViewById(R.id.profileImageView);
 
         // Retrieve user ID from the session
@@ -117,12 +118,11 @@ public class SettingFragment extends Fragment {
     private void populateUI(Users user) {
         usernameEditText.setText(user.getUserName());
         emailEditText.setText(user.getEmail());
-        addressEditText.setText(user.getAddress());
 
         if (user.getProfile_Picture() != null && !user.getProfile_Picture().isEmpty()) {
             byte[] decodedString = Base64.decode(user.getProfile_Picture(), Base64.DEFAULT);
             Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             profileImageView.setImageBitmap(decodedBitmap);
-        }*/
+        }
     }
 }
