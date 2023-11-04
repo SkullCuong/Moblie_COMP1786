@@ -129,6 +129,19 @@ public class ProfileFragment extends Fragment {
                 String updatedEmail = emailEditText.getText().toString().trim();
                 String updatedAddress = addressEditText.getText().toString().trim();
 
+                if (updatedUsername.isEmpty()) {
+                    showMessage("Please fill in name.");
+                    return;
+                }
+                if (updatedEmail.isEmpty()) {
+                    showMessage("Please fill in email.");
+                    return;
+                }
+                if (updatedAddress.isEmpty()) {
+                    showMessage("Please fill in adress.");
+                    return;
+                }
+
                 // Validate the input if necessary (e.g., check if email is valid)
 
                 // Retrieve user ID from the session
@@ -161,6 +174,9 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+    }
+    private void showMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     private void populateUI(Users user) {

@@ -120,6 +120,21 @@ public class UpdateHike extends AppCompatActivity {
         String updatedEquipment = binding.hikeEquipment.getText().toString();
         String updatedQuality = binding.hikeQuality.getText().toString();
 
+        // Validate the input fields
+        if (updatedName.isEmpty()) {
+            showMessage("Please fill out name.");
+            return;
+        }
+        if (updatedLocation.isEmpty()) {
+            showMessage("Please fill out location.");
+            return;
+        }
+        if (updatedDate.isEmpty()) {
+            showMessage("Please fill out date.");
+            return;
+        }
+
+
         // Update data
         foundHike.setName(updatedName);
         foundHike.setLocation(updatedLocation);

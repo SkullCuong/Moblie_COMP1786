@@ -74,10 +74,15 @@ public class InsertObservation extends AppCompatActivity {
         String date = binding.ObDate.getText().toString().trim();
         String comment = binding.ObComment.getText().toString().trim();
 
-        if (name.isEmpty() || date.isEmpty() || comment.isEmpty() || encodedImage.isEmpty()) {
-            showMessage("Please fill in all fields and select/capture an image.");
+        if (name.isEmpty()) {
+            showMessageError("Please fill in name.");
             return;
         }
+        if (date.isEmpty()) {
+            showMessageError("Please fill in date.");
+            return;
+        }
+
 
         Observations observation = new Observations(name, date, comment, encodedImage, hikeId);
 
@@ -151,6 +156,9 @@ public class InsertObservation extends AppCompatActivity {
         Intent intent = new Intent(this, HikeDetails.class);
         intent.putExtra("hike_id", hikeId);
         startActivity(intent);
+    }
+    private void showMessageError(String message) {
+        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
     }
     private final ActivityResultLauncher<Intent> captureImage = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

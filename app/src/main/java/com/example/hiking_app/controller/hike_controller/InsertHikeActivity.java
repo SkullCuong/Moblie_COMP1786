@@ -214,6 +214,9 @@ public class InsertHikeActivity extends FragmentActivity implements OnMapReadyCa
             String quality = binding.hikeQuality.getText().toString().trim();
             int userId = 1;
 
+
+
+
             //Hikes hike = new Hikes(name, location, date, parkingAV, length, difficulty, description, equipment, quality, userId);
             AppDao appDao = DbContext.getInstance(this.getApplicationContext()).appDao();
 

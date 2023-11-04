@@ -305,6 +305,7 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
             String updatedEquipment = binding.hikeEquipment.getText().toString();
             String updatedQuality = binding.hikeQuality.getText().toString();
 
+
             // Update the found hike object
             foundHike.setName(updatedName);
             foundHike.setLocation(updatedLocation);
@@ -336,6 +337,20 @@ public class AddHikeFragment extends Fragment  implements OnMapReadyCallback {
         String description = binding.hikeDescription.getText().toString().trim();
         String equipment = binding.hikeEquipment.getText().toString().trim();
         String quality = binding.hikeQuality.getText().toString().trim();
+
+        // Validate the input fields
+        if (name.isEmpty() ) {
+            Toast.makeText(getContext(), "Please fill out name.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (location.isEmpty() ) {
+            Toast.makeText(getContext(), "Please fill out date.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (date.isEmpty() ) {
+            Toast.makeText(getContext(), "Please fill out date.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         SessionManager sessionManager = new SessionManager(getContext());
         int userIdSession = sessionManager.getKeyUserid();
