@@ -22,7 +22,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_140sdp"
-                    android:background="@drawable/imageloginbackgroundmobile"
+                    android:background="@drawable/hikebackground3"
                     android:orientation="vertical"
                     tools:ignore="MissingConstraints">
                     <com.makeramen.roundedimageview.RoundedImageView
