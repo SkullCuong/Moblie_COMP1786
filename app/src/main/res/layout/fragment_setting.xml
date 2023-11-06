@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/userNameSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lam Phi"
@@ -56,6 +57,7 @@
                     android:textSize="@dimen/_15sdp"
                     android:layout_gravity="center"/>
                 <TextView
+                    android:id="@+id/gmailSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Philgcc200011@fpt.edu.vn"

@@ -28,8 +28,8 @@
                         android:id="@+id/imageView"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_300sdp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/imageloginbackgroundmobile" />
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/hikebackground4" />
                     <ImageView
                         android:id="@+id/capturedImageView"
                         android:layout_width="match_parent"
