@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.hiking_app.DbContext;
 import com.example.hiking_app.MainActivity2;
@@ -24,6 +25,7 @@ public class ObservationDetails extends AppCompatActivity {
     private ActivityObservationDetailsBinding binding;
     int observationId;
     Observations observation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,8 @@ public class ObservationDetails extends AppCompatActivity {
         }
         setListenter();
     }
-    private void setListenter(){
+
+    private void setListenter() {
         binding.arrowLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +63,17 @@ public class ObservationDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        binding.BtnDeleteObservation.setOnClickListener(v -> {
+            DbContext.getInstance(this.getApplicationContext()).appDao().deleteObservation(observation);
+            showMessage(observation.getHikeId(), "Delete success!");
+
+        });
+    }
+    private void showMessage(int hikeId,String message) {
+        Toast.makeText(this.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this.getApplicationContext(), HikeDetails.class);
+        intent.putExtra("hike_id", hikeId);
+        startActivity(intent);
     }
     private Bitmap getImage(String image) {
         try {
