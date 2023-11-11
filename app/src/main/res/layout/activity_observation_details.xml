@@ -77,6 +77,17 @@
                 android:textSize="@dimen/_13sdp"
                 android:text="Indonesian specialties are a reflection of the diversity of cultures and traditions of this archipelago which consists of6,000 islands. In general, Indonesian food is rich in spices such as candlenut, chili, fingerroot, galangal, ginger, kencur, turmeric,coconut and palm sugar. These spices are used to give a distinctive aroma to Indonesian food."
                 android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/BtnDeleteObservation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/_8sdp" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
