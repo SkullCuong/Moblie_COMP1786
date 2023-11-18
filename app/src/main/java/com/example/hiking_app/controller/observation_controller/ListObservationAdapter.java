@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,8 +102,17 @@ public class ListObservationAdapter extends RecyclerView.Adapter<ListObservation
         }
     }
     private Bitmap getUserImage(String image) {
-        byte[] bytes = Base64.decode(image, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        try {
+            byte[] decodedBytes = Base64.decode(image, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+        } catch (IllegalArgumentException e) {
+            Log.e("ImageError", "IllegalArgumentException when converting the image (at getImage): " + e.getMessage());
+        } catch (OutOfMemoryError e) {
+            Log.e("ImageError", "OutOfMemoryError when converting the image (at getImage): " + e.getMessage());
+        } catch (Exception e) {
+            Log.e("ImageError", "Error when converting the image (at getImage): " + e.getMessage());
+        }
+        return null;
 
     }
 }

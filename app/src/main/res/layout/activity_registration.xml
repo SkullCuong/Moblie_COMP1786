@@ -117,6 +117,7 @@ tools:context=".controller.user_controller.RegistrationActivity">
             android:textSize="@dimen/_13ssp"
             android:textStyle = "bold"/>
         <TextView
+            android:id="@+id/signInBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"

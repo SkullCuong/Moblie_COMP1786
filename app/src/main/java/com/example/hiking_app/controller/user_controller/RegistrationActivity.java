@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -31,6 +32,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText editTextAddress;
     private ImageView imageViewProfile;
     private String encodedImage;
+    TextView signInBtn;
     private static final int PICK_IMAGE_REQUEST = 1;
 
     @Override
@@ -43,7 +45,18 @@ public class RegistrationActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextAddress = findViewById(R.id.editTextAddress);
         imageViewProfile = findViewById(R.id.imageViewProfile);
+        signInBtn = findViewById(R.id.signInBtn);
 
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Redirect to the LoginActivity or perform other actions after logout
+                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish(); // Close the current activity
+            }
+        });
         Button buttonSelectImage = findViewById(R.id.buttonSelectImage);
         buttonSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +103,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private boolean isUserExists(String username, String email) {

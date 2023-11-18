@@ -93,16 +93,10 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
             cardView = itemView.findViewById(R.id.cardHike);
         }
 
-        public void setFilteredList(List<Hikes> filteredList) {
-
-        }
-
         void bindData(final Hikes hike) {
 
             Users user = DbContext.getInstance(context).appDao().findUserById(hike.getUserId());
-            List<Observations> observations = DbContext.getInstance(context).appDao().getObservationsByHikeId(hike.getId());
-            //personImage.setImageBitmap(getUserImage(hike.getImage()));
-            //HikeImg.setImageBitmap(getImage(user.getProfile_Picture()));
+
             try {
                 Bitmap imageBitmap = getImage(user.getProfile_Picture());
                 if (imageBitmap != null) {
@@ -118,63 +112,36 @@ public class ListHikeAdapter extends RecyclerView.Adapter<ListHikeAdapter.HikesV
                 Log.e("ImageError", "Error when loading the image: " + e.getMessage());
             }
 
-//            SessionManager sessionManager = new SessionManager(context);
-//            int username1 = sessionManager.getKeyUserid();
             name.setText(hike.getName());
             date.setText(hike.getDate());
             location.setText(hike.getLocation());
             length.setText(String.valueOf(hike.getLength()));
-
+            imgFrame2.setVisibility(View.INVISIBLE);
+            imgFrame1.setVisibility(View.INVISIBLE);
+            imgFrame3.setVisibility(View.INVISIBLE);
+            List<Observations> observations = DbContext.getInstance(context).appDao().getObservationsByHikeId(hike.getId());
             if (!observations.isEmpty()) {
-//                if (observations.size() > 0) {
-//                    hikeImg1.setImageBitmap(getImage(observations.get(0).getPhoto()));
-//                } else {
-//                    hikeImg1.setImageDrawable(null); // or set a placeholder image
-//                }
-//
-//                if (observations.size() > 1) {
-//                    hikeImg2.setImageBitmap(getImage(observations.get(1).getPhoto()));
-//                } else {
-//                    hikeImg2.setImageDrawable(null); // or set a placeholder image
-//                }
-//
-//                if (observations.size() > 2) {
-//                    hikeImg3.setImageBitmap(getImage(observations.get(2).getPhoto()));
-//                } else {
-//                    hikeImg3.setImageDrawable(null); // or set a placeholder image
-//                }
-                if (observations.size() == 1) {
+                if (observations.size() < 2) {
                     imgFrame1.setVisibility(View.VISIBLE);
                     imgFrame1img1.setImageBitmap(getImage(observations.get(0).getPhoto()));
-                } else {
-                    imgFrame1img1.setImageDrawable(null); // or set a placeholder image
                 }
 
                 if (observations.size() == 2) {
                     imgFrame2.setVisibility(View.VISIBLE);
-                    imgFrame1.setVisibility(View.INVISIBLE);
                     imgFrame2img1.setImageBitmap(getImage(observations.get(0).getPhoto()));
                     imgFrame2img2.setImageBitmap(getImage(observations.get(1).getPhoto()));
-                } else {
-                    imgFrame2img1.setImageDrawable(null); // or set a placeholder image
-                    imgFrame2img2.setImageDrawable(null); // or set a placeholder image
                 }
 
                 if (observations.size() > 2) {
                     imgFrame3.setVisibility(View.VISIBLE);
-                    imgFrame2.setVisibility(View.INVISIBLE);
-                    imgFrame1.setVisibility(View.INVISIBLE);
 
                     imgFrame3img1.setImageBitmap(getImage(observations.get(0).getPhoto()));
                     imgFrame3img2.setImageBitmap(getImage(observations.get(1).getPhoto()));
                     imgFrame3img3.setImageBitmap(getImage(observations.get(2).getPhoto()));
-                } else {
-                    imgFrame3img1.setImageDrawable(null); // or set a placeholder image
-                    imgFrame3img2.setImageDrawable(null); // or set a placeholder image
-                    imgFrame3img3.setImageDrawable(null); // or set a placeholder image
                 }
 
             }
+
             if (hike.getDifficulty() == 1) {
                 difficulty.setText("Easy");
             } else if (hike.getDifficulty() == 2) {

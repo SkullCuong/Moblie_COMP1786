@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private Button buttonLogin;
     private Button buttonLogout;
+    TextView btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         dbContext = DbContext.getInstance(this.getApplicationContext());
         sessionManager = new SessionManager(this);
 
+        btnSignUp = findViewById(R.id.signUpBtn);
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
 
@@ -85,6 +88,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Redirect to the LoginActivity or perform other actions after logout
                 Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish(); // Close the current activity
+            }
+        });
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Redirect to the LoginActivity or perform other actions after logout
+                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(intent);
                 finish(); // Close the current activity
             }

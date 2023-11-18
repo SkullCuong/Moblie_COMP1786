@@ -31,7 +31,7 @@ public interface AppDao {
     List<Hikes> getListHikeByName(String name);
     @Query("SELECT * FROM hikes ORDER BY id DESC ")
     List<Hikes> getListHike();
-    @Query("SELECT * FROM hikes")
+    @Query("SELECT * FROM hikes ORDER BY id")
     List<Hikes> getListHikeOldest();
 
     @Query("SELECT * FROM hikes WHERE id = :hikeId")
@@ -57,7 +57,7 @@ public interface AppDao {
     @Insert
     long insertObservations(Observations observations);
 
-    @Query("SELECT * FROM observations WHERE hikeId =:hikeId")
+    @Query("SELECT * FROM observations WHERE hikeId = :hikeId ORDER BY id")
     List<Observations> getObservationsByHikeId(int hikeId);
 
     @Query("SELECT * FROM observations WHERE id =:observationId")

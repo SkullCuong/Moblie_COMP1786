@@ -15,8 +15,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.hiking_app.DbContext;
+import com.example.hiking_app.MainActivity2;
 import com.example.hiking_app.R;
 import com.example.hiking_app.controller.hike_controller.HikeDetails;
+import com.example.hiking_app.controller.hike_controller.ListHikeAdapter;
 import com.example.hiking_app.controller.observation_controller.ViewListObservations;
 import com.example.hiking_app.databinding.ActivityUpdateObservationBinding;
 import com.example.hiking_app.model.Observations;
@@ -124,17 +126,22 @@ public class UpdateObservation extends AppCompatActivity {
     }
 
     private void updateObservation(int observationId) {
+        Observations observationTemp = DbContext.getInstance(this.getApplicationContext()).appDao().getObservationById(observation.getId());
         String name = binding.ObsName.getText().toString();
         String date = binding.ObsDate.getText().toString();
         String comment = binding.ObsComment.getText().toString();
         String photo = encodedImage;
+        if(observationTemp.getPhoto() != null){
+            photo = observationTemp.getPhoto();
+        }
         observation.setPhoto(photo);
         observation.setName(name);
         observation.setComment(comment);
         observation.setDateTime(date);
         DbContext.getInstance(this.getApplicationContext()).appDao().updateObservation(observation);
-        Intent intent = new Intent(this, ViewListObservations.class);
+        Intent intent = new Intent(this, HikeDetails.class);
         intent.putExtra("hike_id", observation.getHikeId());
+
         startActivity(intent);
     }
 
