@@ -96,7 +96,7 @@
             android:textSize="@dimen/_13ssp"
             android:textStyle = "bold"/>
         <TextView
-            android:id="@+id/signUpBtn"
+            android:id="@+id/SignupLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"

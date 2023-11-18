@@ -25,10 +25,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextPassword;
     private DbContext dbContext;
+    private TextView signupLink;
     private SessionManager sessionManager;
     private Button buttonLogin;
     private Button buttonLogout;
-    TextView btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +41,10 @@ public class LoginActivity extends AppCompatActivity {
         dbContext = DbContext.getInstance(this.getApplicationContext());
         sessionManager = new SessionManager(this);
 
-        btnSignUp = findViewById(R.id.signUpBtn);
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
 
-
+        signupLink = findViewById(R.id.SignupLink);
 
         Button buttonLogin = findViewById(R.id.buttonLogin);
         buttonLogout = findViewById(R.id.buttonLogout);
@@ -77,7 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
+        signupLink.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+            startActivity(intent);
+        });
         Button buttonLogout = findViewById(R.id.buttonLogout);
         buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,16 +94,15 @@ public class LoginActivity extends AppCompatActivity {
                 finish(); // Close the current activity
             }
         });
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        TextView signUpTextView = findViewById(R.id.signUpTextView);
+        signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                // Redirect to the LoginActivity or perform other actions after logout
+            public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(intent);
-                finish(); // Close the current activity
             }
         });
+
     }
 
     private int isValidCredentials(String username, String password) {

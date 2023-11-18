@@ -71,6 +71,9 @@ public class insertReview extends AppCompatActivity {
         //int rating = Integer.parseInt(binding.rating.getText().toString().trim());
         int rating = 5;
         String comment = binding.comment.getText().toString().trim();
+        if(comment.isEmpty()){
+            showMessage("Please input the comment");
+        }
 
         Reviews review = new Reviews(rating, comment,userId, HikeId);
 

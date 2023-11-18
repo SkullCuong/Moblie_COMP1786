@@ -57,6 +57,7 @@ tools:context=".Fragment.AddHikeFragment">
         <EditText
             android:id="@+id/hikeLength"
             android:hint="Length"
+            android:text="Length"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"

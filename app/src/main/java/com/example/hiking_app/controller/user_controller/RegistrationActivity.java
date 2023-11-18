@@ -32,7 +32,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText editTextAddress;
     private ImageView imageViewProfile;
     private String encodedImage;
-    TextView signInBtn;
     private static final int PICK_IMAGE_REQUEST = 1;
 
     @Override
@@ -45,18 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextAddress = findViewById(R.id.editTextAddress);
         imageViewProfile = findViewById(R.id.imageViewProfile);
-        signInBtn = findViewById(R.id.signInBtn);
 
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // Redirect to the LoginActivity or perform other actions after logout
-                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish(); // Close the current activity
-            }
-        });
         Button buttonSelectImage = findViewById(R.id.buttonSelectImage);
         buttonSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +91,14 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
-
+        TextView signUpTextView = findViewById(R.id.signInTextView);
+        signUpTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private boolean isUserExists(String username, String email) {
