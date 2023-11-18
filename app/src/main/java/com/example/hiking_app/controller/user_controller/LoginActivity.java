@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextPassword;
     private DbContext dbContext;
+    private TextView signupLink;
     private SessionManager sessionManager;
     private Button buttonLogin;
     private Button buttonLogout;
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
 
-
+        signupLink = findViewById(R.id.SignupLink);
 
         Button buttonLogin = findViewById(R.id.buttonLogin);
         buttonLogout = findViewById(R.id.buttonLogout);
@@ -75,7 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
+        signupLink.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+            startActivity(intent);
+        });
         Button buttonLogout = findViewById(R.id.buttonLogout);
         buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override

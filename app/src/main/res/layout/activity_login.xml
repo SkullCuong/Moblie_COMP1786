@@ -96,7 +96,7 @@
             android:textSize="@dimen/_13ssp"
             android:textStyle = "bold"/>
         <TextView
-            android:id="@+id/signUpTextView"
+            android:id="@+id/SignupLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
@@ -104,7 +104,7 @@
             android:textSize="@dimen/_13ssp"
             android:layout_marginLeft="@dimen/_2sdp"
             android:textColor="#0000FF"
-            android:textStyle="bold"/>
+            android:textStyle = "bold"/>
     </LinearLayout>
     <Button
         android:id="@+id/buttonLogout"
